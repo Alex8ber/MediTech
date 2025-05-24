@@ -1,0 +1,25 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+#contenedor{
+    width: 100%;
+    margin: 0px auto;
+}
+
+header{
+    width: 100%;
+    text-align: 20px;
+}
+
+footer{
+    height: 100px;
+}
+
+.logo{
+    border-radius: 25px;
+    height: 75px;
+    width: 75px;
+    margin: 20px;
+}
