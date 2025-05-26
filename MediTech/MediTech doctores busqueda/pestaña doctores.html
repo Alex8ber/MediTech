@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctores | MediTech</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="logo sin fondo 1.png" alt="MediTech" height="50" class="logo-img">
+            <span>MediTech</span>
+        </div>
+        <nav>
+            <a class="active" href="#">Doctores</a>
+            <a href="#">Personal Obrero</a>
+            <a href="#">Pacientes</a>
+            <a href="#">Agenda</a>
+            <a href="#">Reportes</a>
+        </nav>
+        <div class="perfil">
+            <img src="usuario x.jpg" alt="Perfil" class="avatar">
+        </div>
+    </header>
+    <main>
+        <h1 class="titulo">Doctores</h1>
+        <section class="busqueda">
+    <div>
+        <label>Buscar doctor</label>
+        <input type="text" id="busquedaDoctor" placeholder="Nombre, Apellido, email...">
+    </div>
+    <div>
+        <label>Filtrar por rol</label>
+        <input type="text" id="filtroRol" placeholder="Selecciona rol">
+    </div>
+</section>
+<section class="tabla-section">
+    <div class="tabla-titulo">Doctores registrados</div>
+    <table id="tablaDoctores">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Rol</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tbody>
+    <tr>
+        <td>Pedro</td>
+        <td>Sanchez</td>
+        <td>Cardiólogo</td>
+        <td>+58 412-5656467</td>
+        <td>PedSan22@gmail.com</td>
+    </tr>
+    <tr>
+        <td>Maria</td>
+        <td>Gutierrez</td>
+        <td>Psicóloga</td>
+        <td>+58 414-1266215</td>
+        <td>Gutty556@gmail.com</td>
+    </tr>
+    <tr>
+        <td>Jose</td>
+        <td>Rivero</td>
+        <td>Ginecólogo</td>
+        <td>+58 412-5656783</td>
+        <td>rivero123.Js@gmail.com</td>
+    </tr>
+    <tr>
+        <td>Marinel</td>
+        <td>Gomez</td>
+        <td>Radióloga</td>
+        <td>+58 416-7327964</td>
+        <td>marni748@gmail.com</td>
+    </tr>
+    <tr>
+        <td>Antonio</td>
+        <td>Perez</td>
+        <td>Dermatólogo</td>
+        <td>+58 412-9988776</td>
+        <td>aperez@gmail.com</td>
+    </tr>
+</tbody>
+        </tbody>
+    </table>
+    <button class="nuevo-doctor">Nuevo Doctor</button>
+</section>
+    </main>
+    <script>
+// filepath: c:\Users\Luismineitor\Desktop\MediTech\pestaña doctores
+document.getElementById('busquedaDoctor').addEventListener('input', function() {
+    const filtro = this.value.toLowerCase();
+    const filas = document.querySelectorAll('#tablaDoctores tbody tr');
+    filas.forEach(fila => {
+        const textoFila = fila.textContent.toLowerCase();
+        fila.style.display = textoFila.includes(filtro) ? '' : 'none';
+    });
+});
+</script>
+<script>
+// filepath: c:\Users\Luismineitor\Desktop\MediTech\pestaña doctores.html
+function filtrarTabla() {
+    const filtroNombre = document.getElementById('busquedaDoctor').value.toLowerCase();
+    const filtroRol = document.getElementById('filtroRol').value.toLowerCase();
+    const filas = document.querySelectorAll('#tablaDoctores tbody tr');
+    filas.forEach(fila => {
+        const textoFila = fila.textContent.toLowerCase();
+        const rol = fila.children[2].textContent.toLowerCase();
+        const coincideNombre = textoFila.includes(filtroNombre);
+        const coincideRol = rol.includes(filtroRol);
+        // Mostrar solo si ambos filtros coinciden
+        fila.style.display = (coincideNombre && coincideRol) ? '' : 'none';
+    });
+}
+
+document.getElementById('busquedaDoctor').addEventListener('input', filtrarTabla);
+document.getElementById('filtroRol').addEventListener('input', filtrarTabla);
+</script>
+</body>
+</html>
