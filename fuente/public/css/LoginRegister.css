@@ -116,6 +116,23 @@
             text-decoration: underline;
         }
 
+         .register-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .register-link a {
+            color: rgb(86, 170, 142);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link a:hover{
+            text-decoration: underline;
+        }
+
         .login-link {
             text-align: center;
             margin-top: 25px;
