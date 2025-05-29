@@ -1,4 +1,4 @@
-CREATE TABLE usuarios (
+CREATE TABLE proyecto1.usuarios (
     id INT PRIMARY KEY AUTO_INCREMENT
     Usuario VARCHAR (50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
