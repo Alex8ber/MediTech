@@ -1,18 +1,21 @@
+
 const conexion = require("../db")
 module.exports = {
-    insertar(nombre,apellido,user,pass){
+    insertar(user,pass){
+        console.log("insertar",user,pass);
         return new Promise((resolve, reject) => {
-            conexion.query(`insert into users (nombre,apellido,user,pass,tipoU_id) values (?,?,?,?,2)`,
-            [nombre,apellido,user,pass], async(error, resultados)=>{
+            conexion.query(`insert into proyecto1.usuarios (Usuario,password) values (?,?)`,
+            [user,pass], async(error, resultados)=>{
                 if(error) reject(error);
                 else resolve(resultados);
             })
         })
     },
-    existe(user){
+    existe(user,pass){
+        console.log(user,pass);
         return new Promise((resolve, reject) => {
-            conexion.query(`select users.user from users where user = ?`,
-            [user], async(error, resultados)=>{
+            conexion.query(`select usuarios.Usuario, usuarios.password from proyecto1.usuarios where Usuario = ?`,
+            [user], async(error, resultados)=>{ 
                 if(resultados.length > 0){
                     if(error) reject(error);
                     else resolve(resultados[0]);
