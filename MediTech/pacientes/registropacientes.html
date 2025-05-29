@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacientes</title>
+    <link rel="stylesheet" href="estilos1.css">
+
+</head>
+
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="logo sin fondo 1.png" alt="Logo" class="logo img">
+            MediTech
+        </div>
+        <nav>
+            <a href="#" class="active">Pacientes</a>
+            <a href="#">Doctores</a>
+        </nav>
+        <div class="perfil">
+            <img src="usuario x.jpg" alt="Perfil" class="avatar">
+        </div>
+    </div>
+
+    <main>
+        <div class="titulo">Pacientes</div>
+
+        <div class="busqueda">
+            <div>
+                <label for="buscar">Buscar paciente</label>
+                <input type="text" id="buscar" placeholder="Nombre, cédula, email...">
+            </div>
+        </div>
+
+        <div class="tabla-section">
+            <div class="tabla-titulo">Pacientes registrados</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Fecha de Registro</th>
+                        <th>Cédula</th>
+                        <th>Correo</th>
+                        <th>Dirección</th>
+                        <th>Edad</th>
+                        <th>Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-pacientes">
+                    <tr>
+                        <td>Anais</td>
+                        <td>Gazcon</td>
+                        <td>2025-05-28</td>
+                        <td>V-12345678</td>
+                        <td>ana15gazqn@gmail.com</td>
+                        <td>Av. Bolivar</td>
+                        <td>28</td>
+                        <td>+58 416-1234567</td>
+                    </tr>
+                    <tr>
+                        <td>Gabriela</td>
+                        <td>Guzman</td>
+                        <td>2025-05-27</td>
+                        <td>V-78954321</td>
+                        <td>gabyy989@gmail.com</td>
+                        <td>Av. Principal 123</td>
+                        <td>32</td>
+                        <td>+58 412-1956237</td>
+                    </tr>
+                    <tr>
+                        <td>Nicolas</td>
+                        <td>Sasonetti</td>
+                        <td>2025-05-26</td>
+                        <td>V-41526631</td>
+                        <td>nic.c.ss@gmail.com</td>
+                        <td>Av. Valencia</td>
+                        <td>45</td>
+                        <td>+58 412-3265847</td>
+                    </tr>
+                    <tr>
+                        <td>Manuel</td>
+                        <td>Gomez</td>
+                        <td>2025-05-25</td>
+                        <td>V-78956368</td>
+                        <td>Manu.Gom3@gmail.com</td>
+                        <td>Calle Madeira</td>
+                        <td>36</td>
+                        <td>+58 416-4152687</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="nuevo-doctor" style="margin-left:20px;">Nuevo Paciente</button>
+        </div>
+    </main>
+    <script>
+document.getElementById('buscar').addEventListener('input', function() {
+    const filtro = this.value.toLowerCase();
+    const filas = document.querySelectorAll('#tabla-pacientes tr');
+    filas.forEach(fila => {
+        const textoFila = fila.textContent.toLowerCase();
+        fila.style.display = textoFila.includes(filtro) ? '' : 'none';
+    });
+});
+</script>
+</body>
+</html>
