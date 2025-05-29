@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Cita Médica</title>
+    <link rel="stylesheet" href="citas.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Agendar Cita Médica</h1>
+        <form action="#" method="POST"> <div class="form-group">
+                <label for="nombre_paciente">Nombre Completo del Paciente:</label>
+                <input type="text" id="nombre_paciente" name="nombre_paciente" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cedula_paciente">Cédula de Identidad / N° de Historia:</label>
+                <input type="text" id="cedula_paciente" name="cedula_paciente">
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Número de Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Ej: 0412-1234567" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com">
+            </div>
+
+            <div class="form-group">
+                <label for="especialidad">Especialidad Médica:</label>
+                <select id="especialidad" name="especialidad" required>
+                    <option value="">Seleccione una especialidad</option>
+                    <option value="medicina_general">Medicina General</option>
+                    <option value="pediatria">Pediatría</option>
+                    <option value="ginecologia">Ginecología</option>
+                    <option value="cardiologia">Cardiología</option>
+                    <option value="dermatologia">Dermatología</option>
+                    <option value="oftalmologia">Oftalmología</option>
+                    <option value="otra">Otra</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="medico">Médico de Preferencia (opcional):</label>
+                <input type="text" id="medico" name="medico" placeholder="Nombre del médico">
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_cita">Fecha Deseada para la Cita:</label>
+                <input type="date" id="fecha_cita" name="fecha_cita" required min="2025-05-29"> </div>
+
+            <div class="form-group">
+                <label for="hora_cita">Hora Aproximada Deseada:</label>
+                <input type="time" id="hora_cita" name="hora_cita">
+                <small>Nota: La hora exacta será confirmada posteriormente.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="motivo_cita">Motivo de la Consulta:</label>
+                <textarea id="motivo_cita" name="motivo_cita" rows="4" placeholder="Describa brevemente el motivo de su cita" required></textarea>
+            </div>
+
+            <input type="submit" value="Solicitar Cita">
+
+        </form>
+    </div>
+
+</body>
+</html>

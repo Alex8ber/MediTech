@@ -1,0 +1,33 @@
+{
+  "name": "meditech",
+  "version": "1.0.0",
+  "description": "Probando si actualiza la monda parte1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./fuente/scripts/app.js",
+    "dev": "nodemon ./fuente/scripts/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alex8ber/MediTech.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alex8ber/MediTech/issues"
+  },
+  "homepage": "https://github.com/Alex8ber/MediTech#readme",
+  "devDependencies": {
+    "eslint": "^9.27.0",
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "mysql": "^2.18.1"
+  }
+}
