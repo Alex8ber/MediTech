@@ -25,20 +25,13 @@ app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
 //Aca van las rutas que no tenemos
 
-const routeindex = require('./rutas/index.js');
+const routeindex = require('./rutas/ruta.index');
+const routelogin = require('./rutas/ruta.login');
+const routeRegister = require('./rutas/ruta.register');
+
+app.use ('/', routelogin);
 app.use ('/', routeindex);
-/*
-    const routeinventario = require('./routes/inventario.route');
-
-    const routelogin = require('./routes/login.route');
-    const routeRegister = require('./routes/register.route');
-    
-    app.use ('/',routeRegister);
-    app.use ('/',routelogin);
-    app.use ('/inventario', routeinventario);
-*/
-
-
+app.use ('/', routeRegister);
 
 // archivos estaticos
 app.use(express.static(path.join(__dirname,'../public')));
