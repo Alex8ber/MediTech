@@ -14,7 +14,7 @@ router.post('/login', (req,res) =>{
     const pass = req.body.pass;
     console.log(user,pass);
     if(user && pass){
-        conexion.query(`select usuarios.Usuario,usuarios.password from proyecto1.usuarios where usuarios.Usuario = ? and usuarios.password = ?`),
+        conexion.query(`SELECT usuarios.Usuario,usuarios.password FROM usuarios WHERE usuarios.Usuario = ? AND usuarios.password = ?`,
         [user,pass], (error, resultados)=>{
             console.log(resultados);
             if(resultados.length == 0 || resultados[0].password != pass){
@@ -23,7 +23,7 @@ router.post('/login', (req,res) =>{
                 console.log(resultados)
                 res.redirect('/register');
             }
-        }   
+        })
     }
 });
 
