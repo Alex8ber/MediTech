@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctores</title>
+    <link rel="stylesheet" href="estilos2.css">
+
+</head>
+
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="logo sin fondo 1.png" alt="Logo" class="logo img">
+            MediTech
+        </div>
+        <nav>
+            <a href="#" class="active">Doctores</a>
+            <a href="#">Personal Obrero</a>
+            <a href="#">Pacientes</a>
+            <a href="#">Agenda</a>
+            <a href="#">Ingresos</a>
+            <a href="#">Reportes</a>
+            <a href="#">Historial Medico</a>
+        </nav>
+        <div class="perfil">
+            <img src="usuario x.jpg" alt="Perfil" class="avatar">
+        </div>
+    </div>
+
+    <main>
+        <div class="titulo">Doctor</div>
+
+        <div class="busqueda">
+            <div>
+                <label for="buscar">Buscar Doctor</label>
+                <input type="text" id="buscar" placeholder="Nombre, cédula, email...">
+            </div>
+        </div>
+
+        <div class="tabla-section">
+            <div class="tabla-titulo">Doctores registrados</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cédula</th>
+                        <th>Edad</th>
+                        <th>Especialidad</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-doctores">
+                    <tr>
+                        <td>Anais</td>
+                        <td>Gazcon</td>
+                        <td>V-12345678</td>
+                        <td>42</td>
+                        <td>Cardiologa</td>
+                        <td>anaGaz34@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>Gabriela</td>
+                        <td>Guzman</td>
+                        <td>V-78954321</td>
+                        <td>28</td>
+                        <td>Ginecologa</td>
+                        <td>gaby.gg@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>Nicola</td>
+                        <td>Sasonetti</td>
+                        <td>V-41526631</td>
+                        <td>32</td>
+                        <td>Psicologo</td>
+                        <td>nicossa992@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>Manuel</td>
+                        <td>Gomez</td>
+                        <td>V-78956368</td>
+                        <td>35</td>
+                        <td>Radiologo</td>
+                        <td>manu.gomez472@gmail.com</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="nuevo-doctor" style="margin-left:20px;">Nuevo Doctor</button>
+            <button class="eliminar-doctor" style="margin-left:20px;">Eliminar Doctor</button>
+            <button class="editar-doctor" style="margin-left:20px;">Editar Doctor</button>
+        </div>
+    </main>
+    <script>
+document.getElementById('buscar').addEventListener('input', function() {
+    const filtro = this.value.toLowerCase();
+    const filas = document.querySelectorAll('#tabla-pacientes tr');
+    filas.forEach(fila => {
+        const textoFila = fila.textContent.toLowerCase();
+        fila.style.display = textoFila.includes(filtro) ? '' : 'none';
+    });
+});
+</script>
+</body>
+</html>
