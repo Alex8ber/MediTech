@@ -5,5 +5,8 @@ CREATE TABLE proyecto1.Paciente(
   FechaNacimiento DATE,
   Telefono VARCHAR(15),
   Direccion VARCHAR(100),
-  Email VARCHAR(50)
+  Cedula VARCHAR(20) NOT NULL UNIQUE,
+  Genero ENUM('Masculino', 'Femenino', 'Otro') NOT NULL,
+  Patologia VARCHAR(100),
+  Edad INT,
 ) ENGINE = innoDB;
