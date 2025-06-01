@@ -1,8 +1,11 @@
 // Express sesiones y el Path
 const express = require('express');
-const session = require('express-session');
 const app = express();
 const path = require('path');
+const cookieParser = require('cookie-parser');
+
+
+app.use(cookieParser());
 
 //encriptador de contraseñas
 const bcryptjs = require('bcryptjs') ;
@@ -15,11 +18,6 @@ dotenv.config({path:path.join(__dirname,'./env/.env')});
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-app.use(session({
-  secret:'admin',
-  resave: true,
-  saveUninitialized: true
-}))
 // motor de plantillas
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
