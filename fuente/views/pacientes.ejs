@@ -10,24 +10,24 @@
 <body>
     <div class="pacientes-container">
         <h2>Pacientes Registrados</h2>
-        <form class="filtros" method="GET" action="/pacientes">
+        <form class="filtros" method="POST" action="/pacientes">
             <input type="text" name="nombre" placeholder="Nombre">
             <input type="text" name="apellido" placeholder="Apellido">
             <input type="text" name="cedula" placeholder="Cédula">
             <select name="patologia">
-                <option value="">Patología</option>
+                <option value="" selected disabled>Patología</option>
                 <option value="diabetes">Diabetes</option>
                 <option value="hipertension">Hipertensi&oacute;n</option>
                 <option value="cardiopatias">Cardiopatías</option>
             </select>
             <select name="genero">
-                <option value="">Género</option>
+                <option value="" selected disabled>Género</option>
                 <option value="M">Masculino</option>
                 <option value="F">Femenino</option>
                 <option value="O">Otro</option>
             </select>
-            <select name="condicion">
-                <option value="">Condición</option>
+            <select name="condicion" id="condicion">
+                <option value="" selected disabled>Condición</option>
                 <option value="estable">Estable</option>
                 <option value="critico">Crítico</option>
                 <option value="recuperado">Recuperado</option>
@@ -47,7 +47,19 @@
                         <th>Dirección</th>
                         <th>Patología</th>
                     </tr>
-                </thead>
+            </thead>
+            <tbody>
+                <% pacientes.forEach(function(paciente) { %>
+                    <tr>
+                        <td><%= pacientes.Nombre %></td>
+                        <td><%= pacientes.Apellido %></td>
+                        <td><%= pacientes.FechaNacimiento %></td>
+                        <td><%= pacientes.Telefono %></td>
+                        <td><%= pacientes.Direccion %></td>
+                        <td><%= pacientes.Email %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
                
             </table>
         </div>

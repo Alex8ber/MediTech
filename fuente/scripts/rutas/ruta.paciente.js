@@ -1,5 +1,7 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
+
+const paciente = require('../model/model.paciente');
 
 router.get('/', (req, res) => {
     paciente.ver_paciente().then(pacientes => {
@@ -9,7 +11,6 @@ router.get('/', (req, res) => {
         console.error('Error al obtener los pacientes:', error);
         res.status(500).send('Error al obtener los pacientes');
     });
-})
+});
 
-
-module.exports = router
+module.exports = router;
