@@ -23,8 +23,8 @@ app.use(session({
 // motor de plantillas
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
-//Aca van las rutas que no tenemos
 
+// Rutas
 const routeindex = require('./rutas/ruta.index');
 const routelogin = require('./rutas/ruta.login');
 const routeRegister = require('./rutas/ruta.register');

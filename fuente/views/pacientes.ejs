@@ -10,8 +10,8 @@
 </head>
 <body>
     <main>
+        
         <div class="titulo">Pacientes</div>
-
         <div class="busqueda">
             <div>
                 <label for="buscar">Buscar paciente</label>
@@ -81,14 +81,14 @@
         </div>
     </main>
     <script>
-document.getElementById('buscar').addEventListener('input', function() {
-    const filtro = this.value.toLowerCase();
-    const filas = document.querySelectorAll('#tabla-pacientes tr');
-    filas.forEach(fila => {
-        const textoFila = fila.textContent.toLowerCase();
-        fila.style.display = textoFila.includes(filtro) ? '' : 'none';
-    });
-});
-</script>
+        document.getElementById('buscar').addEventListener('input', function() {
+            const filtro = this.value.toLowerCase();
+            const filas = document.querySelectorAll('#tabla-pacientes tr');
+            filas.forEach(fila => {
+                const textoFila = fila.textContent.toLowerCase();
+                fila.style.display = textoFila.includes(filtro) ? '' : 'none';
+            });
+        });
+    </script>
 </body>
 </html>
