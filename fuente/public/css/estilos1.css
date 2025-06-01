@@ -14,8 +14,6 @@ body {
     justify-content: space-between;
 }
 
-
-
 .logo {
     display: flex;
     align-items: center;
@@ -139,6 +137,18 @@ tr:not(:last-child) {
     padding: 10px 22px;
     background: #45787a;
     color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.editar-doctor {
+    margin: 20px 0 0 20px;
+    padding: 10px 22px;
+    background: #acbfc0;
+    color: #524e4e;
     border: none;
     border-radius: 8px;
     font-size: 1em;
