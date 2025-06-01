@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacientes Registrados - MediTech</title>
+    <link rel="stylesheet" href="../css/pacientes.css">
+    <link rel="stylesheet" href="../css/doctores.css">
+</head>
+<body>
+    <div class="pacientes-container">
+        <h2>Pacientes Registrados</h2>
+        <form class="filtros" method="GET" action="/pacientes">
+            <input type="text" name="nombre" placeholder="Nombre">
+            <input type="text" name="apellido" placeholder="Apellido">
+            <input type="text" name="cedula" placeholder="Cédula">
+            <select name="patologia">
+                <option value="">Patología</option>
+                <option value="diabetes">Diabetes</option>
+                <option value="hipertension">Hipertensi&oacute;n</option>
+                <option value="cardiopatias">Cardiopatías</option>
+            </select>
+            <select name="genero">
+                <option value="">Género</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+                <option value="O">Otro</option>
+            </select>
+            <select name="condicion">
+                <option value="">Condición</option>
+                <option value="estable">Estable</option>
+                <option value="critico">Crítico</option>
+                <option value="recuperado">Recuperado</option>
+            </select>
+            <input type="date" name="fecha_ingreso">
+            <button type="submit" class="filtro-btn">Filtrar</button>
+        </form>
+        <div class="tabla-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cédula</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Dirección</th>
+                        <th>Patología</th>
+                    </tr>
+                </thead>
+               
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -28,10 +28,14 @@ app.set('view engine', 'ejs');
 const routeindex = require('./rutas/ruta.index');
 const routelogin = require('./rutas/ruta.login');
 const routeRegister = require('./rutas/ruta.register');
+const routeCitas = require('./rutas/ruta.citas');
+const routePaciente = require('./rutas/ruta.paciente');
 
 app.use ('/', routelogin);
 app.use ('/', routeindex);
 app.use ('/', routeRegister);
+app.use ('/citas', routeCitas);
+app.use ('/pacientes', routePaciente);
 
 // archivos estaticos
 app.use(express.static(path.join(__dirname,'../public')));

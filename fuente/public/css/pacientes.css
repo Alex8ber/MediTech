@@ -1,0 +1,77 @@
+body {
+    background-color: aliceblue;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.pacientes-container {
+    background: #fff;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.pacientes-container h2 {
+    color: rgb(86, 170, 142);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.filtros input,
+.filtros select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    min-width: 140px;
+}
+
+.filtro-btn {
+    background-color: rgb(86, 170, 142);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.2s;
+}
+
+.filtro-btn:hover {
+    background-color: rgb(70, 140, 120);
+}
+
+.tabla-section {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #f7f7f7;
+}
+
+th, td {
+    padding: 14px 10px;
+    text-align: left;
+}
+
+th {
+    background: #e5e5e5;
+    font-weight: 600;
+}
+
+tr:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+}
