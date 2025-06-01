@@ -3,9 +3,9 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center; /* Centra horizontalmente */
-            align-items: center;    /* Centra verticalmente */
+
+            
+            
             min-height: 100vh;      /* Asegura que el cuerpo ocupe toda la altura */
             padding: 20px 0; /* Añade padding por si el contenido es muy alto en móviles */
         }
@@ -36,6 +36,7 @@
             width: 100%;
             max-width: 400px; /* Ancho máximo del formulario */
             box-sizing: border-box;
+            margin: 40px auto; /* Centra el contenedor en la página */
         }
 
         .login-container h2 {

@@ -1,5 +1,0 @@
-CREATE TABLE usuarios (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    Usuario VARCHAR (50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
-)ENGINE = innoDB;
