@@ -28,7 +28,9 @@ const routelogin = require('./rutas/ruta.login');
 const routeRegister = require('./rutas/ruta.register');
 const routeCitas = require('./rutas/ruta.citas');
 const routePaciente = require('./rutas/ruta.paciente');
+const routeHome = require('./rutas/ruta.home');
 
+app.use ('/', routeHome);
 app.use ('/', routelogin);
 app.use ('/', routeindex);
 app.use ('/', routeRegister);
