@@ -2,7 +2,13 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    res.render('pacientes.ejs')
+    paciente.ver_paciente().then(pacientes => {
+        res.render('pacientes.ejs', { pacientes: pacientes});
+    })
+    .catch(error => {
+        console.error('Error al obtener los pacientes:', error);
+        res.status(500).send('Error al obtener los pacientes');
+    });
 })
 
 
