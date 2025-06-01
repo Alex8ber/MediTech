@@ -14,6 +14,13 @@ Probando si actualiza la monda parte1
         <li>-hacer un footer to calidad con nombres correos ubicaciones</li>
         <li>-separarlos por categoria y filtrados</li>
         <li>culo culo culo y más culo</li>
+        <li>Arreglar filtros en la vista de pacientes</li>
+        <li>Arreglar header en la vista de pacientes</li>
+        <li>Arreglar campos en la base de datos</li>
+        <li>Poner cokies</li>
+        <li>agregar cifrado</li>
+        <li>Pagina de HOME importante</li>
+        <li>No hay Perfil asi que ponerlo</li>
     </ul>
         
 
