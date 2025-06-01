@@ -1,4 +1,0 @@
-ALTER TABLE proyecto1.Paciente
-ADD COLUMN Cedula VARCHAR(20),
-ADD COLUMN Genero VARCHAR(20),
-ADD COLUMN Patologia VARCHAR(100);
