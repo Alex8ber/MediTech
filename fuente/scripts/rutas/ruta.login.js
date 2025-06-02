@@ -10,13 +10,13 @@ router.get('/login', function(req, res) {
 })
 
 router.post('/login', (req,res) =>{
-    const user = req.body.email;
+    const user = req.body.user;
     const pass = req.body.pass;
     if(user && pass){
-        conexion.query(`SELECT usuarios.Usuario,usuarios.password FROM usuarios WHERE usuarios.Usuario = ? AND usuarios.password = ?`,
+        conexion.query(`SELECT usuario.Username,usuario.password FROM usuario WHERE usuario.Username = ? AND usuario.password = ?`,
         [user,pass], (error, resultados)=>{
             if(resultados.length == 0 || resultados[0].password != pass){
-                res.render('/login', {error: 'Usuario o contraseña incorrectos'});
+                res.render('/login', {error: 'Usuario o Contraseña incorrectos'});
             }else{
                 res.redirect('/home');
             }
