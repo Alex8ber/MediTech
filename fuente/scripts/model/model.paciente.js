@@ -3,7 +3,7 @@ const paciente = {
     ver_paciente() {
         return new Promise((resolve, reject) => {
             conexion.query(
-                'SELECT Nombre, Apellido, FechaNacimiento, Telefono, Direccion, Email FROM paciente',
+                'SELECT Nombre, Apellido, FechaNacimiento, Telefono, Direccion FROM paciente',
                 (error, resultados) => {
                     if (error) {
                         reject(error);

@@ -29,6 +29,7 @@ const routeRegister = require('./rutas/ruta.register');
 const routeCitas = require('./rutas/ruta.citas');
 const routePaciente = require('./rutas/ruta.paciente');
 const routeHome = require('./rutas/ruta.home');
+const routeDoctores = require('./rutas/ruta.doctores');
 
 app.use ('/', routeHome);
 app.use ('/', routelogin);
@@ -36,6 +37,7 @@ app.use ('/', routeindex);
 app.use ('/', routeRegister);
 app.use ('/', routeCitas);
 app.use ('/', routePaciente);
+app.use ('/', routeDoctores);
 
 // archivos estaticos
 app.use(express.static(path.join(__dirname,'../public')));
