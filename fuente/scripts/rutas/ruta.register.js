@@ -3,7 +3,6 @@ const bcryptjs = require('bcryptjs');
 const router = express.Router();
 const modelo = require('../model/model.register');
 
-/* GET home page. */
 router.get('/register', function(req, res) {
     res.render('register.ejs', { error: null, title: 'Registro' });
 });

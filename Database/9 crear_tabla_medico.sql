@@ -8,7 +8,7 @@ CREATE TABLE proyecto1.Medico (
   Cedula VARCHAR(20) NOT NULL UNIQUE,
   Edad INT,
   UsuarioID INT,
-  FOREIGN KEY (UsuarioID) REFERENCES proyecto1.Usuario(UsuarioID);
+  FOREIGN KEY (UsuarioID) REFERENCES proyecto1.Usuario(UsuarioID),
   DepartamentoID INT,
-  FOREIGN KEY (DepartamentoID) REFERENCES Departamento(DepartamentoID)
+  FOREIGN KEY (DepartamentoID) REFERENCES proyecto1.Departamento(DepartamentoID)
 )ENGINE = innoDB;

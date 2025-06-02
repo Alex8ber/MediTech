@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const doctores = require('../model/model.doctores')
-/* GET home page. */
+
 router.get('/doctores', function(req, res) {
     doctores.ver_doctores().then(doctores => {
         res.render('Doctores/doctores.ejs', { doctores: doctores });

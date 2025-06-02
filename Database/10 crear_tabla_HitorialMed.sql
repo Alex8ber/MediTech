@@ -5,6 +5,6 @@ CREATE TABLE proyecto1.HistorialMedico (
   Fecha DATE NOT NULL,
   Diagnostico TEXT NOT NULL,
   Tratamiento TEXT,
-  FOREIGN KEY (PacienteID) REFERENCES Paciente(PacienteID),
-  FOREIGN KEY (MedicoID) REFERENCES Medico(MedicoID)
+  FOREIGN KEY (PacienteID) REFERENCES proyecto1.Paciente(PacienteID),
+  FOREIGN KEY (MedicoID) REFERENCES proyecto1.Medico(MedicoID)
 )ENGINE = InnoDB;
