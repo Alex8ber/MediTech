@@ -18,7 +18,7 @@ router.post('/login', (req,res) =>{
             if(resultados.length == 0 || resultados[0].password != pass){
                 res.render('/login', {error: 'Usuario o contraseña incorrectos'});
             }else{
-                res.redirect('/register');
+                res.redirect('/home');
             }
         })
     }
