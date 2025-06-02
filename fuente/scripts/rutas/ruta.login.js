@@ -3,7 +3,6 @@ const bcryptjs = require('bcryptjs');
 const router = express.Router();
 const modelo = require('../model/model.login');
 
-/* GET home page. */
 router.get('/login', function(req, res) {
     res.render('login.ejs')
 })

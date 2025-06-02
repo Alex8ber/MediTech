@@ -6,6 +6,6 @@ CREATE TABLE proyecto1.Cita (
   EstadoCitaID INT,
   FOREIGN KEY (EstadoCitaID) REFERENCES proyecto1.EstadoCita(EstadoCitaID),
   Observaciones TEXT,
-  FOREIGN KEY (PacienteID) REFERENCES Paciente(PacienteID),
-  FOREIGN KEY (MedicoID) REFERENCES Medico(MedicoID)
+  FOREIGN KEY (PacienteID) REFERENCES proyecto1.Paciente(PacienteID),
+  FOREIGN KEY (MedicoID) REFERENCES proyecto1.Medico(MedicoID)
 )ENGINE = InnoDB;
