@@ -1,6 +1,5 @@
 const express = require('express');
 const bcryptjs = require('bcryptjs');
-const conexion = require("../db");
 const router = express.Router();
 const modelo = require('../model/model.login');
 
@@ -17,10 +16,14 @@ router.post('/login', async function(req, res) {
             if (!usuario) {
                 return res.render('login.ejs', { error: 'Usuario o Contraseña incorrectos' });
             }
-            // aquí se agregan las cookies de sesión
-            res.redirect('/home');
+            const passwordValida = await bcryptjs.compare(pass, usuario.password);
+            if (!passwordValida) {
+                return res.render('login.ejs', { error: 'Usuario o Contraseña incorrectos' });
+            } else {
+                res.redirect('/home');
+            }
         } catch (error) {
-            res.send(error);
+            res.render('login.ejs', { error: error.message });
         }
     } else {
         res.render('login.ejs', { error: 'Por favor, ingrese usuario y contraseña' });
