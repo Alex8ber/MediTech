@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f7f7;
+}
+
+.header {
+    background: #45787a;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    height: 80px;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.perfil .avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+}
+
+main {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.titulo {
+    background: #45787a;
+    color: #fff;
+    padding: 18px 0;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.registro {
+    gap: 30px;
+}
+
+.registro div {
+    display: flex;
+    flex-direction:column;
+    flex: 1;
+}
+
+.registro label {
+    font-size: 1em;
+    color: #333;
+    margin-top: 10px;
+}
+
+.registro input {
+    padding: 12px;
+    border: none;
+    background: #e5e5e5;
+    border-radius: 4px;
+    font-size: 1em;
+    outline: none;
+}
+
+.registro select {
+    padding: 12px;
+    border: none;
+    background: #e5e5e5;
+    border-radius: 4px;
+    font-size: 1em;
+    outline: none;
+}
+
+.registro textarea {
+    padding: 12px;
+    border: none;
+    background: #e5e5e5;
+    border-radius: 4px;
+    font-size: 1em;
+    outline: none;
+}
+
+.nuevo {
+    margin: 20px 0 0 400px;
+    padding: 10px 22px;
+    align-items: center;
+    background: #45787a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cancelar {
+    padding: 10px 22px;
+    align-items: center;
+    background: #acbfc0;
+    color: #524e4e;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.nuevo:hover {
+    background: #5e9b9e;
+}
+
+.cancelar:hover {
+    background: rgb(218, 243, 247);
+}
+
+.logo img {
+    width: auto;
+    height: 200px;
+}
