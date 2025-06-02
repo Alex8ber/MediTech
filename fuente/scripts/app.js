@@ -34,8 +34,8 @@ app.use ('/', routeHome);
 app.use ('/', routelogin);
 app.use ('/', routeindex);
 app.use ('/', routeRegister);
-app.use ('/citas', routeCitas);
-app.use ('/pacientes', routePaciente);
+app.use ('/', routeCitas);
+app.use ('/', routePaciente);
 
 // archivos estaticos
 app.use(express.static(path.join(__dirname,'../public')));
