@@ -10,17 +10,16 @@
 
 </head>
 <body>
-    <main>
-        
+    <main>        
         <div class="titulo">Pacientes</div>
         <div class="busqueda">
             <div>
                 <label for="buscar">Buscar paciente</label>
-                <input type="text" id="buscar" placeholder="Nombre, cédula, email...">
+                <input type="text" id="buscar_paciente" placeholder="Nombre, cédula, email...">
             </div>
             <div>
                 <label for="buscar">Buscar patologia</label>
-                <input type="text" id="buscar" placeholder="Buscar Patologia">
+                <input type="text" id="buscar_patologia" placeholder="Buscar Patologia">
             </div>
         </div>
 
@@ -36,55 +35,24 @@
                         <th>Genero</th>
                         <th>Patologia</th>
                         <th>Teléfono</th>
-                        <th>Fecha de Registro</th>
+                        <th>Fecha de Nacimiento</th>
                         <th>Dirección</th>
                     </tr>
                 </thead>
                 <tbody id="tabla-pacientes">
-                    <tr>
-                        <td>Anais</td>
-                        <td>Gazcon</td>
-                        <td>V-12345678</td>
-                        <td>28</td>
-                        <td>Femenino</td>
-                        <td>Diabetes</td>
-                        <td>+58 416-1234567</td>
-                        <td>2025-05-28</td>
-                        <td>Av. Bolivar</td>
-                    </tr>
-                    <tr>
-                        <td>Gabriela</td>
-                        <td>Guzman</td>
-                        <td>V-78954321</td>
-                        <td>32</td>
-                        <td>Femenino</td>
-                        <td>Cancer</td>
-                        <td>+58 412-1956237</td>
-                        <td>2025-05-27</td>
-                        <td>Av. Principal 123</td>
-                    </tr>
-                    <tr>
-                        <td>Nicola</td>
-                        <td>Sasonetti</td>
-                        <td>V-41526631</td>
-                        <td>45</td>
-                        <td>Masculino</td>
-                        <td>Cardiopatia</td>
-                        <td>+58 412-3265847</td>
-                        <td>2025-05-26</td>
-                        <td>Av. Valencia</td>
-                    </tr>
-                    <tr>
-                        <td>Manuel</td>
-                        <td>Gomez</td>
-                        <td>V-78956368</td>
-                        <td>36</td>
-                        <td>Masculino</td>
-                        <td>Obesidad</td>
-                        <td>+58 416-4152687</td>
-                        <td>2025-05-25</td>
-                        <td>Calle Madeira</td>
-                    </tr>
+                   <% pacientes.forEach(paciente => { %>
+                        <tr>
+                            <td><%= paciente.Nombre %></td>
+                            <td><%= paciente.Apellido %></td>
+                            <td><%= paciente.Cedula %></td>
+                            <td><%= paciente.Edad %></td>
+                            <td><%= paciente.Genero %></td>
+                            <td><%= paciente.Patologia %></td>
+                            <td><%= paciente.Telefono %></td>
+                            <td><%= paciente.FechaNacimiento %></td>
+                            <td><%= paciente.Direccion %></td>
+                        </tr>
+                    <% }) %>
                 </tbody>
             </table>
             <button class="nuevo-paciente" style="margin-left:20px;">Nuevo Paciente</button>
@@ -92,14 +60,43 @@
         </div>
     </main>
     <script>
-        document.getElementById('buscar').addEventListener('input', function() {
-            const filtro = this.value.toLowerCase();
-            const filas = document.querySelectorAll('#tabla-pacientes tr');
-            filas.forEach(fila => {
-                const textoFila = fila.textContent.toLowerCase();
-                fila.style.display = textoFila.includes(filtro) ? '' : 'none';
-            });
-        });
-    </script>
+        function actualizarTabla(pacientes) {
+    const tbody = document.getElementById('tabla-pacientes');
+    tbody.innerHTML = '';
+    pacientes.forEach(paciente => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+            <td>${paciente.Nombre}</td>
+            <td>${paciente.Apellido}</td>
+            <td>${paciente.Cedula}</td>
+            <td>${paciente.Edad}</td>
+            <td>${paciente.Genero}</td>
+            <td>${paciente.Patologia}</td>
+            <td>${paciente.Telefono}</td>
+            <td>${paciente.FechaNacimiento}</td>
+            <td>${paciente.Direccion}</td>
+        `;
+        tbody.appendChild(fila);
+    });
+}
+
+function getFiltros() {
+    return {
+        q: document.getElementById('buscar_paciente').value,
+        patologia: document.getElementById('buscar_patologia').value
+    };
+}
+
+function buscarPacientes() {
+    const filtros = getFiltros();
+    const params = new URLSearchParams(filtros).toString();
+    fetch(`/buscar-pacientes?${params}`)
+        .then(res => res.json())
+        .then(data => actualizarTabla(data));
+}
+
+document.getElementById('buscar_paciente').addEventListener('input', buscarPacientes);
+document.getElementById('buscar_patologia').addEventListener('input', buscarPacientes);
+</script>
 </body>
 </html>

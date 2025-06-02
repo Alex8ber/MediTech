@@ -3,8 +3,7 @@ const paciente = {
     ver_paciente() {
         return new Promise((resolve, reject) => {
             conexion.query(
-                'SELECT Nombre, Apellido, FechaNacimiento, Telefono, Direccion FROM paciente',
-                (error, resultados) => {
+                'SELECT paciente.Nombre, paciente.Apellido, paciente.Cedula, paciente.Edad, paciente.Genero, patologia.Patologia, paciente.FechaNacimiento, Telefono, Direccion FROM paciente JOIN patologia ON paciente.PatologiaID = patologia.PatologiaID', (error, resultados) => {
                     if (error) {
                         reject(error);
                     } else {
@@ -12,6 +11,31 @@ const paciente = {
                     }
                 }
             );
+        });
+    },
+
+    buscar_paciente(filtro, patologia) {
+    return new Promise((resolve, reject) => {
+        let query = `
+            SELECT paciente.Nombre, paciente.Apellido, paciente.FechaNacimiento, paciente.Telefono, paciente.Direccion, paciente.Cedula, paciente.Edad, paciente.Genero, patologia.Patologia
+            FROM paciente
+            JOIN patologia ON paciente.PatologiaID = patologia.PatologiaID
+            WHERE (paciente.Nombre LIKE ? OR paciente.Apellido LIKE ? OR paciente.Cedula LIKE ?)
+        `;
+        const values = [`%${filtro}%`, `%${filtro}%`, `%${filtro}%`];
+
+        if (patologia) {
+            query += ' AND patologia.Patologia LIKE ?';
+            values.push(`%${patologia}%`);
+        }
+
+        conexion.query(query, values, (error, resultados) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(resultados);
+                }
+            });
         });
     }
 };

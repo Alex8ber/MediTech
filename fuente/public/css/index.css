@@ -136,4 +136,13 @@ footer{
             width: 100%; /* Asegura que ocupe todo el ancho */
         }
 
-        
+        /* Para el enlace "MediTech" */
+.logo a {
+    color: #fff;           /* Letras blancas */
+    text-decoration: none; /* Quita la barra de abajo */
+}
+
+/* Si quieres asegurarte que no haya subrayado al pasar el mouse */
+.logo a:hover, .logo a:focus {
+    text-decoration: none;
+}
