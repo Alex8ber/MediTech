@@ -3,7 +3,7 @@ const router = express.Router();
 
 const paciente = require('../model/model.paciente');
 
-router.get('/', (req, res) => {
+router.get('/pacientes', (req, res) => {
     paciente.ver_paciente().then(pacientes => {
         res.render('pacientes.ejs');
     })
