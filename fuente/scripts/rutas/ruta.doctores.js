@@ -11,6 +11,15 @@ router.get('/doctores', function(req, res) {
     })
 })
 
+router.get('/buscar-doctores', function(req, res) {
+    const filtro = req.query.q || '';
+    doctores.buscar_doctores(filtro).then(doctores => {
+        res.json(doctores); // Devuelve los resultados en JSON
+    })
+    .catch(err => {
+        return res.status(500).send('Error al buscar doctores: ' + err.message);
+    })
+});
 
 
 module.exports = router

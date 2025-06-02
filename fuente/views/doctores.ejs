@@ -15,7 +15,7 @@
         <div class="busqueda">
             <div>
                 <label for="buscar">Buscar Doctor</label>
-                <input type="text" id="buscar" placeholder="Nombre, cédula, email...">
+                <input type="text" id="buscar" placeholder="Nombre, Cédula, Especialidad...">
             </div>
         </div>
 
@@ -50,14 +50,27 @@
             <button class="editar-doctor" style="margin-left:20px;">Editar Doctor</button>
         </div>
     </main>
-    <script>
+<script>
 document.getElementById('buscar').addEventListener('input', function() {
-    const filtro = this.value.toLowerCase();
-    const filas = document.querySelectorAll('#tabla-pacientes tr');
-    filas.forEach(fila => {
-        const textoFila = fila.textContent.toLowerCase();
-        fila.style.display = textoFila.includes(filtro) ? '' : 'none';
-    });
+    const filtro = this.value;
+    fetch(`/buscar-doctores?q=${encodeURIComponent(filtro)}`)
+        .then(res => res.json())
+        .then(data => {
+            const tbody = document.getElementById('tabla-doctores');
+            tbody.innerHTML = '';
+            data.forEach(doctor => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${doctor.Nombre}</td>
+                    <td>${doctor.Apellido}</td>
+                    <td>${doctor.Cedula}</td>
+                    <td>${doctor.Edad}</td>
+                    <td>${doctor.Especialidad}</td>
+                    <td>${doctor.Email}</td>
+                `;
+                tbody.appendChild(fila);
+            });
+        });
 });
 </script>
 </body>
