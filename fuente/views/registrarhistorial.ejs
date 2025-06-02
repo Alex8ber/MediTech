@@ -1,0 +1,82 @@
+<%- include('headerpaciente') %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Historial Medico</title>
+    <link rel="stylesheet" href="../css/nuevohistorial.css">
+
+</head>
+
+<body>
+    <main>
+        <h3>Historial Medico > Nuevo Historial Medico</h3>
+
+        <div class="titulo">Registrar Historial Medico</div>
+
+        <h2> Registro Medico </h2>
+        
+        <form>
+        <div class="registro">
+            <div>
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Ingrese nombre">
+            </div>
+            <div>
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" id="apellido" placeholder="Ingrese apellido">
+            </div>
+            <div>
+                <label for="cedula">Cedula</label>
+                <input type="number" name="cedula" id="cedula" placeholder="V-12345678">
+            </div>
+            <div>
+                <label for="telefono">Telefono</label>
+                <input type="number" name="telefono" id="telefono" placeholder="+58 ###-#######">
+            </div>
+            <div>
+                <label for="edad">Edad</label>
+                <input type="number" name="edad" id="edad" placeholder="Ingrese edad">
+            </div>
+            <div>
+                <label for="patologia">Patologia</label>
+                <input type="text" name="patologia" id="patologia" placeholder="Ingrese patologia">
+            </div>
+            <div>
+                <label for="genero">Genero</label>
+                <select id="genero" name="genero" form="generoform">
+                    <option value="masculino" >Masculino</option>
+                    <option value="femenino">Femenino</option>
+                </select>
+            </div>
+            <div>
+                <label for="fecha">Fecha de Registro</label>
+                <input type="date" name="fecha" id="fecha">
+            </div>
+            <div>
+                <label for="fecha">Proxima Cita</label>
+                <input type="date" name="fecha" id="fecha">
+            </div>
+        <div class="tabla-section">
+            <div class="tabla-titulo"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Notas de progreso</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-pacientes">
+                    <tr>
+                        <td>2025-06-19</td>
+                        <td>hoy el paciente casi se mata haciendo estas vistas</td>
+
+                    </tr>
+                </tbody>
+            </table>    
+        </div>
+        <button class="nuevo">Nuevo Historial Medico</button>
+        <button class="cancelar">Cancelar</button>
+    </main>
+</body>
