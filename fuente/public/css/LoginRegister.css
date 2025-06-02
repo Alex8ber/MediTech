@@ -58,6 +58,17 @@
             font-weight: bold;
         }
 
+        .form-group input[type="user"],
+        .form-group input[type="text"] {
+             width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Para que el padding no afecte el ancho total */
+            font-size: 1em;
+
+        }
+
         .form-group input[type="email"],
         .form-group input[type="password"] {
             width: 100%;

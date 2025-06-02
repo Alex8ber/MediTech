@@ -8,17 +8,19 @@ router.get('/register', function(req, res) {
     res.render('register.ejs', { error: null, title: 'Registro' });
 });
 
-router.post('/register', async function(req, res) {
+router.post('/register', function(req, res) {
 
-const {email, pass, confirm} = req.body;
-    if(!email || !pass || !confirm){
-        res.render('registro', {error: 'Todos los campos son obligatorios'});
+const {user, email, pass, confirm} = req.body;
+    if(!user || !email || !pass || !confirm){
+        res.render('register.ejs', {error: 'Todos los campos son obligatorios'});
     }else if(pass.length < 8){
-        res.render('registro', {error: 'La contraseña debe ser mayor a 8 caracteres'});
-    }else if(await modelo.existe(email) > [0]){
-        res.render('registro', {error: 'El usuario ya existe'});
+        res.render('register.ejs', {error: 'La contraseña debe ser mayor a 8 caracteres'});
+    }else if(modelo.existe(email) > [0]){
+        res.render('register.ejs', {error: 'El correo ya está en uso'});
+    }else if(modelo.existe(user) > [0]){
+        res.render('register.ejs', {error: 'El usuario ya está en uso'});
     }else{
-    modelo.insertar(email, pass) 
+    modelo.insertar(user, email, pass) 
         .then(() => {
         res.redirect('/');
     }).catch(error => {
