@@ -20,18 +20,22 @@ router.post('/register', async function(req, res) {
         return res.render('register.ejs', {error: 'Las contraseñas no coinciden'});
     }
     try {
+        // Verificar si el usuario o el email ya existen
         const emailExiste = await modelo.existeEmail(email);
-        if(emailExiste){
-            return res.render('register.ejs', {error: 'El correo ya está en uso'});
-        }
         const userExiste = await modelo.existeUser(user);
         if(userExiste){
             return res.render('register.ejs', {error: 'El usuario ya está en uso'});
+        }else if(emailExiste){
+            return res.render('register.ejs', {error: 'El correo ya está en uso'});
+        }else {
+            // Encriptar la contraseña antes de mandarla
+            const hash = await bcryptjs.hash(pass, 12);
+            await modelo.insertar(user, email, hash);
+            res.redirect('/');
         }
-        await modelo.insertar(user, email, pass);
-        res.redirect('/');
     } catch (error) {
         res.send(error);
     }
 });
+
 module.exports = router
