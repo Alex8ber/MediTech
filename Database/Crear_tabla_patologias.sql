@@ -1,0 +1,6 @@
+
+CREATE TABLE proyecto1.Patologia (
+    PatologiaID INT AUTO_INCREMENT PRIMARY KEY,
+    Patologia VARCHAR(100) NOT NULL UNIQUE
+)ENGINE = innoDB;
+
