@@ -8,6 +8,6 @@ CREATE TABLE proyecto1.Paciente(
   Cedula VARCHAR(20) NOT NULL UNIQUE,
   Genero ENUM('Masculino', 'Femenino', 'Otro') NOT NULL,
   PatologiaID INT,
-   FOREIGN KEY (PatologiaID) REFERENCES proyecto1.Patologia(PatologiaID);
-  Edad INT,
+   FOREIGN KEY (PatologiaID) REFERENCES proyecto1.Patologia(PatologiaID),
+  Edad INT
 ) ENGINE = innoDB;
