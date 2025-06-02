@@ -9,18 +9,21 @@ router.get('/login', function(req, res) {
     res.render('login.ejs')
 })
 
-router.post('/login', (req,res) =>{
-    const user = req.body.user;
-    const pass = req.body.pass;
-    if(user && pass){
-        conexion.query(`SELECT usuario.Username,usuario.password FROM usuario WHERE usuario.Username = ? AND usuario.password = ?`,
-        [user,pass], (error, resultados)=>{
-            if(resultados.length == 0 || resultados[0].password != pass){
-                res.render('/login', {error: 'Usuario o Contraseña incorrectos'});
-            }else{
-                res.redirect('/home');
+router.post('/login', async function(req, res) {
+    const { user, pass } = req.body;
+    if (user && pass) {
+        try {
+            const usuario = await modelo.userExiste(user, pass);
+            if (!usuario) {
+                return res.render('login.ejs', { error: 'Usuario o Contraseña incorrectos' });
             }
-        })
+            // aquí se agregan las cookies de sesión
+            res.redirect('/home');
+        } catch (error) {
+            res.send(error);
+        }
+    } else {
+        res.render('login.ejs', { error: 'Por favor, ingrese usuario y contraseña' });
     }
 });
 

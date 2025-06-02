@@ -6,7 +6,8 @@ CREATE TABLE proyecto1.Paciente(
   Telefono VARCHAR(15),
   Direccion VARCHAR(100),
   Cedula VARCHAR(20) NOT NULL UNIQUE,
-  Genero ENUM('Masculino', 'Femenino', 'Otro') NOT NULL,
+  GeneroID INT,
+  FOREIGN KEY (GeneroID) REFERENCES proyecto1.Genero(GeneroID),
   PatologiaID INT,
    FOREIGN KEY (PatologiaID) REFERENCES proyecto1.Patologia(PatologiaID),
   Edad INT
