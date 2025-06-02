@@ -72,10 +72,9 @@ main {
 }
 
 .busqueda div {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    flex: 1;
 }
 
 .busqueda label {
@@ -132,7 +131,7 @@ tr:not(:last-child) {
     border-bottom: 1px solid #ddd;
 }
 
-.nuevo-doctor {
+.nuevo-paciente {
     margin: 20px 0 0 20px;
     padding: 10px 22px;
     background: #45787a;
@@ -144,7 +143,7 @@ tr:not(:last-child) {
     transition: background 0.2s;
 }
 
-.editar-doctor {
+.editar-paciente {
     margin: 20px 0 0 20px;
     padding: 10px 22px;
     background: #acbfc0;
@@ -156,7 +155,7 @@ tr:not(:last-child) {
     transition: background 0.2s;
 }
 
-.nuevo-doctor:hover {
+.nuevo-paciente:hover {
     background: #5e9b9e;
 }
 
