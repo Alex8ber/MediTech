@@ -1,0 +1,67 @@
+<%- include('headerpaciente') %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Paciente</title>
+    <link rel="stylesheet" href="../css/nuevopaciente.css">
+
+</head>
+
+<body>
+    <main>
+        <h3>Pacientes > Nuevo Paciente</h3>
+
+        <div class="titulo">Registrar Paciente</div>
+
+        <h2> Datos Personales</h2>
+        
+        <form>
+        <div class="registro">
+            <div>
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Ingrese nombre">
+            </div>
+            <div>
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" id="apellido" placeholder="Ingrese apellido">
+            </div>
+            <div>
+                <label for="cedula">Cedula</label>
+                <input type="number" name="cedula" id="cedula" placeholder="V-12345678">
+            </div>
+            <div>
+                <label for="telefono">Telefono</label>
+                <input type="number" name="telefono" id="telefono" placeholder="+58 ###-#######">
+            </div>
+            <div>
+                <label for="edad">Edad</label>
+                <input type="number" name="edad" id="edad" placeholder="Ingrese edad">
+            </div>
+            <div>
+                <label for="patologia">Patologia</label>
+                <input type="text" name="patologia" id="patologia" placeholder="Ingrese patologia">
+            </div>
+            <div>
+                <label for="genero">Genero</label>
+                <select id="genero" name="genero" form="generoform">
+                    <option value="masculino" >Masculino</option>
+                    <option value="femenino">Femenino</option>
+                </select>
+            </div>
+            <div>
+                <label for="fecha">Fecha de Registro</label>
+                <input type="date" name="fecha" id="fecha">
+            </div>
+            <div>
+                <label for="direccion">Direccion</label>
+                <textarea name="direccion" id="direccion" rows="3" placeholder="Ingrese direccion"></textarea>
+            </div>
+            <button type="button" class="nuevo">Registrar Paciente</button>
+            <button type="button" class="cancelar">Cancelar</button>
+        </div>
+</form>
+
+    </main>
+</body>
