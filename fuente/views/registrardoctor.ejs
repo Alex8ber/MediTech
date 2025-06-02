@@ -1,0 +1,52 @@
+<%- include('headerpaciente') %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Doctor</title>
+    <link rel="stylesheet" href="../css/nuevopaciente.css">
+
+</head>
+
+<body>
+    <main>
+        <h3>Doctores > Nuevo Doctor</h3>
+
+        <div class="titulo">Registrar Doctor</div>
+
+        <h2> Datos Personales</h2>
+        
+        <form>
+        <div class="registro">
+            <div>
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Ingrese nombre">
+            </div>
+            <div>
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" id="apellido" placeholder="Ingrese apellido">
+            </div>
+            <div>
+                <label for="cedula">Cedula</label>
+                <input type="number" name="cedula" id="cedula" placeholder="V-12345678">
+            </div>
+            <div>
+                <label for="edad">Edad</label>
+                <input type="number" name="edad" id="edad" placeholder="Ingrese edad">
+            </div>
+            <div>
+                <label for="especialidad">Especialidad</label>
+                <input type="text" name="especialidad" id="especialidad" placeholder="Ingrese especialidad">
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="tu.correo@ejemplo.com">
+            </div>
+            <button type="button" class="nuevo">Registrar Doctor</button>
+            <button type="button" class="cancelar">Cancelar</button>
+        </div>
+</form>
+
+    </main>
+</body>
