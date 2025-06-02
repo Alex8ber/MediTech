@@ -24,5 +24,24 @@ router.get('/buscar-pacientes', (req, res) => {
         res.status(500).send('Error al buscar pacientes');
     });
 });
+router.get('/registrarpaciente', (req, res) => {
+    res.render('Pacientes/registrarpaciente.ejs');
+});
 
+router.post('/registrarpaciente', (req, res) => {
+    const {nombre, apellido, cedula, telefono, edad, patologia, genero, fecha, direccion} = req.body;
+    if (!nombre || !apellido || !cedula || !telefono || !edad || !patologia || !genero || !fecha || !direccion) {
+        return res.status(500).send('Todos los campos son obligatorios');
+    }
+    paciente.agregar_paciente(nombre, apellido, cedula, telefono, edad, patologia, genero, fecha, direccion).then(() => {
+        res.redirect('/pacientes');
+    })
+    .catch(err => {
+        if (err.code === 'ER_DUP_ENTRY') {
+            return res.status(400).send('La cédula ya está registrada');
+        }
+        console.error('Error al agregar paciente:', err);
+        return res.status(500).send('Error al agregar paciente');
+    });
+});
 module.exports = router;

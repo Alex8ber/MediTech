@@ -37,7 +37,24 @@ const paciente = {
                 }
             });
         });
+    },
+
+    agregar_paciente(nombre, apellido, cedula, telefono, edad, patologia, genero, FechaNacimiento, direccion) {
+    return new Promise((resolve, reject) => {
+        conexion.query(
+            `INSERT INTO paciente (Nombre, Apellido, Cedula, Telefono, Edad, PatologiaID, Genero, Direccion, FechaNacimiento)
+            VALUES (?, ?, ?, ?, ?, (SELECT PatologiaID FROM patologia WHERE Patologia = ?), ?, ?, ?);`,
+            [nombre, apellido, cedula, telefono, edad, patologia, genero, direccion, FechaNacimiento],
+            (error, resultados) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(resultados);
+                }
+            });
+        });
     }
+
 };
 
 module.exports = paciente;
