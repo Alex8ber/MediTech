@@ -15,7 +15,7 @@
         <div class="busqueda">
             <div>
                 <label for="buscar">Buscar Doctor</label>
-                <input type="text" id="buscar" placeholder="Nombre, cédula, email...">
+                <input type="text" id="buscar" placeholder="Nombre, Cédula, Especialidad...">
             </div>
         </div>
 
@@ -33,38 +33,16 @@
                     </tr>
                 </thead>
                 <tbody id="tabla-doctores">
-                    <tr>
-                        <td>Anais</td>
-                        <td>Gazcon</td>
-                        <td>V-12345678</td>
-                        <td>42</td>
-                        <td>Cardiologa</td>
-                        <td>anaGaz34@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <td>Gabriela</td>
-                        <td>Guzman</td>
-                        <td>V-78954321</td>
-                        <td>28</td>
-                        <td>Ginecologa</td>
-                        <td>gaby.gg@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <td>Nicola</td>
-                        <td>Sasonetti</td>
-                        <td>V-41526631</td>
-                        <td>32</td>
-                        <td>Psicologo</td>
-                        <td>nicossa992@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <td>Manuel</td>
-                        <td>Gomez</td>
-                        <td>V-78956368</td>
-                        <td>35</td>
-                        <td>Radiologo</td>
-                        <td>manu.gomez472@gmail.com</td>
-                    </tr>
+                    <% doctores.forEach(doctor => { %>
+                        <tr>
+                            <td><%= doctor.Nombre %></td>
+                            <td><%= doctor.Apellido %></td>
+                            <td><%= doctor.Cedula %></td>
+                            <td><%= doctor.Edad %></td>
+                            <td><%= doctor.Especialidad %></td>
+                            <td><%= doctor.Email %></td>
+                        </tr>
+                    <% }) %>
                 </tbody>
             </table>
             <button class="nuevo-doctor" style="margin-left:20px;">Nuevo Doctor</button>
@@ -72,14 +50,27 @@
             <button class="editar-doctor" style="margin-left:20px;">Editar Doctor</button>
         </div>
     </main>
-    <script>
+<script>
 document.getElementById('buscar').addEventListener('input', function() {
-    const filtro = this.value.toLowerCase();
-    const filas = document.querySelectorAll('#tabla-pacientes tr');
-    filas.forEach(fila => {
-        const textoFila = fila.textContent.toLowerCase();
-        fila.style.display = textoFila.includes(filtro) ? '' : 'none';
-    });
+    const filtro = this.value;
+    fetch(`/buscar-doctores?q=${encodeURIComponent(filtro)}`)
+        .then(res => res.json())
+        .then(data => {
+            const tbody = document.getElementById('tabla-doctores');
+            tbody.innerHTML = '';
+            data.forEach(doctor => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${doctor.Nombre}</td>
+                    <td>${doctor.Apellido}</td>
+                    <td>${doctor.Cedula}</td>
+                    <td>${doctor.Edad}</td>
+                    <td>${doctor.Especialidad}</td>
+                    <td>${doctor.Email}</td>
+                `;
+                tbody.appendChild(fila);
+            });
+        });
 });
 </script>
 </body>
