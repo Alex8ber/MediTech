@@ -159,6 +159,10 @@ tr:not(:last-child) {
     background: #5e9b9e;
 }
 
+.editar-paciente:hover {
+    background: rgb(218, 243, 247);
+}
+
 .logo img {
     width: auto;
     height: 200px;
