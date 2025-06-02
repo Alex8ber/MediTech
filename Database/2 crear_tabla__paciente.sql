@@ -7,6 +7,7 @@ CREATE TABLE proyecto1.Paciente(
   Direccion VARCHAR(100),
   Cedula VARCHAR(20) NOT NULL UNIQUE,
   Genero ENUM('Masculino', 'Femenino', 'Otro') NOT NULL,
-  Patologia VARCHAR(100),
+  PatologiaID INT,
+   FOREIGN KEY (PatologiaID) REFERENCES proyecto1.Patologia(PatologiaID);
   Edad INT,
 ) ENGINE = innoDB;
