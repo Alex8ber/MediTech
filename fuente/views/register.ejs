@@ -10,7 +10,9 @@
 <body>
     <div class="login-container">
         <h2>Crear Nueva Cuenta</h2>
-        
+        <% if (error !=null) { %>
+            <p style="color: red;"><%= error %></p>
+        <% } %>
         <form action="/register" method="POST"> 
 
             <div class="form-group">
