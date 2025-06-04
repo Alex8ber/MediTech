@@ -163,3 +163,117 @@ tr:not(:last-child) {
 .logo a:hover, .logo a:focus {
     text-decoration: none;
 }
+
+html {
+            height: 100%;
+        }
+
+        body {
+            min-height: 100%;
+            margin: 0; /* Elimina el margen por defecto del navegador */
+            display: flex; /* Habilita Flexbox */
+            flex-direction: column; /* Apila los elementos verticalmente */
+            background-color: #f0f2f5; /* Un color de fondo suave como en tu imagen */
+        }
+        
+        /* --- TUS ESTILOS --- */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            border-color: white;
+        }
+
+        /* --- AJUSTE PRINCIPAL AQUÍ --- */
+        .banner {
+            background-color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            
+            /* Cambiamos "margin: 20px" por "margin: auto" */
+            /* Esto centra el cuadro en el espacio disponible */
+            margin: auto; 
+            
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            /* Añadimos un ancho máximo para que no se estire demasiado en pantallas grandes */
+            width: 90%;
+            max-width: 1100px;
+        }
+
+        .banner-content {
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        .banner h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        .banner p {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .features ul {
+            list-style: disc;
+            text-align: left;
+        }
+
+        .image-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap; /* Para que las imágenes se ajusten en pantallas pequeñas */
+            justify-content: center;
+        }
+
+        .image-container img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background-color: #45787a;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            width: 100%;
+            /* margin-top: auto; ya no es necesario con flexbox en el body */
+        }
+
+
