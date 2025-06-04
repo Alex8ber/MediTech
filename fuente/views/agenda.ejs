@@ -1,0 +1,329 @@
+<%- include('header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda</title>
+    <link rel="stylesheet" href="../css/estilos3.css">
+</head>
+
+<body>
+    <main>
+
+        <div class="menu">
+		<p data-target="#general">General</p>
+		<p data-target="#hoy">Hoy</p>
+		<p data-target="#semana">Semana</p>
+        <p data-target="#mes">Mes</p>
+		<div class="line"></div>
+	</div>
+    
+
+	<div class="content">
+
+		<div data-content id="general" class="active">
+			<h1>Agenda General</h1>
+			<div class="card-container">
+				<div class="card">
+					<div class="card-content">
+						<h3>Citas</h3>
+						<h2>10 programadas</h2>
+						<p>Revisa y gestiona tus citas de hoy.</p>
+						<button>Ver agenda</button>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-content">
+						<h3>Pacientes</h3>
+						<h2>2 Nuevos</h2>
+						<p>Nuevos pacientes registrados.</p>
+						<button>Ver pacientes</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="tabla-section">
+				<div class="tabla-titulo">Proximas Citas</div>
+				<table>
+					<thead>
+						<tr>
+							<th>Hora</th>
+							<th>Paciente</th>
+							<th>Revision</th>
+						</tr>
+					</thead>
+
+					<tbody id="tabla-agenda">
+						<tr>
+						<td>09:30 AM</td>
+						<td>Ramses Rivero</td>
+						<td>Sesion de terapia</td>
+						</tr>
+						<tr>
+						<td>10:30 AM</td>
+						<td>Dante O'connor</td>
+						<td>Control de progreso</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
+		<div data-content id="hoy">
+			<h1>Agenda de Hoy</h1>
+
+			<div class="tabla-section">
+				<div class="tabla-titulo">Citas de Hoy</div>
+				<table>
+					<thead>
+						<tr>
+							<th>Hora</th>
+							<th>Paciente</th>
+							<th>Revision</th>
+						</tr>
+					</thead>
+
+					<tbody id="tabla-agenda">
+						<tr>
+						<td>09:30 AM</td>
+						<td>Ramses Rivero</td>
+						<td>Sesion de terapia</td>
+						</tr>
+						<tr>
+						<td>10:30 AM</td>
+						<td>Dante O'connor</td>
+						<td>Control de progreso</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div data-content id="semana">
+			<h1>Agenda de la Semana</h1>
+
+			<div class="busqueda">
+            <div>
+                <label for="buscar">Buscar Revision</label>
+                <input type="text" id="buscar" placeholder="Buscar revision">
+            </div>
+            <div>
+                <label for="buscar">Buscar Fecha</label>
+                <input type="text" id="buscar" placeholder="AAAA/MM/DD">
+            </div>
+        </div>
+
+			<div class="tabla-section">
+				<div class="tabla-titulo">Citas de Hoy</div>
+				<table>
+					<thead>
+						<tr>
+							<th>Hora</th>
+							<th>Paciente</th>
+							<th>Revision</th>
+							<th>Fecha</th>
+						</tr>
+					</thead>
+
+					<tbody id="tabla-agenda">
+						<tr>
+						<td>09:30 AM</td>
+						<td>Ramses Rivero</td>
+						<td>Sesion de terapia</td>
+						<td>2025-06-02</td>
+						</tr>
+						<tr>
+						<td>10:30 AM</td>
+						<td>Dante O'connor</td>
+						<td>Control de progreso</td>
+						<td>2025-06-05</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						<td>2025-06-06</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						<td>2025-06-06</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						<td>2025-06-06</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						<td>2025-06-06</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						<td>2025-06-06</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+        <div data-content id="mes">
+			<h1>Agenda del Mes</h1>
+
+			<div class="busqueda">
+            <div>
+                <label for="buscar">Buscar Revision</label>
+                <input type="text" id="buscar" placeholder="Buscar revision">
+            </div>
+            <div>
+                <label for="buscar">Buscar Fecha</label>
+                <input type="text" id="buscar" placeholder="AAAA/MM/DD">
+            </div>
+        	</div>
+
+			<div class="tabla-section">
+				<div class="tabla-titulo">Citas de Hoy</div>
+				<table>
+					<thead>
+						<tr>
+							<th>Hora</th>
+							<th>Paciente</th>
+							<th>Revision</th>
+							<th>Fecha</th>
+						</tr>
+					</thead>
+
+					<tbody id="tabla-agenda">
+						<tr>
+						<td>09:30 AM</td>
+						<td>Ramses Rivero</td>
+						<td>Sesion de terapia</td>
+						<td>2025-06-02</td>
+						</tr>
+						<tr>
+						<td>10:30 AM</td>
+						<td>Dante O'connor</td>
+						<td>Control de progreso</td>
+						<td>2025-06-05</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						<td>2025-06-06</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						<td>2025-06-11</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						<td>2025-06-16</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						<td>2025-06-18</td>
+						</tr>
+						<tr>
+						<td>12:45 PM</td>
+						<td>Mai Conetti</td>
+						<td>Sesion de revision</td>
+						<td>2025-06-20</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+
+	</div>
+
+    </main>
+	<script>
+		const targets = document.querySelectorAll('[data-target]')
+		const content = document.querySelectorAll('[data-content]')
+
+		targets.forEach(target => {
+		target.addEventListener('click', (e) => {
+		content.forEach(c => {
+			c.classList.remove('active')
+		})
+		const t = document.querySelector(target.dataset.target)
+		t.classList.add('active')
+
+		var line = document.querySelector('.line');
+		line.style.width = e.target.offsetWidth + "px";
+		line.style.left = e.target.offsetLeft + "px";
+		})
+
+		
+	})
+	</script>
+
+	<script>
+        document.getElementById('buscar').addEventListener('input', function() {
+            const filtro = this.value.toLowerCase();
+            const filas = document.querySelectorAll('#tabla-agenda tr');
+            filas.forEach(fila => {
+                const textoFila = fila.textContent.toLowerCase();
+                fila.style.display = textoFila.includes(filtro) ? '' : 'none';
+            });
+        });
+    </script>
+
+</body>
+</html>
