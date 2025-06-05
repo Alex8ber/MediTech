@@ -62,14 +62,14 @@ const paciente = {
         });
     },
 
-    agregar_paciente(nombres, apellidos, cedula, telefono, edad, patologia, genero, email, direccion) {
+    agregar_paciente(nombres, apellidos, cedula, telefono, edad, patologia, genero, email, direccion, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id) {
         return new Promise((resolve, reject) => {
             // Insertar paciente
             conexion.query(
                 `INSERT INTO Pacientes 
-                    (Nombres, Apellidos, Cedula, Edad, Genero_ID, Email, Direccion, Patologia_ID)
-                 VALUES (?, ?, ?, ?, (SELECT Id FROM Genero WHERE Tipo = ?), ?, ?, (SELECT Id FROM Patologia WHERE Nombre = ?))`,
-                [nombres, apellidos, cedula, edad, genero, email, direccion, patologia],
+                    (Nombres, Apellidos, Cedula, Edad, Genero_ID, Email, Direccion, Ocupacion, Estado_Civil_ID, Patologia_ID, Condicion_ID, Tipo_de_sangre_ID)
+                 VALUES (?, ?, ?, ?, (SELECT Id FROM Genero WHERE Tipo = ?), ?, ?, ?, ?, (SELECT Id FROM Patologia WHERE Nombre = ?), ?, ?)`,
+                [nombres, apellidos, cedula, edad, genero, email, direccion, ocupacion, estado_civil_id, patologia, condicion_id, tipo_de_sangre_id],
                 (error, resultados) => {
                     if (error) {
                         reject(error);

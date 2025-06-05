@@ -29,11 +29,20 @@ router.get('/registrarpaciente', (req, res) => {
 });
 
 router.post('/registrarpaciente', (req, res) => {
-    const {nombre, apellido, cedula, telefono, edad, patologia, genero, fecha, direccion} = req.body;
-    if (!nombre || !apellido || !cedula || !telefono || !edad || !patologia || !genero || !fecha || !direccion) {
+    const {
+        nombre, apellido, cedula, telefono, edad, patologia, genero, fecha, direccion,
+        ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id
+    } = req.body;
+    if (
+        !nombre || !apellido || !cedula || !telefono || !edad || !patologia || !genero ||
+        !fecha || !direccion || !ocupacion || !estado_civil_id || !condicion_id || !tipo_de_sangre_id
+    ) {
         return res.status(500).send('Todos los campos son obligatorios');
     }
-    paciente.agregar_paciente(nombre, apellido, cedula, telefono, edad, patologia, genero, fecha, direccion).then(() => {
+    paciente.agregar_paciente(
+        nombre, apellido, cedula, telefono, edad, patologia, genero, fecha, direccion,
+        ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id
+    ).then(() => {
         res.redirect('/pacientes');
     })
     .catch(err => {
