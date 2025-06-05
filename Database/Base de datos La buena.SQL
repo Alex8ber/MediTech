@@ -82,7 +82,7 @@ CREATE TABLE Usuario (
     Email VARCHAR(100) NOT NULL,
     Contrasena VARCHAR(100) NOT NULL,
     Tipo_usuario_ID INT,
-    FOREIGN KEY (Tipo_usuario_ID) REFERENCES Tipo_Usuario(Id),
+    FOREIGN KEY (Tipo_usuario_ID) REFERENCES Tipo_Usuario(Id)
 );
 
 -- Tabla Sintomas
