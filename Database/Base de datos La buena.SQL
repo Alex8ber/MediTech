@@ -68,11 +68,6 @@ CREATE TABLE Ubicacion (
     Descripcion VARCHAR(100) NOT NULL
 );
 
--- Tabla Email
-CREATE TABLE Email (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    Direccion VARCHAR(100) NOT NULL
-);
 
 -- Tabla Tipo_Usuario
 CREATE TABLE Tipo_Usuario (
@@ -84,11 +79,10 @@ CREATE TABLE Tipo_Usuario (
 CREATE TABLE Usuario (
     Id INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
-    Email_ID INT,
+    Email VARCHAR(100) NOT NULL,
     Contrasena VARCHAR(100) NOT NULL,
     Tipo_usuario_ID INT,
     FOREIGN KEY (Tipo_usuario_ID) REFERENCES Tipo_Usuario(Id),
-    FOREIGN KEY (Email_ID) REFERENCES Email(Id)
 );
 
 -- Tabla Sintomas
