@@ -1,7 +1,6 @@
-const { resolveInclude } = require("ejs");
 const conexion = require("../db");
 module.exports = {
-  userExiste(user, pass) {
+  userExiste(user) {
     return new Promise((resolve, reject) => {
       conexion.query(
         `SELECT Usuario.Nombre, Usuario.Contrasena FROM Usuario WHERE Usuario.Nombre = ?`,

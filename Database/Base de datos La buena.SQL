@@ -68,12 +68,6 @@ CREATE TABLE Ubicacion (
     Descripcion VARCHAR(100) NOT NULL
 );
 
--- Tabla Email
-CREATE TABLE Email (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    Direccion VARCHAR(100) NOT NULL
-);
-
 -- Tabla Tipo_Usuario
 CREATE TABLE Tipo_Usuario (
     Id INT AUTO_INCREMENT PRIMARY KEY,
@@ -84,11 +78,10 @@ CREATE TABLE Tipo_Usuario (
 CREATE TABLE Usuario (
     Id INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
-    Email_ID INT,
+    Email VARCHAR(100) NOT NULL,
     Contrasena VARCHAR(100) NOT NULL,
     Tipo_usuario_ID INT,
-    FOREIGN KEY (Tipo_usuario_ID) REFERENCES Tipo_Usuario(Id),
-    FOREIGN KEY (Email_ID) REFERENCES Email(Id)
+    FOREIGN KEY (Tipo_usuario_ID) REFERENCES Tipo_Usuario(Id)
 );
 
 -- Tabla Sintomas
@@ -146,13 +139,12 @@ CREATE TABLE Pacientes (
     Genero_ID INT,
     Email VARCHAR(100),
     Direccion VARCHAR(150),
-    Ocupacion INT,
+    Ocupacion VARCHAR(150),
     Estado_Civil_ID INT,
     Patologia_ID INT,
     Condicion_ID INT,
     Tipo_de_sangre_ID INT,
     FOREIGN KEY (Genero_ID) REFERENCES Genero(Id),
-    FOREIGN KEY (Ocupacion) REFERENCES Ocupacion(Id),
     FOREIGN KEY (Estado_Civil_ID) REFERENCES Estado_civil(Id),
     FOREIGN KEY (Patologia_ID) REFERENCES Patologia(Id),
     FOREIGN KEY (Condicion_ID) REFERENCES Condicion(Id),

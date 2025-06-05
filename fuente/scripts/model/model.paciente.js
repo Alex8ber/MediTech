@@ -4,15 +4,15 @@ const paciente = {
         return new Promise((resolve, reject) => {
             conexion.query(
                 `SELECT 
-                    Pacientes.Nombres, 
-                    Pacientes.Apellidos, 
+                    Pacientes.Nombres AS Nombre, 
+                    Pacientes.Apellidos AS Apellido, 
                     Pacientes.Cedula, 
                     Pacientes.Edad, 
                     Genero.Tipo AS Genero, 
                     Patologia.Nombre AS Patologia, 
                     Pacientes.Direccion, 
-                    Pacientes.Email_ID, 
-                    Pacientes.Telefono_ID
+                    Pacientes.Email, 
+                    (SELECT Numero FROM Telefono_Paciente WHERE Paciente_ID = Pacientes.Id LIMIT 1) AS Telefono
                 FROM Pacientes
                 LEFT JOIN Patologia ON Pacientes.Patologia_ID = Patologia.Id
                 LEFT JOIN Genero ON Pacientes.Genero_ID = Genero.Id`,
@@ -31,15 +31,15 @@ const paciente = {
         return new Promise((resolve, reject) => {
             let query = `
                 SELECT 
-                    Pacientes.Nombres,
-                    Pacientes.Apellidos, 
+                    Pacientes.Nombres AS Nombre,
+                    Pacientes.Apellidos AS Apellido, 
                     Pacientes.Cedula, 
                     Pacientes.Edad, 
                     Genero.Tipo AS Genero, 
                     Patologia.Nombre AS Patologia, 
                     Pacientes.Direccion, 
-                    Pacientes.Email_ID, 
-                    Pacientes.Telefono_ID
+                    Pacientes.Email, 
+                    (SELECT Numero FROM Telefono_Paciente WHERE Paciente_ID = Pacientes.Id LIMIT 1) AS Telefono
                 FROM Pacientes
                 LEFT JOIN Patologia ON Pacientes.Patologia_ID = Patologia.Id
                 LEFT JOIN Genero ON Pacientes.Genero_ID = Genero.Id
@@ -64,30 +64,31 @@ const paciente = {
 
     agregar_paciente(nombres, apellidos, cedula, telefono, edad, patologia, genero, email, direccion) {
         return new Promise((resolve, reject) => {
+            // Insertar paciente
             conexion.query(
                 `INSERT INTO Pacientes 
-                    (Nombres, 
-                    Apellidos, 
-                    Cedula, 
-                    Edad, 
-                    Genero_ID, 
-                    Telefono_ID, 
-                    Email_ID, 
-                    Patologia_ID, 
-                    Direccion)
-                 VALUES (?, ?, ?, ?, (SELECT Id FROM Genero WHERE Tipo = ?), (SELECT Id FROM Telefono WHERE Numero = ?), (SELECT Id FROM Email WHERE Direccion = ?), (SELECT Id FROM Patologia WHERE Nombre = ?), ?)`,
-                [nombres, apellidos, cedula, edad, genero, telefono, email, patologia, direccion],
+                    (Nombres, Apellidos, Cedula, Edad, Genero_ID, Email, Direccion, Patologia_ID)
+                 VALUES (?, ?, ?, ?, (SELECT Id FROM Genero WHERE Tipo = ?), ?, ?, (SELECT Id FROM Patologia WHERE Nombre = ?))`,
+                [nombres, apellidos, cedula, edad, genero, email, direccion, patologia],
                 (error, resultados) => {
                     if (error) {
                         reject(error);
                     } else {
-                        resolve(resultados);
+                        // Insertar teléfono si es necesario
+                        const pacienteId = resultados.insertId;
+                        conexion.query(
+                            `INSERT INTO Telefono_Paciente (Paciente_ID, Numero) VALUES (?, ?)`,
+                            [pacienteId, telefono],
+                            (telError) => {
+                                if (telError) reject(telError);
+                                else resolve(resultados);
+                            }
+                        );
                     }
                 }
             );
         });
     }
-
 };
 
 module.exports = paciente;
