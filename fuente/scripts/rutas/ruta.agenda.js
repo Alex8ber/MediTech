@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/obreros', (req, res) => {
-    res.render('personalobrero.ejs')
+router.get('/agenda', (req, res) => {
+    res.render('agenda.ejs')
 })
+
 
 module.exports = router

@@ -26,20 +26,20 @@ app.set('view engine', 'ejs');
 const routeindex = require('./rutas/ruta.index');
 const routelogin = require('./rutas/ruta.login');
 const routeRegister = require('./rutas/ruta.register');
-const routeCitas = require('./rutas/ruta.citas');
-const routePaciente = require('./rutas/ruta.paciente');
+const routeAgenda = require('./rutas/ruta.agenda');
+const routePacientes = require('./rutas/ruta.pacientes');
 const routeHome = require('./rutas/ruta.home');
 const routeDoctores = require('./rutas/ruta.doctores');
-const routeObrero = require('./rutas/ruta.obrero');
+const routePersonal = require('./rutas/ruta.personal');
 
 app.use ('/', routeHome);
 app.use ('/', routelogin);
 app.use ('/', routeindex);
 app.use ('/', routeRegister);
-app.use ('/', routeCitas);
-app.use ('/', routePaciente);
+app.use ('/', routeAgenda);
+app.use ('/', routePacientes);
 app.use ('/', routeDoctores);
-app.use ('/', routeObrero);
+app.use ('/', routePersonal);
 
 // archivos estaticos
 app.use(express.static(path.join(__dirname,'../public')));

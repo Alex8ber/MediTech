@@ -21,5 +21,9 @@ router.get('/buscar-doctores', function(req, res) {
     })
 });
 
+router.get('/registrardoctor', function(req, res) {
+    res.render('Doctores/registrardoctor.ejs')
+})
+
 
 module.exports = router
