@@ -1,0 +1,80 @@
+<%- include('../header') %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal</title>
+    <link rel="stylesheet" href="/css/estilos2.css">
+
+
+</head>
+<body>
+    <main>
+        <div class="titulo">Personal</div>
+
+        <div class="busqueda">
+            <div>
+                <label for="buscar">Buscar Personal</label>
+                <input type="text" id="buscar" placeholder="Nombre, Cédula, Especialidad...">
+            </div>
+        </div>
+
+        <div class="tabla-section">
+            <div class="tabla-titulo">Personal registrado</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cédula</th>
+                        <th>Edad</th>
+                        <th>Especialidad</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-personal">
+                    <% personal.forEach(persona => { %>
+                        <tr>
+                            <td><%= persona.Nombre %></td>
+                            <td><%= persona.Apellido %></td>
+                            <td><%= persona.Cedula %></td>
+                            <td><%= persona.Edad %></td>
+                            <td><%= persona.Especialidad %></td>
+                            <td><%= persona.Email %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <button class="nuevo-personal" style="margin-left:20px;" onclick="window.location.href='/registrarpersonal'">
+                Nuevo Personal
+            </button>
+            <button class="eliminar-personal" style="margin-left:20px;" onclick="window.location.href='/eliminarpersonal'">Eliminar Personal</button>
+            <button class="editar-personal" style="margin-left:20px;" onclick="window.location.href='/editarpersonal'">Editar Personal</button>
+        </div>
+    </main>
+<script>
+document.getElementById('buscar').addEventListener('input', function() {
+    const filtro = this.value;
+    fetch(`/buscar-personal?q=${encodeURIComponent(filtro)}`)
+        .then(res => res.json())
+        .then(data => {
+            const tbody = document.getElementById('tabla-personal');
+            tbody.innerHTML = '';
+            data.forEach(personal => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${personal.Nombre}</td>
+                    <td>${personal.Apellido}</td>
+                    <td>${personal.Cedula}</td>
+                    <td>${personal.Edad}</td>
+                    <td>${personal.Especialidad}</td>
+                    <td>${personal.Email}</td>
+                `;
+                tbody.appendChild(fila);
+            });
+        });
+});
+</script>
+</body>
+</html>
