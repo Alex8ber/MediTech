@@ -24,6 +24,7 @@ router.get('/buscar-pacientes', (req, res) => {
         res.status(500).send('Error al buscar pacientes');
     });
 });
+
 router.get('/registrarpaciente', (req, res) => {
     res.render('Pacientes/registrarpaciente.ejs');
 });

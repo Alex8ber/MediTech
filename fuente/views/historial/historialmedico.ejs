@@ -1,0 +1,104 @@
+<%- include('../header') %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial Medico</title>
+    <link rel="stylesheet" href="../css/estilos1.css">
+
+</head>
+<body>
+    <main>
+        
+        <div class="titulo">Historial Medico</div>
+        <div class="busqueda">
+            <div>
+                <label for="buscar">Buscar paciente</label>
+                <input type="text" id="buscar" placeholder="Nombre, cédula, email...">
+            </div>
+            <div>
+                <label for="buscar">Buscar patologia</label>
+                <input type="text" id="buscar" placeholder="Buscar Patologia">
+            </div>
+        </div>
+
+        <div class="tabla-section">
+            <div class="tabla-titulo">Historial medico registrado</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cédula</th>
+                        <th>Edad</th>
+                        <th>Genero</th>
+                        <th>Patologia</th>
+                        <th>Teléfono</th>
+                        <th>Fecha de Registro</th>
+                        <th>Proxima Cita</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-historialmedico">
+                    <tr>
+                        <td>Anais</td>
+                        <td>Gazcon</td>
+                        <td>V-12345678</td>
+                        <td>28</td>
+                        <td>Femenino</td>
+                        <td>Diabetes</td>
+                        <td>+58 416-1234567</td>
+                        <td>2025-06-25</td>
+                        <td>2025-09-28</td>
+                    </tr>
+                    <tr>
+                        <td>Gabriela</td>
+                        <td>Guzman</td>
+                        <td>V-78954321</td>
+                        <td>32</td>
+                        <td>Femenino</td>
+                        <td>Cancer</td>
+                        <td>+58 412-1956237</td>
+                        <td>2025-06-24</td>
+                        <td>2025-11-27</td>
+                    </tr>
+                    <tr>
+                        <td>Nicola</td>
+                        <td>Sasonetti</td>
+                        <td>V-41526631</td>
+                        <td>45</td>
+                        <td>Masculino</td>
+                        <td>Cardiopatia</td>
+                        <td>+58 412-3265847</td>
+                        <td>2025-06-12</td>
+                        <td>2025-12-26</td>
+                    </tr>
+                    <tr>
+                        <td>Manuel</td>
+                        <td>Gomez</td>
+                        <td>V-78956368</td>
+                        <td>36</td>
+                        <td>Masculino</td>
+                        <td>Obesidad</td>
+                        <td>+58 416-4152687</td>
+                        <td>2025-06-19</td>
+                        <td>2025-07-25</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="nuevo-paciente" style="margin-left:20px;">Nuevo Historial Medico</button>
+            <button class="editar-paciente" style="margin-left:20px;">Actualizar Historial Medico</button>
+        </div>
+    </main>
+    <script>
+        document.getElementById('buscar').addEventListener('input', function() {
+            const filtro = this.value.toLowerCase();
+            const filas = document.querySelectorAll('#tabla-historialmedico tr');
+            filas.forEach(fila => {
+                const textoFila = fila.textContent.toLowerCase();
+                fila.style.display = textoFila.includes(filtro) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
