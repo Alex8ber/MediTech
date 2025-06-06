@@ -219,7 +219,7 @@ CREATE TABLE Total (
 );
 
 -- Insertar datos iniciales en la tabla Tipo_Usuario
-INSERT INTO Tipo_Usuario (Descripcion) VALUES.
+INSERT INTO Tipo_Usuario (Descripcion) VALUES
 ('Administrador'),
 ('Medico'),
 ('Recepcionista');

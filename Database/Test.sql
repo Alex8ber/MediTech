@@ -16,9 +16,6 @@ INSERT INTO Tipo_de_Sangre (Tipo) VALUES ('A+'), ('O-'), ('B+'), ('AB-');
 -- Insertar datos en Especialidad
 INSERT INTO Especialidad (Descripcion) VALUES ('Medicina General'), ('Pediatría'), ('Cardiología');
 
--- Insertar datos en Ocupacion
-INSERT INTO Ocupacion (Nombre) VALUES ('Médico'), ('Enfermero'), ('Recepcionista');
-
 -- Insertar datos en Estado
 INSERT INTO Estado (Descripcion) VALUES ('Activo'), ('Inactivo'), ('Pendiente');
 
@@ -40,10 +37,10 @@ INSERT INTO Usuario (Nombre, Email, Contrasena, Tipo_usuario_ID) VALUES
 ('recepcion1', 'recepcion1@meditech.com', '$2b$12$u1Qw6pQw6pQw6pQw6pQw6uQw6pQw6pQw6pQw6pQw6pQw6pQw6pQw6', 4); -- recep123
 
 -- Insertar personal
-INSERT INTO Personal (Nombres, Apellidos, Cedula, Edad, Genero_ID, Usuario_ID, Ocupacion_ID, Especialidad_ID) VALUES
-('Juan', 'Pérez', '12345678', 40, 1, 2, 1, 1),
-('Ana', 'Gómez', '87654321', 30, 2, 3, 2, NULL),
-('Luis', 'Martínez', '11223344', 28, 1, 4, 3, NULL);
+INSERT INTO Personal (Nombres, Apellidos, Cedula, Edad, Genero_ID, Usuario_ID, Tipo_usuario_ID, Especialidad_ID) VALUES
+('Juan', 'Pérez', '12345678', 40, 1, 2, 2, 1),
+('Ana', 'Gómez', '87654321', 30, 2, 3, 3, NULL),
+('Luis', 'Martínez', '11223344', 28, 1, 4, 4, NULL);
 
 -- Insertar teléfonos del personal
 INSERT INTO Telefono_Personal (Personal_ID, Numero) VALUES
