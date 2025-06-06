@@ -3,7 +3,8 @@ const paciente = {
     ver_paciente() {
         return new Promise((resolve, reject) => {
             conexion.query(
-                `SELECT 
+                `SELECT
+                    Pacientes.Id,
                     Pacientes.Nombres AS Nombre, 
                     Pacientes.Apellidos AS Apellido, 
                     Pacientes.Cedula, 
