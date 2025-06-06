@@ -22,7 +22,11 @@ router.get('/buscar-doctores', function(req, res) {
 });
 
 router.get('/registrardoctor', function(req, res) {
-    res.render('Doctores/registrardoctor.ejs')
+    doctores.obtener_especialidades().then(especialidades => {
+        res.render('Doctores/registrardoctor.ejs', { especialidades });
+    }).catch(err => {
+        res.status(500).send('Error al obtener especialidades: ' + err.message);
+    });
 })
 
 

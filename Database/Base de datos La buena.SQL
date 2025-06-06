@@ -44,12 +44,6 @@ CREATE TABLE Metodo_Pago (
     Descripcion VARCHAR(100) NOT NULL
 );
 
--- Tabla Ocupacion
-CREATE TABLE Ocupacion (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    Nombre VARCHAR(100) NOT NULL
-);
-
 -- Tabla Estado
 CREATE TABLE Estado (
     Id INT AUTO_INCREMENT PRIMARY KEY,
@@ -113,11 +107,11 @@ CREATE TABLE Personal (
     Edad INT NOT NULL,
     Genero_ID INT,
     Usuario_ID INT,
-    Ocupacion_ID INT,
+    Tipo_usuario_ID INT,
     Especialidad_ID INT,
     FOREIGN KEY (Genero_ID) REFERENCES Genero(Id),
     FOREIGN KEY (Usuario_ID) REFERENCES Usuario(Id),
-    FOREIGN KEY (Ocupacion_ID) REFERENCES Ocupacion(Id),
+    FOREIGN KEY (Tipo_usuario_ID) REFERENCES Tipo_usuario(Id),
     FOREIGN KEY (Especialidad_ID) REFERENCES Especialidad(Id)
 );
 
@@ -225,9 +219,9 @@ CREATE TABLE Total (
 );
 
 -- Insertar datos iniciales en la tabla Tipo_Usuario
-INSERT INTO Tipo_Usuario (Descripcion) VALUES
+INSERT INTO Tipo_Usuario (Descripcion) VALUES.
 ('Administrador'),
-('Doctor'),
-('Enfermero'),
+('Medico'),
 ('Recepcionista');
+
 

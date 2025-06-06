@@ -26,8 +26,8 @@ const doctores = {
 
     buscar_doctores(filtro) {
         return new Promise((resolve, reject) => {
-            const query = `
-                SELECT 
+            const query = 
+                `SELECT 
                     Personal.Nombres AS Nombre, 
                     Personal.Apellidos AS Apellido, 
                     Personal.Cedula, 
@@ -43,13 +43,21 @@ const doctores = {
                     Personal.Apellidos LIKE ? OR 
                     Especialidad.Descripcion LIKE ? OR 
                     Usuario.Email LIKE ?
-                  )
-            `;
+                  )`;
             const values = [`%${filtro}%`, `%${filtro}%`, `%${filtro}%`, `%${filtro}%`];
             conexion.query(query, values, (error, results) => {
                 if (error) {
                     return reject(error);
                 }
+                resolve(results);
+            });
+        });
+    },
+
+    obtener_especialidades() {
+        return new Promise((resolve, reject) => {
+            conexion.query('SELECT Id, Descripcion FROM Especialidad', (error, results) => {
+                if (error) return reject(error);
                 resolve(results);
             });
         });

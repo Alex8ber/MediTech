@@ -36,13 +36,21 @@
                 <input type="number" name="edad" id="edad" placeholder="Ingrese edad">
             </div>
             <div>
-                <label for="especialidad">Especialidad</label>
-                <input type="text" name="especialidad" id="especialidad" placeholder="Ingrese especialidad">
-            </div>
-            <div>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required placeholder="tu.correo@ejemplo.com">
+                <input type="email" name="email" id="email" placeholder="Ingrese email"> 
             </div>
+            <div class="form-group">
+                <label for="especialidad">Especialidad</label>
+                <select id="especialidad" name="especialidad" required>
+                    <option value="">Seleccione una especialidad</option>
+                    <% if (typeof especialidades !== 'undefined') { %>
+                        <% especialidades.forEach(function(especialidad) { %>
+                            <option value="<%= especialidad.Id %>"><%= especialidad.Descripcion %></option>
+                        <% }); %>
+                    <% } %>
+                </select>
+            </div>
+
             <button type="button" class="nuevo">Registrar Doctor</button>
             <button type="button" class="cancelar">Cancelar</button>
         </div>
