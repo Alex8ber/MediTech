@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const agenda = require('../model/model.agenda')
-const doctores = require('../model/model.doctores'); // Agrega esta línea
-const paciente = require('../model/model.paciente'); // Agrega esta línea
+const doctores = require('../model/model.doctores')
+const paciente = require('../model/model.paciente');
 
 router.get('/agenda', function (req, res) {
     res.render('agenda.ejs')
@@ -13,7 +13,7 @@ router.get('/citas', async function (req, res) {
         const patologias = await agenda.obtenerPatologias();
         const estados = await agenda.obtenerEstado();
         const especialidades = await doctores.obtener_especialidades();
-        const pacientes = await paciente.ver_paciente(); // Obtén pacientes
+        const pacientes = await paciente.ver_paciente();
         res.render('citas.ejs', { patologias, estados, especialidades, pacientes });
     } catch (err) { 
         console.log(err);
@@ -23,7 +23,6 @@ router.get('/citas', async function (req, res) {
 
 router.post('/citas', async function (req, res) {
     try {
-        // Asegúrate de que req.body tenga los campos necesarios
         if (!req.body.pacienteId || !req.body.personalId || !req.body.observaciones || !req.body.estadoId || !req.body.fecha) {
             res.render('citas.ejs', { error: 'Todos los campos son obligatorios' });
         }else{
