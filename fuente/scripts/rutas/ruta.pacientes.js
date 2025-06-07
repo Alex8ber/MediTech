@@ -31,18 +31,15 @@ router.get('/registrarpaciente', (req, res) => {
 
 router.post('/registrarpaciente', (req, res) => {
     const {
-        nombre, apellido, cedula, telefono, edad, patologia, genero, fecha, direccion,
-        ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id
+        nombre, apellido, cedula, edad, genero_id, patologia_id, telefono, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion
     } = req.body;
     if (
-        !nombre || !apellido || !cedula || !telefono || !edad || !patologia || !genero ||
-        !fecha || !direccion || !ocupacion || !estado_civil_id || !condicion_id || !tipo_de_sangre_id
+        !nombre || !apellido || !cedula || !edad || !genero_id || !patologia_id || !telefono || !email || !ocupacion || !estado_civil_id || !condicion_id || !tipo_de_sangre_id || !direccion
     ) {
         return res.status(500).send('Todos los campos son obligatorios');
     }
     paciente.agregar_paciente(
-        nombre, apellido, cedula, telefono, edad, patologia, genero, fecha, direccion,
-        ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id
+        nombre, apellido, cedula, edad, genero_id, patologia_id, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion, telefono
     ).then(() => {
         res.redirect('/pacientes');
     })
@@ -54,4 +51,15 @@ router.post('/registrarpaciente', (req, res) => {
         return res.status(500).send('Error al agregar paciente');
     });
 });
+
+router.get('/eliminarpaciente/:id', (req, res) => {
+    paciente.eliminar_paciente(req.params.id).then(() => {
+        res.redirect('/pacientes');
+    })
+    .catch(err => {
+        console.error('Error al eliminar paciente:', err);
+        return res.status(500).send('Error al eliminar paciente');
+    });
+});
+
 module.exports = router;

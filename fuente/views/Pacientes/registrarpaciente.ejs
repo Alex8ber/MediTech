@@ -28,37 +28,75 @@
             <input type="text" name="apellido" id="apellido" placeholder="Ingrese apellido" required>
         </div>
         <div>
-            <label for="cedula">Cedula</label>
+            <label for="cedula">Cédula</label>
             <input type="number" name="cedula" id="cedula" placeholder="V-12345678" required>
         </div>
         <div>
-            <label for="telefono">Telefono</label>
-            <input type="number" name="telefono" id="telefono" placeholder="+58 ###-#######" required>
-        </div>
-        <div>
             <label for="edad">Edad</label>
-            <input type="number" name="edad" id="edad" placeholder="Ingrese edad" required>
+            <input type="number" name="edad" id="edad" placeholder="ingrese la edad" required>
         </div>
         <div>
-            <label for="patologia">Patologia</label>
-            <input type="text" name="patologia" id="patologia" placeholder="Ingrese patologia" required>
-        </div>
-        <div>
-            <label for="genero">Genero</label>
-            <select id="genero" name="genero" required>
-                <option value="" disabled selected>Seleccione genero</option>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-                <option value="otro">Otro</option>
+            <label for="genero_id">Género</label>
+            <select id="genero_id" name="genero_id" required>
+                <option value="" disabled selected>Seleccione género</option>
+                <option value="1">Masculino</option>
+                <option value="2">Femenino</option>
+                <option value="3">Otro</option>
             </select>
         </div>
         <div>
-            <label for="fecha">Fecha de Nacimiento</label>
-            <input type="date" name="fecha" id="fecha">
+            <label for="patologia_id">Patología</label>
+            <select id="patologia_id" name="patologia_id" required>
+                <option value="" disabled selected>Seleccione patologia</option>
+                <option value="1">Diabetes</option>
+                <option value="2">Hipertensión</option>
+                <option value="3">Asma</option>
+            </select>
         </div>
         <div>
-            <label for="direccion">Direccion</label>
-            <textarea name="direccion" id="direccion" rows="3" placeholder="Ingrese direccion"></textarea>
+            <label for="telefono">Teléfono</label>
+            <input type="number" name="telefono" id="telefono" placeholder="+58 ###-#######" required>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="Ingrese email" required>
+        </div>
+        <div>
+            <label for="ocupacion">Ocupación</label>
+            <input type="text" name="ocupacion" id="ocupacion" placeholder="Ingrese ocupación" required>
+        </div>
+        <div>
+            <label for="estado_civil_id">Estado Civil</label>
+            <select id="estado_civil_id" name="estado_civil_id" required>
+                <option value="" disabled selected>Seleccione estado civil</option>
+                <option value="1">Soltero</option>
+                <option value="2">Casado</option>
+                <option value="3">Divorciado</option>
+                <option value="4">Viudo</option>
+            </select>
+        </div>
+         <div>
+            <label for="condicion_id">Condición</label>
+            <select id="condicion_id" name="condicion_id" required>
+                <option value="" disabled selected>Seleccione condición</option>
+                <option value="1">Estable</option>
+                <option value="2">Crítico</option>
+                <option value="3">Recuperación</option>
+            </select>
+        </div>
+        <div>
+            <label for="tipo_de_sangre_id">Tipo de Sangre</label>
+            <select id="tipo_de_sangre_id" name="tipo_de_sangre_id" required>
+                    <option value="">Seleccione el tipo de sangre</option>
+                <option value="1">A+</option>
+                <option value="3">B+</option>
+                <option value="4">AB-</option>
+                <option value="2">O-</option>
+                </select>
+        </div>
+        <div>
+            <label for="direccion">Dirección</label>
+            <textarea name="direccion" id="direccion" rows="3" placeholder="Ingrese dirección"></textarea>
         </div>
             <button type="submit" class="nuevo">Registrar Paciente</button>
             <button type="button" class="cancelar" onclick="window.location.href='/pacientes'">Cancelar</button>

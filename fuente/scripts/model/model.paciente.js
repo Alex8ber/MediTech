@@ -71,28 +71,41 @@ const paciente = {
         });
     },
 
-    agregar_paciente(nombres, apellidos, cedula, telefono, edad, patologia, genero, email, direccion, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id) {
+    agregar_paciente(nombre, apellido, cedula, edad, genero_id, patologia_id, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion, telefono) {
+    return new Promise((resolve, reject) => {
+        conexion.query(
+            `INSERT INTO Pacientes 
+                (Nombres, Apellidos, Cedula, Edad, Genero_ID, Patologia_ID, Email, Ocupacion, Estado_Civil_ID, Condicion_ID, Tipo_de_sangre_ID, Direccion)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [nombre, apellido, cedula, edad, genero_id, patologia_id, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion],
+            (error, resultados) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    const pacienteId = resultados.insertId;
+                    conexion.query(
+                        `INSERT INTO Telefono_Paciente (Paciente_ID, Numero) VALUES (?, ?)`,
+                        [pacienteId, telefono],
+                        (telError) => {
+                            if (telError) reject(telError);
+                            else resolve(resultados);
+                        }
+                    );
+                }
+            }
+        );
+    });
+    },
+
+    eliminar_paciente(id) {
         return new Promise((resolve, reject) => {
-            // Insertar paciente
             conexion.query(
-                `INSERT INTO Pacientes 
-                    (Nombres, Apellidos, Cedula, Edad, Genero_ID, Email, Direccion, Ocupacion, Estado_Civil_ID, Patologia_ID, Condicion_ID, Tipo_de_sangre_ID)
-                 VALUES (?, ?, ?, ?, (SELECT Id FROM Genero WHERE Tipo = ?), ?, ?, ?, ?, (SELECT Id FROM Patologia WHERE Nombre = ?), ?, ?)`,
-                [nombres, apellidos, cedula, edad, genero, email, direccion, ocupacion, estado_civil_id, patologia, condicion_id, tipo_de_sangre_id],
+                `DELETE FROM Pacientes WHERE Id = ?`, [id],
                 (error, resultados) => {
                     if (error) {
                         reject(error);
                     } else {
-                        // Insertar teléfono si es necesario
-                        const pacienteId = resultados.insertId;
-                        conexion.query(
-                            `INSERT INTO Telefono_Paciente (Paciente_ID, Numero) VALUES (?, ?)`,
-                            [pacienteId, telefono],
-                            (telError) => {
-                                if (telError) reject(telError);
-                                else resolve(resultados);
-                            }
-                        );
+                        resolve(resultados);
                     }
                 }
             );

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacientes</title>
-    <link rel="stylesheet" href="/css/doctores.css">
+    <link rel="stylesheet" href="/css/pacientes.css">
 
 </head>
 <body>
@@ -26,6 +26,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Cédula</th>
@@ -62,15 +63,17 @@
                     <% }) %>
                 </tbody>
             </table>
-            <button style="margin-left:20px;"  class="nuevo-paciente" id="nuevo-paciente" style="margin-left:20px;" onclick="window.location.href='/registrarpaciente'"> Nuevo Paciente </button>
-            <button style="margin-left:20px;" id="editar-paciente" class="editar-paciente" style="margin-left:20px;" onclick="window.location.href='/editarpaciente'"> Editar Paciente </button>
-            <button id="nuevo-historial" class="nuevo-historial" style="margin-left:20px;" disabled>Nuevo historial</button>
+            <button style="margin-left:20px;"   id="nuevo-paciente" class="nuevo-paciente" onclick="window.location.href='/registrarpaciente'"> Nuevo Paciente </button>
+            <button style="margin-left:20px;" id="editar-paciente" class="editar-paciente" disabled> Editar Paciente </button>
+            <button style="margin-left:20px;" id="eliminar-paciente" class="eliminar-paciente" disabled>Eliminar Paciente</button>
+            <button style="margin-left:20px;" id="nuevo-historial" class="nuevo-historial"  disabled>Nuevo historial</button>
         </div>
     </main>
     <script>
 
+        // Asignar el paciente seleccionado a una variable global
         let pacienteSeleccionado = null;
-
+        // Asignar listeners a los radios de pacientes
         function asignarListenersRadios() {
             const radios = document.getElementsByName('paciente_id');
             radios.forEach(radio => {
@@ -78,10 +81,11 @@
                     pacienteSeleccionado = this.value;
                     document.getElementById('editar-paciente').disabled = false;
                     document.getElementById('nuevo-historial').disabled = false;
+                    document.getElementById('eliminar-paciente').disabled = false;
                 });
             });
         }
-
+        // Inicializar los listeners de los radios al cargar la página
         asignarListenersRadios();
 
         function actualizarTabla(pacientes) {
@@ -127,11 +131,22 @@ function buscarPacientes() {
 document.getElementById('buscar_paciente').addEventListener('input', buscarPacientes);
 document.getElementById('buscar_patologia').addEventListener('input', buscarPacientes);
 
+
+
+// Redirigir a los formularios correspondientes por Id
 document.getElementById('nuevo-historial').addEventListener('click', function() {
     if (pacienteSeleccionado) {
         window.location.href = `/registrarhistorial/${pacienteSeleccionado}`;
-    } else {
-        alert('Selecciona un paciente primero');
+    } 
+});
+document.getElementById('editar-paciente').addEventListener('click', function(){
+    if(pacienteSeleccionado){
+        window.location.href = `/editarpaciente/${pacienteSeleccionado}`;
+    }
+});
+document.getElementById('eliminar-paciente').addEventListener('click', function(){
+    if(pacienteSeleccionado){
+        window.location.href = `/eliminarpaciente/${pacienteSeleccionado}`;
     }
 });
 
