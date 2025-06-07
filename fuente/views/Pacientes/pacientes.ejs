@@ -45,6 +45,7 @@
                 <tbody id="tabla-pacientes">
                    <% pacientes.forEach(paciente => { %>
                         <tr>
+                            <td><input type="radio" id="paciente_id"  name= "paciente_id" value="<%= paciente.id %>"></td>
                             <td><%= paciente.Nombre %></td>
                             <td><%= paciente.Apellido %></td>
                             <td><%= paciente.Cedula %></td>
