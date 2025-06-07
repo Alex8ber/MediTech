@@ -31,6 +31,7 @@ const routePacientes = require('./rutas/ruta.pacientes');
 const routeHome = require('./rutas/ruta.home');
 const routePersonal = require('./rutas/ruta.personal');
 const routeHistorialMedico = require('./rutas/ruta.historialmedico');
+const routeReportes = require('./rutas/ruta.reportes');
 
 app.use ('/', routeHome);
 app.use ('/', routelogin);
@@ -40,7 +41,7 @@ app.use ('/', routeAgenda);
 app.use ('/', routePacientes);
 app.use ('/', routePersonal);
 app.use ('/', routeHistorialMedico);
-
+app.use ('/', routeReportes);
 // archivos estaticos
 app.use(express.static(path.join(__dirname,'../public')));
 

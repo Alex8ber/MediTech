@@ -4,15 +4,6 @@ body {
     background: #f7f7f7;
 }
 
-.header {
-    background: #45787a;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    padding: 15px 50px;
-    height: 85px;
-    justify-content: space-between;
-}
 
 .logo {
     display: flex;

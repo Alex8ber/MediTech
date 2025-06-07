@@ -4,16 +4,7 @@
             margin: 0;
             padding: 0;
         }
-        .header {
-            background: #5d7f81;
-            padding: 32px 0 24px 0;
-            text-align: center;
-        }
-        .header h1 {
-            color: #fff;
-            font-size: 2.5rem;
-            margin: 0;
-        }
+
         .filters {
             margin: 20px 40px 0 40px;
             display: flex;

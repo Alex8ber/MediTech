@@ -13,41 +13,27 @@
     <div class="container">
         <h1>Agendar Cita Médica</h1>
         <form action="#" method="POST"> <div class="form-group">
-                <label for="nombre_paciente">Nombre Completo del Paciente:</label>
-                <input type="text" id="nombre_paciente" name="nombre_paciente" required>
-            </div>
-
             <div class="form-group">
-                <label for="cedula_paciente">Cédula de Identidad / N° de Historia:</label>
-                <input type="text" id="cedula_paciente" name="cedula_paciente">
-            </div>
-
-            <div class="form-group">
-                <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
-            </div>
-
-            <div class="form-group">
-                <label for="telefono">Número de Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" placeholder="Ej: 0412-1234567" required>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com">
+                <label for="paciente">Paciente registrado:</label>
+                <select id="paciente" name="pacienteId" required>
+                    <option value="">Seleccione un paciente</option>
+                    <% pacientes.forEach(function(p) { %>
+                        <option value="<%= p.Id %>">
+                            <%= p.Nombre %> <%= p.Apellido %> - <%= p.Edad %> Años - C.I: <%= p.Cedula %>
+                            <% if(p.Telefono){ %> - Tlf: <%= p.Telefono %> <% } %>
+                            <% if(p.FechaNacimiento){ %> - Nac: <%= p.FechaNacimiento.toISOString ? p.FechaNacimiento.toISOString().slice(0,10) : p.FechaNacimiento %> <% } %>
+                        </option>
+                    <% }) %>
+                </select>
             </div>
 
             <div class="form-group">
                 <label for="especialidad">Especialidad Médica:</label>
                 <select id="especialidad" name="especialidad" required>
                     <option value="">Seleccione una especialidad</option>
-                    <option value="medicina_general">Medicina General</option>
-                    <option value="pediatria">Pediatría</option>
-                    <option value="ginecologia">Ginecología</option>
-                    <option value="cardiologia">Cardiología</option>
-                    <option value="dermatologia">Dermatología</option>
-                    <option value="oftalmologia">Oftalmología</option>
-                    <option value="otra">Otra</option>
+                    <% especialidades.forEach(function(es) { %>
+                        <option value="<%= es.Id %>"><%= es.Descripcion %></option>
+                    <% }) %>
                 </select>
             </div>
 
@@ -71,6 +57,25 @@
                 <textarea id="motivo_cita" name="motivo_cita" rows="4" placeholder="Describa brevemente el motivo de su cita" required></textarea>
             </div>
 
+            <div class="form-group">
+                <label for="patologia">Patología:</label>
+                <select id="patologia" name="patologia" required>
+                    <option value="">Seleccione una patología</option>
+                    <% patologias.forEach(function(p) { %>
+                        <option value="<%= p.Id %>"><%= p.Nombre %></option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="estado">Estado Actual:</label>
+                <select id="estado" name="estadoId" required>
+                    <option value="">Seleccione un estado</option>
+                    <% estados.forEach(function(e) { %>
+                        <option value="<%= e.Id %>"><%= e.Descripcion %></option>
+                    <% }) %>
+                </select>
+            </div>
             <input type="submit" value="Solicitar Cita">
 
         </form>
