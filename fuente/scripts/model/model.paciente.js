@@ -4,6 +4,7 @@ const paciente = {
         return new Promise((resolve, reject) => {
             conexion.query(
                 `SELECT 
+                    Pacientes.Id AS id,
                     Pacientes.Nombres AS Nombre, 
                     Pacientes.Apellidos AS Apellido, 
                     Pacientes.Cedula, 
@@ -38,6 +39,7 @@ const paciente = {
         return new Promise((resolve, reject) => {
             let query = `
                 SELECT 
+                    Pacientes.Id AS id,
                     Pacientes.Nombres AS Nombre,
                     Pacientes.Apellidos AS Apellido, 
                     Pacientes.Cedula, 

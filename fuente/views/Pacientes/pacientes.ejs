@@ -13,15 +13,14 @@
         <div class="titulo">Pacientes</div>
         <div class="busqueda">
             <div>
-                <label for="buscar">Buscar paciente</label>
+                <label for="buscar_paciente">Buscar paciente</label>
                 <input type="text" id="buscar_paciente" placeholder="Nombre, cédula, email...">
             </div>
             <div>
-                <label for="buscar">Buscar patologia</label>
+                <label for="buscar_patologia">Buscar patologia</label>
                 <input type="text" id="buscar_patologia" placeholder="Buscar Patologia">
             </div>
         </div>
-
         <div class="tabla-section">
             <div class="tabla-titulo">Pacientes registrados</div>
             <table>
@@ -45,7 +44,7 @@
                 <tbody id="tabla-pacientes">
                    <% pacientes.forEach(paciente => { %>
                         <tr>
-                            <td><input type="radio" id="paciente_id"  name= "paciente_id" value="<%= paciente.id %>"></td>
+                            <td><input type="radio" name="paciente_id" value="<%= paciente.id %>"></td>
                             <td><%= paciente.Nombre %></td>
                             <td><%= paciente.Apellido %></td>
                             <td><%= paciente.Cedula %></td>
@@ -63,17 +62,35 @@
                     <% }) %>
                 </tbody>
             </table>
-            <button style="margin-left:20px;"  class="nuevo-paciente" style="margin-left:20px;" onclick="window.location.href='/registrarpaciente'"> Nuevo Paciente </button>
-            <button style="margin-left:20px;"  class="editar-paciente" style="margin-left:20px;" onclick="window.location.href='/editarpaciente'"> Editar Paciente </button>
+            <button style="margin-left:20px;"  class="nuevo-paciente" id="nuevo-paciente" style="margin-left:20px;" onclick="window.location.href='/registrarpaciente'"> Nuevo Paciente </button>
+            <button style="margin-left:20px;" id="editar-paciente" class="editar-paciente" style="margin-left:20px;" onclick="window.location.href='/editarpaciente'"> Editar Paciente </button>
+            <button id="nuevo-historial" class="nuevo-historial" style="margin-left:20px;" disabled>Nuevo historial</button>
         </div>
     </main>
     <script>
+
+        let pacienteSeleccionado = null;
+
+        function asignarListenersRadios() {
+            const radios = document.getElementsByName('paciente_id');
+            radios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    pacienteSeleccionado = this.value;
+                    document.getElementById('editar-paciente').disabled = false;
+                    document.getElementById('nuevo-historial').disabled = false;
+                });
+            });
+        }
+
+        asignarListenersRadios();
+
         function actualizarTabla(pacientes) {
     const tbody = document.getElementById('tabla-pacientes');
     tbody.innerHTML = '';
     pacientes.forEach(paciente => {
         const fila = document.createElement('tr');
         fila.innerHTML = `
+            <td><input type="radio" name="paciente_id" value="${paciente.id}"></td>
             <td>${paciente.Nombre}</td>
             <td>${paciente.Apellido}</td>
             <td>${paciente.Cedula}</td>
@@ -90,6 +107,7 @@
         `;
         tbody.appendChild(fila);
     });
+    asignarListenersRadios();
 }
 
 function getFiltros() {
@@ -106,9 +124,17 @@ function buscarPacientes() {
         .then(res => res.json())
         .then(data => actualizarTabla(data));
 }
-
 document.getElementById('buscar_paciente').addEventListener('input', buscarPacientes);
 document.getElementById('buscar_patologia').addEventListener('input', buscarPacientes);
+
+document.getElementById('nuevo-historial').addEventListener('click', function() {
+    if (pacienteSeleccionado) {
+        window.location.href = `/registrarhistorial/${pacienteSeleccionado}`;
+    } else {
+        alert('Selecciona un paciente primero');
+    }
+});
+
 </script>
 </body>
 </html>

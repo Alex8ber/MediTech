@@ -17,46 +17,39 @@
 
         <h2> Registro Medico </h2>
         
-        <form>
+        <form action="/registrarhistorial" method="POST">
+            <input type="hidden" name="paciente_id" value="<%= paciente ? paciente.id : '' %>">
         <div class="registro">
             <div>
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" placeholder="Ingrese nombre">
+                <input type="text" name="nombre" id="nombre" placeholder="<%= paciente ? paciente.Nombres: '' %>">
             </div>
             <div>
                 <label for="apellido">Apellido</label>
-                <input type="text" name="apellido" id="apellido" placeholder="Ingrese apellido">
+                <input type="text" name="apellido" id="apellido" placeholder="<%= paciente ? paciente.Apellidos: '' %>">
             </div>
             <div>
                 <label for="cedula">Cedula</label>
-                <input type="number" name="cedula" id="cedula" placeholder="V-12345678">
+                <input type="number" name="cedula" id="cedula" placeholder="<%= paciente ? paciente.Cedula: '' %>">
             </div>
             <div>
                 <label for="telefono">Telefono</label>
-                <input type="number" name="telefono" id="telefono" placeholder="+58 ###-#######">
+                <input type="number" name="telefono" id="telefono" placeholder="<%= paciente ? paciente.Telefono: '' %>">
             </div>
             <div>
                 <label for="edad">Edad</label>
-                <input type="number" name="edad" id="edad" placeholder="Ingrese edad">
+                <input type="number" name="edad" id="edad" placeholder="<%= paciente ? paciente.Edad: '' %>">
             </div>
             <div>
                 <label for="patologia">Patologia</label>
-                <input type="text" name="patologia" id="patologia" placeholder="Ingrese patologia">
+                <input type="text" name="patologia" id="patologia" placeholder="<%= paciente ? paciente.Patologia: '' %>">
             </div>
             <div>
                 <label for="genero">Genero</label>
                 <select id="genero" name="genero" form="generoform">
-                    <option value="masculino" >Masculino</option>
-                    <option value="femenino">Femenino</option>
+                    <option value="masculino" <%= paciente && paciente.Genero === 'masculino' ? 'selected' : '' %>>Masculino</option>
+                    <option value="femenino" <%= paciente && paciente.Genero === 'femenino' ? 'selected' : '' %>>Femenino</option>
                 </select>
-            </div>
-            <div>
-                <label for="fecha">Fecha de Registro</label>
-                <input type="date" name="fecha" id="fecha">
-            </div>
-            <div>
-                <label for="fecha">Proxima Cita</label>
-                <input type="date" name="fecha" id="fecha">
             </div>
         <div class="tabla-section">
             <div class="tabla-titulo"></div>
