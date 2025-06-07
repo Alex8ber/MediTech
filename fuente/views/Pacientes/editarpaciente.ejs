@@ -1,0 +1,108 @@
+<%- include('../header.ejs') %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Paciente</title>
+    <link rel="stylesheet" href="../css/nuevopaciente.css">
+
+</head>
+
+<body>
+    <main>
+        <h3>Pacientes > Editar Paciente</h3>
+
+        <div class="titulo">Editar Paciente</div>
+
+        <h2> Datos Personales</h2>
+        
+        <form action="/editarpaciente/<%= paciente ? paciente.id : '' %>" method="POST">
+            <input type="hidden" name="paciente_id" id="paciente_id" value="<%= paciente ? paciente.id : '' %>">
+    <div class="registro">
+        <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" value="<%= paciente ? paciente.Nombres: '' %>" required>
+        </div>
+        <div>
+            <label for="apellido">Apellido</label>
+            <input type="text" name="apellido" id="apellido" value="<%= paciente ? paciente.Apellidos: '' %>" required>
+        </div>
+        <div>
+            <label for="cedula">Cédula</label>
+            <input type="number" name="cedula" id="cedula" value="<%= paciente ? paciente.Cedula: '' %>" required>
+        </div>
+        <div>
+            <label for="edad">Edad</label>
+            <input type="number" name="edad" id="edad" value="<%= paciente ? paciente.Edad: '' %>" required>
+        </div>
+        <div>
+            <label for="genero_id">Género</label>
+            <select id="genero_id" name="genero_id" required>
+                <option value="" disabled selected>Seleccione género</option>
+                <option value="1" <%= paciente && paciente.Genero === 'masculino' ? 'selected' : '' %>>Masculino</option>
+                <option value="2" <%= paciente && paciente.Genero === 'femenino' ? 'selected' : '' %>>Femenino</option>
+                <option value="3" <%= paciente && paciente.Genero === 'otro' ? 'selected' : '' %>>Otro</option>
+            </select>
+        </div>
+        <div>
+            <label for="patologia_id">Patología</label>
+            <select id="patologia_id" name="patologia_id" required>
+                <option value="" disabled selected>Seleccione patologia</option>
+                <option value="1" <%= paciente && paciente.Patologia === 'diabetes' ? 'selected' : '' %>>Diabetes</option>
+                <option value="2" <%= paciente && paciente.Patologia === 'hipertension' ? 'selected' : '' %>>Hipertensión</option>
+                <option value="3" <%= paciente && paciente.Patologia === 'asma' ? 'selected' : '' %>>Asma</option>
+            </select>
+        </div>
+        <div>
+            <label for="telefono">Teléfono</label>
+            <input type="number" name="telefono" id="telefono" value="<%= paciente ? paciente.Telefono: '' %>" required>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="<%= paciente ? paciente.Email: '' %>" required>
+        </div>
+        <div>
+            <label for="ocupacion">Ocupación</label>
+            <input type="text" name="ocupacion" id="ocupacion" value="<%= paciente ? paciente.Ocupacion: '' %>" required>
+        </div>
+        <div>
+            <label for="estado_civil_id">Estado Civil</label>
+            <select id="estado_civil_id" name="estado_civil_id" required>
+                <option value="" disabled selected>Seleccione estado civil</option>
+                <option value="1" <%= paciente && paciente.Estado_Civil === 'soltero' ? 'selected' : '' %>>Soltero</option>
+                <option value="2" <%= paciente && paciente.Estado_Civil === 'casado' ? 'selected' : '' %>>Casado</option>
+                <option value="3" <%= paciente && paciente.Estado_Civil === 'divorciado' ? 'selected' : '' %>>Divorciado</option>
+                <option value="4" <%= paciente && paciente.Estado_Civil === 'viudo' ? 'selected' : '' %>>Viudo</option>
+            </select>
+        </div>
+         <div>
+            <label for="condicion_id">Condición</label>
+            <select id="condicion_id" name="condicion_id" required>
+                <option value="" disabled selected>Seleccione condición</option>
+                <option value="1" <%= paciente && paciente.Condicion === 'Estable' ? 'selected' : '' %>>Estable</option>
+                <option value="2" <%= paciente && paciente.Condicion === 'Crítico' ? 'selected' : '' %>>Crítico</option>
+                <option value="3" <%= paciente && paciente.Condicion === 'Recuperación' ? 'selected' : '' %>>Recuperación</option>
+            </select>
+        </div>
+        <div>
+            <label for="tipo_de_sangre_id">Tipo de Sangre</label>
+            <select id="tipo_de_sangre_id" name="tipo_de_sangre_id" required>
+                    <option value="">Seleccione el tipo de sangre</option>
+                <option value="1" <%= paciente && paciente.Tipo_de_Sangre === 'A+' ? 'selected' : '' %>>A+</option>
+                <option value="3" <%= paciente && paciente.Tipo_de_Sangre === 'B+' ? 'selected' : '' %>>B+</option>
+                <option value="4" <%= paciente && paciente.Tipo_de_Sangre === 'AB-' ? 'selected' : '' %>>AB-</option>
+                <option value="2" <%= paciente && paciente.Tipo_de_Sangre === 'O-' ? 'selected' : '' %>>O-</option>
+                </select>
+        </div>
+        <div>
+            <label for="direccion">Dirección</label>
+            <textarea name="direccion" id="direccion" rows="3" placeholder="Ingrese dirección"><%= paciente ? paciente.Direccion: '' %></textarea>
+        </div>
+            <button type="submit" class="nuevo">Registrar Paciente</button>
+            <button type="button" class="cancelar" onclick="window.location.href='/pacientes'">Cancelar</button>
+        </div>
+    </form>
+
+    </main>
+</body>
