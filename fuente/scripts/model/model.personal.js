@@ -8,10 +8,14 @@ const personal = {
                     Personal.Nombres AS Nombre, 
                     Personal.Apellidos AS Apellido, 
                     Personal.Cedula, 
-                    Personal.Edad, 
+                    Personal.Edad,
+                    genero.Tipo AS Genero,
+                    Ocupacion.Nombre AS Ocupacion,
                     Especialidad.Descripcion AS Especialidad, 
                     Usuario.Email AS Email
                 FROM Personal
+                LEFT JOIN Genero ON Personal.Genero_ID = Genero.Id
+                LEFT JOIN Ocupacion ON Personal.Ocupacion_ID = Ocupacion.Id
                 LEFT JOIN Especialidad ON Personal.Especialidad_ID = Especialidad.Id
                 LEFT JOIN Usuario ON Personal.Usuario_ID = Usuario.Id`,
                 (error, results) => {
@@ -54,9 +58,29 @@ const personal = {
         });
     },
 
+    agregar_personal (nombre, apellido, cedula, edad, genero_id, ocupacion_id, especialidad_id) {
+        return new Promise((resolve, reject) => {
+            conexion.query(`INSERT INTO Personal (Nombres, Apellidos, Cedula, Edad, Genero_ID, Ocupacion_ID, Especialidad_ID) VALUES (?, ?, ?, ?, ?, ?, ?)`, [nombre, apellido, cedula, edad, genero_id, ocupacion_id, especialidad_id], (error, resultados) => {
+                if (error) {
+                    return reject(error);
+                }
+                resolve(resultados);
+            });
+        });
+    },
+
     obtener_especialidades() {
         return new Promise((resolve, reject) => {
             conexion.query('SELECT Id, Descripcion FROM Especialidad', (error, results) => {
+                if (error) return reject(error);
+                resolve(results);
+            });
+        });
+    },
+
+    obtener_ocupaciones() {
+        return new Promise((resolve, reject) => {
+            conexion.query('SELECT Id, Nombre FROM Ocupacion', (error, results) => {
                 if (error) return reject(error);
                 resolve(results);
             });

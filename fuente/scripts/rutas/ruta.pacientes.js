@@ -27,8 +27,18 @@ router.get('/buscar-pacientes', (req, res) => {
     });
 });
 
-router.get('/registrarpaciente', (req, res) => {
-    res.render('Pacientes/registrarpaciente.ejs');
+router.get('/registrarpaciente', async(req, res) => {
+    try {
+        const [patologias, tiposDeSangre, civil] = await Promise.all([
+            agenda.obtenerPatologias(),
+            paciente.obtener_Sangre(),
+            paciente.obtener_Civil()
+        ]);
+        res.render('Pacientes/registrarpaciente.ejs', { patologias, tiposDeSangre, civil });
+    } catch (error) {
+        console.error('Error al obtener datos para registrar paciente:', error);
+        res.status(500).send('Error al obtener datos para registrar paciente');
+    };
 });
 
 router.post('/registrarpaciente', (req, res) => {

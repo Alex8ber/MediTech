@@ -21,39 +21,50 @@
         <div class="registro">
             <div>
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" placeholder="Ingrese nombre">
+                <input type="text" name="nombre" id="nombre" placeholder="Ingrese nombre" required>
             </div>
             <div>
                 <label for="apellido">Apellido</label>
-                <input type="text" name="apellido" id="apellido" placeholder="Ingrese apellido">
+                <input type="text" name="apellido" id="apellido" placeholder="Ingrese apellido" required>
             </div>
             <div>
                 <label for="cedula">Cedula</label>
-                <input type="number" name="cedula" id="cedula" placeholder="V-12345678">
+                <input type="number" name="cedula" id="cedula" placeholder="V-12345678" required>
             </div>
             <div>
                 <label for="edad">Edad</label>
-                <input type="number" name="edad" id="edad" placeholder="Ingrese edad">
+                <input type="number" name="edad" id="edad" placeholder="Ingrese edad" required>
             </div>
-            <div class="form-group">
-                <label for="especialidad">Especialidad</label>
-                <select id="especialidad" name="especialidad" required>
-                    <option value="">Seleccione una especialidad</option>
-                    <% if (typeof especialidades !== 'undefined') { %>
-                        <% especialidades.forEach(function(especialidad) { %>
-                            <option value="<%= especialidad.Id %>"><%= especialidad.Descripcion %></option>
-                        <% }); %>
-                    <% } %>
+            <div>
+                <label for="genero_id">Género</label>
+                <select id="genero_id" name="genero_id" required>
+                    <option value="" disabled selected>Seleccione género</option>
+                    <option value="1">Masculino</option>
+                    <option value="2">Femenino</option>
+                    <option value="3">Otro</option>
                 </select>
             </div>
             <div>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required placeholder="tu.correo@ejemplo.com">
+                <label for="ocupacion_id">Ocupación</label>
+                <select name="ocupacion_id" id="ocupacion_id" required>
+                    <option value="" disabled selected>Seleccione una ocupación</option>
+                    <% ocupaciones.forEach(function(ocupacion) { %>
+                    <option value="<%= ocupacion.Id %>"><%= ocupacion.Nombre %></option>
+                    <% }) %>
+                </select>
             </div>
-            <button type="button" class="nuevo">Registrar Personal</button>
-            <button type="button" class="cancelar">Cancelar</button>
+            <div class="form-group">
+                <label for="especialidad_id">Especialidad</label>
+                <select id="especialidad_id" name="especialidad_id" required>
+                    <option value="" disabled selected>Seleccione una especialidad</option>
+                    <% especialidades.forEach(function(especialidad) { %>
+                    <option value="<%= especialidad.Id %>"><%= especialidad.Descripcion %></option>
+                <% }) %>
+                </select>
+            </div>
+            <button type="submit" class="nuevo">Registrar Personal</button>
+            <button type="button" class="cancelar" onclick="window.location.href='/personal'">Cancelar</button>
         </div>
 </form>
-
     </main>
 </body>
