@@ -1,6 +1,6 @@
 const conexion = require("../db")
 module.exports = {
-    insertar(user, email, pass, tipoUsuarioId = 2) {
+    insertar(user, email, pass, tipoUsuarioId) {
         return new Promise((resolve, reject) => {
             conexion.query(
                 `INSERT INTO Usuario (Nombre, Email, Contrasena, Tipo_usuario_ID) VALUES (?, ?, ?, ?)`,
@@ -34,6 +34,18 @@ module.exports = {
                 (error, resultados) => {
                     if (error) reject(error);
                     else resolve(resultados.length > 0);
+                }
+            );
+        });
+    },
+    
+    obtenerTiposUsuario() {
+        return new Promise((resolve, reject) => {
+            conexion.query(
+                `SELECT Id, Descripcion FROM Tipo_Usuario`,
+                (error, resultados) => {
+                    if (error) reject(error);
+                    else resolve(resultados);
                 }
             );
         });

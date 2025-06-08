@@ -31,10 +31,10 @@ INSERT INTO Ubicacion (Descripcion) VALUES ('Habitación 101'), ('Habitación 10
 -- Insertar usuarios con contraseñas encriptadas (bcrypt, costo 12)
 -- Contraseña original: admin123, doctor123, enfermero123, recep123
 INSERT INTO Usuario (Nombre, Email, Contrasena, Tipo_usuario_ID) VALUES
-('admin', 'admin@meditech.com', '$2b$12$u1Qw6pQw6pQw6pQw6pQw6uQw6pQw6pQw6pQw6pQw6pQw6pQw6pQw6', 1), -- admin123
-('doctor1', 'doctor1@meditech.com', '$2b$12$u1Qw6pQw6pQw6pQw6pQw6uQw6pQw6pQw6pQw6pQw6pQw6pQw6pQw6', 2), -- doctor123
-('enfermera1', 'enfermera1@meditech.com', '$2b$12$u1Qw6pQw6pQw6pQw6pQw6uQw6pQw6pQw6pQw6pQw6pQw6pQw6pQw6', 3), -- enfermero123
-('recepcion1', 'recepcion1@meditech.com', '$2b$12$u1Qw6pQw6pQw6pQw6pQw6uQw6pQw6pQw6pQw6pQw6pQw6pQw6pQw6', 4); -- recep123
+('admin', 'admin@meditech.com', '$2a$12$ySpfTgHM2u43RDxhbmbl.uZzuXQ8AagoViNFO9QF/Ze18cy0GjXba', 1), -- admin123
+('doctor1', 'doctor1@meditech.com', '$2a$12$Lg0fRfqK9TQHtdBNvf.xluiii3X57tTD089K485C0zP8A8z1wopXi', 2), -- doctor123
+('enfermera1', 'enfermera1@meditech.com', '$2a$12$jv4SDixkPuUCT6V8C4L42OjygBeMmwcAIIscHwslIvBTdZr5m5dOO', 3), -- enfermero123
+('recepcion1', 'recepcion1@meditech.com', '$2a$12$JtTcl6iAsJrOi5jSr0pP4uCCr2oV1Q4DEAyi8L45Dq5ayHEc4q1lO', 4); -- recep123
 
 -- Insertar personal
 INSERT INTO Personal (Nombres, Apellidos, Cedula, Edad, Genero_ID, Usuario_ID, Tipo_usuario_ID, Especialidad_ID) VALUES
