@@ -2,11 +2,17 @@ const express = require('express');
 const bcryptjs = require('bcryptjs');
 const router = express.Router();
 const modelo = require('../model/model.register');
+const personal = require('../model/model.personal');
 
-router.get('/register', function(req, res) {
-    res.render('register.ejs', { error: null, title: 'Registro' });
+router.get('/register', async function (req, res) {
+    try {
+        const tiposUsuario = await modelo.obtenerTiposUsuario();
+        res.render('register.ejs', { tittle: 'Registro',tiposUsuario, error: null });
+    } catch (err) {
+        console.log(err);
+        res.render('register.ejs', { error: 'Error cargando datos', tiposUsuario: [] });
+    }
 });
-
 router.post('/register', async function(req, res) {
     const {user, email, pass, confirm} = req.body;
     if(!user || !email || !pass || !confirm){
@@ -33,7 +39,8 @@ router.post('/register', async function(req, res) {
             res.redirect('/');
         }
     } catch (error) {
-        res.send(error);
+        const tiposUsuario = await tipoUsuario.obtenerTiposUsuario();
+        res.render('register.ejs', { error: error.message, tiposUsuario });
     }
 });
 

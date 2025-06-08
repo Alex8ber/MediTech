@@ -37,5 +37,17 @@ module.exports = {
                 }
             );
         });
+    },
+    
+    obtenerTiposUsuario() {
+        return new Promise((resolve, reject) => {
+            conexion.query(
+                `SELECT Id, Descripcion FROM Tipo_Usuario`,
+                (error, resultados) => {
+                    if (error) reject(error);
+                    else resolve(resultados);
+                }
+            );
+        });
     }
 };

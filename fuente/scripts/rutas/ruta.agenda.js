@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const agenda = require('../model/model.agenda');
-const doctores = require('../model/model.doctores');
 const paciente = require('../model/model.paciente');
 const personal = require('../model/model.personal');
 
@@ -13,7 +12,7 @@ router.get('/citas', async function (req, res) {
     try {
         const patologias = await agenda.obtenerPatologias();
         const estados = await agenda.obtenerEstado();
-        const especialidades = await doctores.obtener_especialidades();
+        const especialidades = await personal.obtener_especialidades();
         const pacientes = await paciente.ver_paciente();
         const medicos = await personal.ver_personal();
         res.render('citas.ejs', { patologias, estados, especialidades, pacientes, medicos });
