@@ -129,6 +129,7 @@ const paciente = {
                     Pacientes.Apellidos, 
                     Pacientes.Cedula, 
                     Pacientes.Edad, 
+                    Pacientes.Genero_ID,
                     Genero.Tipo AS Genero, 
                     Patologia.Nombre AS Patologia,
                     (SELECT Numero FROM Telefono_Paciente WHERE Paciente_ID = Pacientes.Id LIMIT 1) AS Telefono, 

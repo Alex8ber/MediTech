@@ -39,10 +39,10 @@
         <div>
             <label for="genero_id" >Género</label>
             <select id="genero_id" name="genero_id" required>
-                <option value="" disabled selected>Seleccione un género</option>
-                <option value="1" <%= paciente && paciente.Genero === 'Masculino' ? 'selected' : '' %>>Masculino</option>
-                <option value="2" <%= paciente && paciente.Genero === 'Femenino' ? 'selected' : '' %>>Femenino</option>
-                <option value="3" <%= paciente && paciente.Genero === 'Otro' ? 'selected' : '' %>>Otro</option>
+                <option value="" disabled <%= !paciente || !paciente.Genero_ID ? 'selected' : '' %>>Seleccione un género</option>
+                <option value="1" <%= paciente && paciente.Genero_ID == 1 ? 'selected' : '' %>>Masculino</option>
+                <option value="2" <%= paciente && paciente.Genero_ID == 2 ? 'selected' : '' %>>Femenino</option>
+                <option value="3" <%= paciente && paciente.Genero_ID == 3 ? 'selected' : '' %>>Otro</option>
             </select>
         </div>
         <div>
