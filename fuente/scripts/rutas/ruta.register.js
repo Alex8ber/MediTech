@@ -39,7 +39,7 @@ router.post('/register', async function(req, res) {
             res.redirect('/');
         }
     } catch (error) {
-        const tiposUsuario = await tipoUsuario.obtenerTiposUsuario();
+        const tiposUsuario = await tiposUsuario.obtenerTiposUsuario();
         res.render('register.ejs', { error: error.message, tiposUsuario });
     }
 });
