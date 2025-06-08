@@ -4,6 +4,7 @@ const personal = {
         return new Promise((resolve, reject) => {
             conexion.query(
                 `SELECT 
+                    Personal.Id AS id,
                     Personal.Nombres AS Nombre, 
                     Personal.Apellidos AS Apellido, 
                     Personal.Cedula, 
@@ -28,6 +29,7 @@ const personal = {
         return new Promise((resolve, reject) => {
             const query = 
                 `SELECT 
+                    Personal.Id AS id,
                     Personal.Nombres AS Nombre, 
                     Personal.Apellidos AS Apellido, 
                     Personal.Cedula, 
@@ -61,6 +63,18 @@ const personal = {
                 resolve(results);
             });
         });
+    },
+
+    eliminar_personal(id){
+        return new Promise((resolve, reject) => {
+            conexion.query('DELETE FROM Personal WHERE Id = ?', [id], (error, resultados) => {
+                if(error) {
+                    reject(error);
+                } else {
+                    resolve(resultados);
+                }
+            });
+        });
     }
-}
+};
 module.exports = personal;
