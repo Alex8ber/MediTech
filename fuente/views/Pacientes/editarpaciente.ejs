@@ -48,9 +48,9 @@
         <div>
             <label for="patologia_id">Patología</label>
             <select id="patologia_id" name="patologia_id" required>
-                <option value="" disabled selected>Seleccione patologia</option>
+                 <option value="" disabled>Seleccione patologia</option>
                 <% patologias.forEach(function(patologia) { %>
-                    <option value="<%= patologia.Id %>"><%= patologia.Nombre %></option>
+                    <option value="<%= patologia.Id %>" <%= paciente && paciente.Patologia && patologia.Nombre === paciente.Patologia ? 'selected' : '' %>><%= patologia.Nombre %></option>
                 <% }) %>
             </select>
         </div>
@@ -69,9 +69,9 @@
         <div>
             <label for="estado_civil_id">Estado Civil</label>
             <select id="estado_civil_id" name="estado_civil_id" required>
-                <option value="" disabled selected>Seleccione estado civil</option>
+                <option value="" disabled>Seleccione estado civil</option>
                 <% civil.forEach(function(c) { %>
-                    <option value="<%= c.Id %>"><%= c.Estado %></option>
+                    <option value="<%= c.Id %>" <%= paciente && paciente['Estado Civil'] && c.Estado === paciente['Estado Civil'] ? 'selected' : '' %>><%= c.Estado %></option>
                 <% }) %>
             </select>
         </div>
@@ -87,11 +87,11 @@
         <div>
             <label for="tipo_de_sangre_id">Tipo de Sangre</label>
             <select id="tipo_de_sangre_id" name="tipo_de_sangre_id" required>
-                    <option value="">Seleccione el tipo de sangre</option>
+                <option value="">Seleccione el tipo de sangre</option>
                 <% tiposDeSangre.forEach(function(tipo) { %>
-                    <option value="<%= tipo.Id %>"><%= tipo.Tipo %></option>
+                    <option value="<%= tipo.Id %>" <%= paciente && paciente['Tipo de Sangre'] && tipo.Tipo === paciente['Tipo de Sangre'] ? 'selected' : '' %>><%= tipo.Tipo %></option>
                 <% }) %>
-                </select>
+            </select>
         </div>
         <div>
             <label for="direccion">Dirección</label>
