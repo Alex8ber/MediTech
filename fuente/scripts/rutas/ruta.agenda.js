@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const agenda = require('../model/model.agenda');
-const doctores = require('../model/model.doctores');
 const paciente = require('../model/model.paciente');
 const personal = require('../model/model.personal');
 
