@@ -14,18 +14,38 @@ router.get('/personal', function(req, res) {
 router.get('/buscar-personal', function(req, res) {
     const filtro = req.query.q || '';
     personal.buscar_personal(filtro).then(personal => {
-        res.json(personal); // Devuelve los resultados en JSON
+        res.json(personal);
     })
     .catch(err => {
         return res.status(500).send('Error al buscar personal: ' + err.message);
     })
 });
 
-router.get('/registrarpersonal', function(req, res) {
-    personal.obtener_especialidades().then(especialidades => {
-        res.render('Personal/registrarpersonal.ejs', { especialidades });
-    }).catch(err => {
-        res.status(500).send('Error al obtener especialidades: ' + err.message);
+router.get('/registrarpersonal', async(req, res) => {
+    try {
+        const especialidades = await personal.obtener_especialidades();
+        const ocupaciones = await personal.obtener_ocupaciones();
+        res.render('Personal/registrarpersonal.ejs', { especialidades, ocupaciones});
+    } catch (error) {
+        console.error('Error al obtener datos para registrar personal:', error);
+        res.status(500).send('Error al obtener datos para registrar personal');
+    }
+});
+
+router.post('/registrarpersonal', (req, res) => {
+    const { nombre, apellido, cedula, edad, genero_id, ocupacion_id, especialidad_id } = req.body;
+    if (!nombre || !apellido || !cedula || !edad || !genero_id || !ocupacion_id || !especialidad_id) {
+        return res.status(500).send('Todos los campos son obligatorios');
+    }
+    personal.agregar_personal(nombre, apellido, cedula, edad, genero_id, ocupacion_id, especialidad_id).then(() => {
+        res.redirect('/personal');
+    })
+    .catch(err => {
+        if (err.code === 'ER_DUP_ENTRY') {
+            return res.status(400).send('La cédula ya está registrada');
+        }
+        console.error('Error al agregar personal:', err);
+        return res.status(500).send('Error al agregar personal');
     });
 });
 

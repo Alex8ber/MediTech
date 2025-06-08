@@ -11,11 +11,11 @@ router.post('/login', async function(req, res) {
     const { user, pass } = req.body;
     if (user && pass) {
         try {
-            const usuario = await modelo.userExiste(user, pass);
+            const usuario = await modelo.userExiste(user);
             if (!usuario) {
                 return res.render('login.ejs', { error: 'Usuario o Contraseña incorrectos' });
             }
-            const passwordValida = await bcryptjs.compare(pass, usuario.password);
+            const passwordValida = await bcryptjs.compare(pass, usuario.Contrasena);
             if (!passwordValida) {
                 return res.render('login.ejs', { error: 'Usuario o Contraseña incorrectos' });
             } else {

@@ -48,9 +48,9 @@
             <label for="patologia_id">Patología</label>
             <select id="patologia_id" name="patologia_id" required>
                 <option value="" disabled selected>Seleccione patologia</option>
-                <option value="1">Diabetes</option>
-                <option value="2">Hipertensión</option>
-                <option value="3">Asma</option>
+                <% patologias.forEach(function(patologia) { %>
+                    <option value="<%= patologia.Id %>"><%= patologia.Nombre %></option>
+                <% }) %>
             </select>
         </div>
         <div>
@@ -68,11 +68,9 @@
         <div>
             <label for="estado_civil_id">Estado Civil</label>
             <select id="estado_civil_id" name="estado_civil_id" required>
-                <option value="" disabled selected>Seleccione estado civil</option>
-                <option value="1">Soltero</option>
-                <option value="2">Casado</option>
-                <option value="3">Divorciado</option>
-                <option value="4">Viudo</option>
+                <% civil.forEach(function(c) { %>
+                    <option value="<%= c.Id %>"><%= c.Estado %></option>
+                <% }) %>>
             </select>
         </div>
          <div>
@@ -88,10 +86,9 @@
             <label for="tipo_de_sangre_id">Tipo de Sangre</label>
             <select id="tipo_de_sangre_id" name="tipo_de_sangre_id" required>
                     <option value="">Seleccione el tipo de sangre</option>
-                <option value="1">A+</option>
-                <option value="3">B+</option>
-                <option value="4">AB-</option>
-                <option value="2">O-</option>
+                <% tiposDeSangre.forEach(function(tipo) { %>
+                    <option value="<%= tipo.Id %>"><%= tipo.Tipo %></option>
+                <% }) %>
                 </select>
         </div>
         <div>

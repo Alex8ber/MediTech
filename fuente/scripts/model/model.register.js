@@ -1,6 +1,6 @@
 const conexion = require("../db")
 module.exports = {
-    insertar(user, email, pass, tipoUsuarioId = 2) {
+    insertar(user, email, pass, tipoUsuarioId) {
         return new Promise((resolve, reject) => {
             conexion.query(
                 `INSERT INTO Usuario (Nombre, Email, Contrasena, Tipo_usuario_ID) VALUES (?, ?, ?, ?)`,
