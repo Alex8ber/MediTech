@@ -25,6 +25,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Cédula</th>
@@ -36,6 +37,7 @@
                 <tbody id="tabla-personal">
                     <% personal.forEach(persona => { %>
                         <tr>
+                            <td><input type="radio" name="personal_id" value="<%= persona.id %>"></td>
                             <td><%= persona.Nombre %></td>
                             <td><%= persona.Apellido %></td>
                             <td><%= persona.Cedula %></td>
@@ -46,14 +48,30 @@
                     <% }) %>
                 </tbody>
             </table>
-            <button class="nuevo-doctor" style="margin-left:20px;" onclick="window.location.href='/registrarpersonal'">
+            <button class="nuevo-personal" style="margin-left:20px;" onclick="window.location.href='/registrarpersonal'">
                 Nuevo Personal
             </button>
-            <button class="eliminar-doctor" style="margin-left:20px;" onclick="window.location.href='/eliminarpersonal'">Eliminar Personal</button>
-            <button class="editar-doctor" style="margin-left:20px;" onclick="window.location.href='/editarpersonal'">Editar Personal</button>
+            <button class="eliminar-personal" style="margin-left:20px;" id="eliminar-personal" disabled>Eliminar Personal</button>
+            <button class="editar-personal" style="margin-left:20px;" id="editar-personal" disabled>Editar Personal</button>
         </div>
     </main>
 <script>
+    let personalSeleccionado = null;
+    
+    function asignarListenersRadios() {
+            const radios = document.getElementsByName('personal_id');
+            radios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    personalSeleccionado = this.value;
+                    document.getElementById('eliminar-personal').disabled = false;
+                    document.getElementById('editar-personal').disabled = false;
+                });
+            });
+        }
+        // Inicializar los listeners de los radios al cargar la página
+        asignarListenersRadios();
+
+
 document.getElementById('buscar').addEventListener('input', function() {
     const filtro = this.value;
     fetch(`/buscar-personal?q=${encodeURIComponent(filtro)}`)
@@ -61,20 +79,36 @@ document.getElementById('buscar').addEventListener('input', function() {
         .then(data => {
             const tbody = document.getElementById('tabla-personal');
             tbody.innerHTML = '';
-            data.forEach(personal => {
+            data.forEach(persona => {
                 const fila = document.createElement('tr');
                 fila.innerHTML = `
-                    <td>${personal.Nombre}</td>
-                    <td>${personal.Apellido}</td>
-                    <td>${personal.Cedula}</td>
-                    <td>${personal.Edad}</td>
-                    <td>${personal.Especialidad}</td>
-                    <td>${personal.Email}</td>
-                `;
+                    <td><input type="radio" name="personal_id" value="${persona.id}"></td>
+                    <td>${persona.Nombre}</td>
+                    <td>${persona.Apellido}</td>
+                    <td>${persona.Cedula}</td>
+                    <td>${persona.Edad}</td>
+                    <td>${persona.Especialidad}</td>
+                    <td>${persona.Email}</td>
+                    `;  
                 tbody.appendChild(fila);
             });
+            asignarListenersRadios();
         });
 });
+
+
+document.getElementById('eliminar-personal').addEventListener('click', function(){
+    if(personalSeleccionado){
+        window.location.href = `/eliminarpersonal/${personalSeleccionado}`;
+    }
+});
+
+document.getElementById('editar-personal').addEventListener('click', function(){
+    if(personalSeleccionado){
+        window.location.href = `/editarpersonal/${personalSeleccionado}`;
+    }
+});
+
 </script>
 </body>
 </html>

@@ -20,7 +20,6 @@
                     <% pacientes.forEach(function(p) { %>
                         <option value="<%= p.Id %>">
                             <%= p.Nombre %> <%= p.Apellido %> - <%= p.Edad %> Años - C.I: <%= p.Cedula %>
-                            <% if(p.Telefono){ %> - Tlf: <%= p.Telefono %> <% } %>
                             <% if(p.FechaNacimiento){ %> - Nac: <%= p.FechaNacimiento.toISOString ? p.FechaNacimiento.toISOString().slice(0,10) : p.FechaNacimiento %> <% } %>
                         </option>
                     <% }) %>
@@ -39,7 +38,12 @@
 
             <div class="form-group">
                 <label for="medico">Médico de Preferencia (opcional):</label>
-                <input type="text" id="medico" name="medico" placeholder="Nombre del médico">
+                <select name="medico" id="medico" required>
+                    <option value="">Seleccione doctor</option>
+                    <% medicos.forEach(function(m) { %>
+                        <option value="<%= m.Id %>"><%= m.Nombre %> - <%= m.Apellido %></option>
+                    <% }) %>
+                </select>
             </div>
 
             <div class="form-group">
@@ -80,6 +84,8 @@
 
         </form>
     </div>
-
+    <script>
+        
+    </script>
 </body>
 </html>

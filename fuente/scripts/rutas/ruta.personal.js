@@ -27,7 +27,17 @@ router.get('/registrarpersonal', function(req, res) {
     }).catch(err => {
         res.status(500).send('Error al obtener especialidades: ' + err.message);
     });
-})
+});
+
+router.get('/eliminarpersonal/:id', (req, res) => {
+    personal.eliminar_personal(req.params.id).then(() => {
+        res.redirect('/personal');
+    })
+    .catch(err => {
+        console.error('Error al eliminar personal:', err);
+        return res.status(500).send('Error al eliminar personal');
+    });
+});
 
 
 module.exports = router

@@ -31,59 +31,16 @@
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Cédula</th>
-                        <th>Edad</th>
-                        <th>Genero</th>
-                        <th>Patologia</th>
-                        <th>Teléfono</th>
-                        <th>Fecha de Registro</th>
-                        <th>Proxima Cita</th>
                     </tr>
                 </thead>
                 <tbody id="tabla-historialmedico">
+                    <% historiales.forEach(historial => { %>
                     <tr>
-                        <td>Anais</td>
-                        <td>Gazcon</td>
-                        <td>V-12345678</td>
-                        <td>28</td>
-                        <td>Femenino</td>
-                        <td>Diabetes</td>
-                        <td>+58 416-1234567</td>
-                        <td>2025-06-25</td>
-                        <td>2025-09-28</td>
+                        <td><%= historial.Nombres %></td>
+                        <td><%= historial.Apellidos %></td>
+                        <td><%= historial.Cedula %></td>
                     </tr>
-                    <tr>
-                        <td>Gabriela</td>
-                        <td>Guzman</td>
-                        <td>V-78954321</td>
-                        <td>32</td>
-                        <td>Femenino</td>
-                        <td>Cancer</td>
-                        <td>+58 412-1956237</td>
-                        <td>2025-06-24</td>
-                        <td>2025-11-27</td>
-                    </tr>
-                    <tr>
-                        <td>Nicola</td>
-                        <td>Sasonetti</td>
-                        <td>V-41526631</td>
-                        <td>45</td>
-                        <td>Masculino</td>
-                        <td>Cardiopatia</td>
-                        <td>+58 412-3265847</td>
-                        <td>2025-06-12</td>
-                        <td>2025-12-26</td>
-                    </tr>
-                    <tr>
-                        <td>Manuel</td>
-                        <td>Gomez</td>
-                        <td>V-78956368</td>
-                        <td>36</td>
-                        <td>Masculino</td>
-                        <td>Obesidad</td>
-                        <td>+58 416-4152687</td>
-                        <td>2025-06-19</td>
-                        <td>2025-07-25</td>
-                    </tr>
+                    <% }) %>
                 </tbody>
             </table>
             <button class="nuevo-paciente" style="margin-left:20px;" onclick="window.location.href= '/registrarhistorial'">Nuevo Historial Medico</button>
