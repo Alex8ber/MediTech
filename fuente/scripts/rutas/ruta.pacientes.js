@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const paciente = require('../model/model.paciente');
+const agenda = require('../model/model.agenda');
+const doctores = require('../model/model.doctores');
 
 router.get('/pacientes', (req, res) => {
     paciente.ver_paciente().then(pacientes => {
@@ -61,14 +63,20 @@ router.get('/eliminarpaciente/:id', (req, res) => {
     });
 });
 
-router.get('/editarpaciente/:id', (req, res) => {
-    paciente.editar_paciente(req.params.id).then(paciente => {
-        res.render('Pacientes/editarpaciente.ejs', {paciente})
-    })
-    .catch(error => {
-        console.error('Error al editar el paciente:', error);
-        res.status(500).send('Error al editar el paciente');
-    });
+router.get('/editarpaciente/:id', async(req, res) => {
+    try {
+        const [patologias, pacientes, tiposDeSangre, civil, pacienteData] = await Promise.all([
+        agenda.obtenerPatologias(),
+        paciente.ver_paciente(),
+        paciente.obtener_Sangre(),
+        paciente.obtener_Civil(),
+        paciente.editar_paciente(req.params.id)
+    ]);
+    res.render('Pacientes/editarpaciente.ejs', {paciente: pacienteData, patologias, pacientes, tiposDeSangre, civil});
+    } catch (error) {
+        console.error('Error al obtener el paciente:', error);
+        res.status(500).send('Error al obtener el paciente');
+    }
 });
 
 router.post('/editarpaciente/:id', (req, res) => {

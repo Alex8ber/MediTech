@@ -178,6 +178,24 @@ const paciente = {
                 }
             )
         })
+    },
+
+    obtener_Sangre() {
+        return new Promise((resolve, reject) => {
+            conexion.query(`SELECT Id, Tipo FROM Tipo_de_sangre`, (err, res) => {
+            if (err) reject(err);
+            else resolve(res);
+            });
+        });
+    },
+
+    obtener_Civil(){
+        return new Promise((resolve, reject) => {
+            conexion.query(`SELECT Id, Estado FROM Estado_civil`, (err, res) => {
+                if (err) reject(err);
+                else resolve(res);
+            });
+        });
     }
 };
 
