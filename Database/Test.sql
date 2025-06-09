@@ -19,7 +19,7 @@ INSERT INTO Condicion (Descripcion) VALUES ('Estable'), ('Crítico'), ('Recupera
 INSERT INTO Tipo_de_Sangre (Tipo) VALUES ('A+'), ('O-'), ('B+'), ('AB-');
 
 -- Insertar datos en Especialidad
-INSERT INTO Especialidad (Descripcion) VALUES ('Medicina General'), ('Pediatría'), ('Cardiología');
+INSERT INTO Especialidad (Descripcion) VALUES ('Medicina General'), ('Pediatría'), ('Cardiología'), ('No Aplicable');
 
 -- Insertar datos en Estado
 INSERT INTO Estado (Descripcion) VALUES ('Activo'), ('Inactivo'), ('Pendiente');
