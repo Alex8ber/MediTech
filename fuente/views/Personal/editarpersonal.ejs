@@ -1,0 +1,70 @@
+<%- include('../header.ejs') %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Personal</title>
+    <link rel="stylesheet" href="../css/nuevopaciente.css">
+</head>
+<body>
+    <main>
+        <h3>Personal > Editar Personal</h3>
+        <div class="titulo">Editar Personal</div>
+        <h2>Datos Personales</h2>
+        <form action="/editarpersonal/<%= personal ? personal.Id : '' %>" method="POST">
+            <div class="registro">
+                <div>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" value="<%= personal ? personal.Nombres : '' %>" required>
+                </div>
+                <div>
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="apellido" id="apellido" value="<%= personal ? personal.Apellidos : '' %>" required>
+                </div>
+                <div>
+                    <label for="cedula">Cédula</label>
+                    <input type="number" name="cedula" id="cedula" value="<%= personal ? personal.Cedula : '' %>" required>
+                </div>
+                <div>
+                    <label for="edad">Edad</label>
+                    <input type="number" name="edad" id="edad" value="<%= personal ? personal.Edad : '' %>" required>
+                </div>
+                <div>
+                    <label for="genero_id">Género</label>
+                    <select id="genero_id" name="genero_id" required>
+                        <option value="" disabled <%= !personal || !personal.Genero_ID ? 'selected' : '' %>>Seleccione un género</option>
+                        <option value="1" <%= personal && personal.Genero_ID == 1 ? 'selected' : '' %>>Masculino</option>
+                        <option value="2" <%= personal && personal.Genero_ID == 2 ? 'selected' : '' %>>Femenino</option>
+                        <option value="3" <%= personal && personal.Genero_ID == 3 ? 'selected' : '' %>>Otro</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="tipo_usuario_id">Ocupación</label>
+                    <select name="tipo_usuario_id" id="tipo_usuario_id" required>
+                        <option value="" disabled>Seleccione una ocupación</option>
+                        <% ocupaciones.forEach(function(ocupacion) { %>
+                            <option value="<%= ocupacion.Id %>" <%= personal && personal.Tipo_usuario_ID == ocupacion.Id ? 'selected' : '' %>><%= ocupacion.Descripcion %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div>
+                    <label for="especialidad_id">Especialidad</label>
+                    <select id="especialidad_id" name="especialidad_id" required>
+                        <option value="" disabled>Seleccione una especialidad</option>
+                        <% especialidades.forEach(function(especialidad) { %>
+                            <option value="<%= especialidad.Id %>" <%= personal && personal.Especialidad_ID == especialidad.Id ? 'selected' : '' %>><%= especialidad.Descripcion %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" value="<%= personal ? personal.Email : '' %>" required>
+                </div>
+                <button type="submit" class="nuevo">Actualizar Personal</button>
+                <button type="button" class="cancelar" onclick="window.location.href='/personal'">Cancelar</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

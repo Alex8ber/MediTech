@@ -47,11 +47,11 @@
                 </select>
             </div>
             <div>
-                <label for="ocupacion_id">Ocupación</label>
-                <select name="ocupacion_id" id="ocupacion_id" required>
+                <label for="tipo_usuario_id">Ocupación</label>
+                <select name="tipo_usuario_id" id="tipo_usuario_id" required>
                     <option value="" disabled selected>Seleccione una ocupación</option>
                     <% ocupaciones.forEach(function(ocupacion) { %>
-                    <option value="<%= ocupacion.Id %>"><%= ocupacion.Nombre %></option>
+                    <option value="<%= ocupacion.Id %>"><%= ocupacion.Descripcion %></option>
                     <% }) %>
                 </select>
             </div>
