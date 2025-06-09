@@ -187,3 +187,35 @@ select {
     font-size: 1em;
     outline: none;
 }
+
+.eliminar-paciente {
+    margin: 20px 0 0 20px;
+    padding: 10px 22px;
+    background: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.eliminar-paciente:hover {
+    background: #ff1a1a;
+}
+
+.nuevo-historial {
+    margin: 20px 0 0 20px;
+    padding: 10px 22px;
+    background: #45787a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.nuevo-historial:hover {
+    background: #5e9b9e;
+}
+
