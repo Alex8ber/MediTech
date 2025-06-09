@@ -197,3 +197,49 @@ tr:not(:last-child) {
 .logo a:hover, .logo a:focus {
     text-decoration: none;
 }
+
+.eliminar-personal{
+    margin: 20px 0 0 20px;
+    padding: 10px 22px;
+    background: #b98a8a;
+    color: #111111;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.eliminar-personal:hover {
+    background: #f7b8b8;
+}
+
+.nuevo-personal {
+    margin: 20px 0 0 20px;
+    padding: 10px 22px;
+    background: #45787a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.nuevo-personal:hover {
+    background: #5e9b9e;
+}
+
+.editar-personal {
+    margin: 20px 0 0 20px;
+    padding: 10px 22px;
+    background: #acbfc0;
+    color: #524e4e;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.editar-personal:hover {
+    background: rgb(218, 243, 247);
+}
