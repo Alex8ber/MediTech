@@ -26,7 +26,7 @@ router.get('/registrarpersonal', async(req, res) => {
     try {
         const especialidades = await personal.obtener_especialidades();
         const ocupaciones = await personal.obtener_ocupaciones();
-        res.render('Personal/registrarpersonal.ejs', { especialidades, ocupaciones });
+        res.render('Personal/registrarpersonal.ejs', { especialidades, ocupaciones, error: null });
     } catch (error) {
         console.error('Error al obtener datos para registrar personal:', error);
         res.status(500).send('Error al obtener datos para registrar personal');
