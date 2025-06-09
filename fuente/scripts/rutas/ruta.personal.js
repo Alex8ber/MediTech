@@ -1,10 +1,11 @@
 const express = require('express')
 const router = express.Router();
 const personal = require('../model/model.personal');
+const modelo = require('../model/model.register');
 
 router.get('/personal', function(req, res) {
     personal.ver_personal().then(personal => {
-        res.render('Personal/personal.ejs', { personal: personal });
+        res.render('Personal/personal.ejs', { personal: personal});
     })
     .catch(err => {
         return res.status(500).send('Error al obtener el personal : ' + err.message);
