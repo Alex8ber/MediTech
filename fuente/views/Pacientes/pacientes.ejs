@@ -168,25 +168,6 @@
     asignarListenersRadios();
 }
 
-function getFiltros() {
-    return {
-        q: document.getElementById('buscar_paciente').value,
-        patologia: document.getElementById('buscar_patologia').value
-    };
-}
-
-function buscarPacientes() {
-    const filtros = getFiltros();
-    const params = new URLSearchParams(filtros).toString();
-    fetch(`/buscar-pacientes?${params}`)
-        .then(res => res.json())
-        .then(data => actualizarTabla(data));
-}
-document.getElementById('buscar_paciente').addEventListener('input', buscarPacientes);
-document.getElementById('buscar_patologia').addEventListener('input', buscarPacientes);
-
-
-
 // Redirigir a los formularios correspondientes por Id
 document.getElementById('nuevo-historial').addEventListener('click', function() {
     if (pacienteSeleccionado) {
