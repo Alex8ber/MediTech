@@ -25,7 +25,7 @@ router.get('/registrarpersonal', async(req, res) => {
     try {
         const especialidades = await personal.obtener_especialidades();
         const ocupaciones = await personal.obtener_ocupaciones();
-        res.render('Personal/registrarpersonal.ejs', { especialidades, ocupaciones});
+        res.render('Personal/registrarpersonal.ejs', { especialidades, ocupaciones });
     } catch (error) {
         console.error('Error al obtener datos para registrar personal:', error);
         res.status(500).send('Error al obtener datos para registrar personal');
@@ -33,11 +33,11 @@ router.get('/registrarpersonal', async(req, res) => {
 });
 
 router.post('/registrarpersonal', (req, res) => {
-    const { nombre, apellido, cedula, edad, genero_id, ocupacion_id, especialidad_id } = req.body;
-    if (!nombre || !apellido || !cedula || !edad || !genero_id || !ocupacion_id || !especialidad_id) {
+    const { nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id } = req.body;
+    if (!nombre || !apellido || !cedula || !edad || !genero_id || !tipo_usuario_id || !especialidad_id) {
         return res.status(500).send('Todos los campos son obligatorios');
     }
-    personal.agregar_personal(nombre, apellido, cedula, edad, genero_id, ocupacion_id, especialidad_id).then(() => {
+    personal.agregar_personal(nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id).then(() => {
         res.redirect('/personal');
     })
     .catch(err => {
@@ -47,6 +47,29 @@ router.post('/registrarpersonal', (req, res) => {
         console.error('Error al agregar personal:', err);
         return res.status(500).send('Error al agregar personal');
     });
+});
+
+router.get('/editarpersonal/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const datos_personal = await personal.obtener_personal_por_id(id);
+        const especialidades = await personal.obtener_especialidades();
+        const ocupaciones = await personal.obtener_ocupaciones();
+        res.render('Personal/editarpersonal.ejs', { personal: datos_personal, especialidades, ocupaciones });
+    } catch (error) {
+        res.status(500).send('Error al obtener datos del personal');
+    }
+});
+
+router.post('/editarpersonal/:id', async (req, res) => {
+    const { nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id, email } = req.body;
+    const id = req.params.id;
+    try {
+        await personal.actualizar_personal(id, nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id, email);
+        res.redirect('/personal');
+    } catch (error) {
+        res.status(500).send('Error al actualizar personal');
+    }
 });
 
 router.get('/eliminarpersonal/:id', (req, res) => {

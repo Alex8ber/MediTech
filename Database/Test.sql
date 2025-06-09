@@ -1,3 +1,8 @@
+-- Insertar datos iniciales en la tabla Tipo_Usuario
+INSERT INTO Tipo_Usuario (Descripcion) VALUES
+('Administrador'),
+('Medico'),
+('Recepcionista');
 -- Insertar datos en Genero
 INSERT INTO Genero (Tipo) VALUES ('Masculino'), ('Femenino'), ('Otro');
 
@@ -33,14 +38,13 @@ INSERT INTO Ubicacion (Descripcion) VALUES ('Habitación 101'), ('Habitación 10
 INSERT INTO Usuario (Nombre, Email, Contrasena, Tipo_usuario_ID) VALUES
 ('admin', 'admin@meditech.com', '$2a$12$ySpfTgHM2u43RDxhbmbl.uZzuXQ8AagoViNFO9QF/Ze18cy0GjXba', 1), -- admin123
 ('doctor1', 'doctor1@meditech.com', '$2a$12$Lg0fRfqK9TQHtdBNvf.xluiii3X57tTD089K485C0zP8A8z1wopXi', 2), -- doctor123
-('enfermera1', 'enfermera1@meditech.com', '$2a$12$jv4SDixkPuUCT6V8C4L42OjygBeMmwcAIIscHwslIvBTdZr5m5dOO', 3), -- enfermero123
-('recepcion1', 'recepcion1@meditech.com', '$2a$12$JtTcl6iAsJrOi5jSr0pP4uCCr2oV1Q4DEAyi8L45Dq5ayHEc4q1lO', 4); -- recep123
+('recepcion1', 'recepcion1@meditech.com', '$2a$12$JtTcl6iAsJrOi5jSr0pP4uCCr2oV1Q4DEAyi8L45Dq5ayHEc4q1lO', 3); -- recep123
 
 -- Insertar personal
 INSERT INTO Personal (Nombres, Apellidos, Cedula, Edad, Genero_ID, Usuario_ID, Tipo_usuario_ID, Especialidad_ID) VALUES
-('Juan', 'Pérez', '12345678', 40, 1, 2, 2, 1),
-('Ana', 'Gómez', '87654321', 30, 2, 3, 3, NULL),
-('Luis', 'Martínez', '11223344', 28, 1, 4, 4, NULL);
+('Juan', 'Pérez', '12345678', 40, 1, 1, 1, NULL),
+('Ana', 'Gómez', '87654321', 30, 2, 3, 2, 1),
+('Luis', 'Martínez', '11223344', 28, 1, 3, 3, NULL);
 
 -- Insertar teléfonos del personal
 INSERT INTO Telefono_Personal (Personal_ID, Numero) VALUES

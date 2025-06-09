@@ -218,10 +218,5 @@ CREATE TABLE Total (
     FOREIGN KEY (MetodoPago_ID) REFERENCES Metodo_Pago(Id)
 );
 
--- Insertar datos iniciales en la tabla Tipo_Usuario
-INSERT INTO Tipo_Usuario (Descripcion) VALUES
-('Administrador'),
-('Medico'),
-('Recepcionista');
 
 
