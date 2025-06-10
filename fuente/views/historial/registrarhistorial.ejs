@@ -11,67 +11,290 @@
 
 <body>
     <main>
-        <h3>Historial Medico > Nuevo Historial Medico</h3>
+        <div class="menu">
+            <p data-target="#general">Datos Generales</p>
+            <p data-target="#examen_fisico">Examen Físico</p>
+            <p data-target="#examen_laboratorio">Examen Laboratorio</p>
+            <p data-target="#diagnostico">Diagnostico</p>
+		<div class="line"></div>
+	    </div>
 
-        <div class="titulo">Registrar Historial Medico</div>
+        <div class="content">
+            <div data-content id="general" class="active">
 
-        <h2> Registro Medico </h2>
-        
-        <form action="/registrarhistorial" method="POST">
-            <input type="hidden" name="paciente_id" value="<%= paciente ? paciente.id : '' %>">
-        <div class="registro">
-            <div>
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" value="<%= paciente ? paciente.Nombres: '' %>">
-            </div>
-            <div>
-                <label for="apellido">Apellido</label>
-                <input type="text" name="apellido" id="apellido" value="<%= paciente ? paciente.Apellidos: '' %>">
-            </div>
-            <div>
-                <label for="cedula">Cedula</label>
-                <input type="number" name="cedula" id="cedula" value="<%= paciente ? paciente.Cedula: '' %>">
-            </div>
-            <div>
-                <label for="telefono">Telefono</label>
-                <input type="number" name="telefono" id="telefono" value="<%= paciente ? paciente.Telefono: '' %>">
-            </div>
-            <div>
-                <label for="edad">Edad</label>
-                <input type="number" name="edad" id="edad" value="<%= paciente ? paciente.Edad: '' %>">
-            </div>
-            <div>
-                <label for="patologia">Patologia</label>
-                <input type="text" name="patologia" id="patologia" value="<%= paciente ? paciente.Patologia: '' %>">
-            </div>
-            <div>
-                <label for="genero">Genero</label>
-                <select id="genero" name="genero" form="generoform">
-                    <option value="masculino" <%= paciente && paciente.Genero === 'masculino' ? 'selected' : '' %>>Masculino</option>
-                    <option value="femenino" <%= paciente && paciente.Genero === 'femenino' ? 'selected' : '' %>>Femenino</option>
-                </select>
-            </div>
-        <div class="tabla-section">
-            <div class="tabla-titulo"></div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Notas de progreso</th>
-                    </tr>
-                </thead>
-                <tbody id="tabla-pacientes">
-                    <tr>
-                        <td>2025-06-19</td>
-                        <td>hoy el paciente casi se mata haciendo estas vistas</td>
+                <h2> Datos Generales</h2>
+    
+                <form action="/registrarhistorial" method="POST">
+                    <input type="hidden" name="paciente_id" value="<%= paciente ? paciente.id : '' %>">
+                    <div class="registro">
+                        <div>
+                            <label for="nombre">Nombre</label>
+                            <input type="text" name="nombre" id="nombre" value="<%= paciente ? paciente.Nombres: '' %>">
+                        </div>
+                        <div>
+                            <label for="apellido">Apellido</label>
+                            <input type="text" name="apellido" id="apellido" value="<%= paciente ? paciente.Apellidos: '' %>">
+                        </div>
+                        <div>
+                            <label for="cedula">Cedula</label>
+                            <input type="number" name="cedula" id="cedula" value="<%= paciente ? paciente.Cedula: '' %>">
+                        </div>
+                        <div>
+                            <label for="telefono">Telefono</label>
+                            <input type="number" name="telefono" id="telefono" value="<%= paciente ? paciente.Telefono: '' %>">
+                        </div>
+                        <div>
+                            <label for="edad">Edad</label>
+                            <input type="number" name="edad" id="edad" value="<%= paciente ? paciente.Edad: '' %>">
+                        </div>
+                        <div>
+                            <label for="patologia">Patologia</label>
+                            <input type="text" name="patologia" id="patologia" value="<%= paciente ? paciente.Patologia: '' %>">
+                        </div>
+                        <div>
+                            <label for="genero">Genero</label>
+                            <select id="genero" name="genero" form="generoform">
+                                <option value="masculino" <%= paciente && paciente.Genero === 'masculino' ? 'selected' : '' %>>Masculino</option>
+                                <option value="femenino" <%= paciente && paciente.Genero === 'femenino' ? 'selected' : '' %>>Femenino</option>
+                            </select>
+                        </div>
+                        <div class="tabla-section">
+                            <div class="tabla-titulo"></div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Notas de progreso</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-pacientes">
+                                    <tr>
+                                        <td>2025-06-19</td>
+                                        <td>hoy el paciente casi se mata haciendo estas vistas</td>
 
-                    </tr>
-                </tbody>
-            </table>    
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </div>
+                        <button type="submit"class="nuevo">Nuevo Historial Medico</button>
+                        <button type="button" class="cancelar" onclick="location.href='/pacientes'">Regresar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div data-content id="examen_fisico">
+                <h2>Examen Físico</h2>
+                <form action="/registrarExamenFisico" method="POST">
+                    <input type="hidden" name="paciente_id" value="<%= paciente ? paciente.id : '' %>">
+                    <div class="registro">
+                        <div>
+                            <label for="">Presión Arterial</label>
+                            <input type="text" name="" id="" value="">
+                        </div>
+                        <div>
+                            <label for="">Frecuencia Cardíaca</label>
+                            <input type="" name="" id="" value="">
+                        </div>
+                        <div>
+                            <label for="">Frecuencia Respiratoria</label>
+                            <input type="" name="" id="" value="">
+                        </div>
+                        <div>
+                            <label for="">Peso</label>
+                            <input type="" name="" id="" value="">
+                        </div>
+                        <div>
+                            <label for="">Talla</label>
+                            <input type="" name="" id="" value="">
+                        </div>
+                        <div>
+                            <label for="">IMC (indice masa corporal)</label>
+                            <input type="" name="" id="" value="">
+                        </div>
+                        <div>
+                            <label for="">Condiciones Generales</label>
+                            <input type="" name="" id="" value="">
+                        </div>
+                        <div>
+                            <label for="">Piel, Cicatrices, Tatuajes</label>
+                            <input type="" name="" id="" value="">
+                        </div>
+                        <div>
+                            <label for="">Ojos</label>
+                            <input type="" name="" id="" value="">
+                        </div>
+                        <div>
+                            <label for="">Oídos</label>
+                            <input type="" name="" id="" value="">
+                        </div>
+                        <div>
+                            <label for="">Nariz</label>
+                            <input type="" name="" id="" value="">
+                        </div>
+                        <button type="submit"class="nuevo">Nuevo Historial Medico</button>
+                        <button type="button" class="cancelar" onclick="location.href='/pacientes'">Regresar</button>
+                    </div>
+                </form>
+            </div>
+
+
+            <div data-content id="examen_laboratorio">
+                <h1>Examen Laboratorio... los resultados deberian ser inputs</h1>
+                <form action="/registrarExamenLabo" method="POST">
+                    <input type="hidden" name="paciente_id" value="<%= paciente ? paciente.id : '' %>">
+                    <div class="">
+                        <div class="laboratorio">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Hemograma</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-">
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                            <h3></h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Perfil Lipídico</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-">
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                            <h3></h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Urianálisis</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-">
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Perfil Hepático</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-">
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Pruebas hormonales</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-">
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>nombre:</td>
+                                            <td>Resultado:</td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="otros_examenes">
+                            <div>
+                                <label for="">Glucosa en Sangre</label>
+                                <input type="text" name="" id="" value="">
+                            </div>
+                            <div>
+                                <label for="">Urea</label>
+                                <input type="text" name="" id="" value="">
+                            </div>
+                            <div>
+                                <label for="">Creatinina</label>
+                                <input type="text" name="" id="" value="">
+                            </div>
+                        </div>
+                        <button type="submit"class="nuevo">Editar</button>
+                        <button type="button" class="aceptar">Aceptar y Guardar</button>
+                        <button type="button" class="cancelar" onclick="location.href='/pacientes'">Regresar</button>
+                    </div>
+                </form>
+            </div>
+            <div data-content id="diagnostico">
+                <h2>Diagnostico</h2>
+            </div>
         </div>
-        <button type="submit"class="nuevo">Nuevo Historial Medico</button>
-        <button type="button" class="cancelar" onclick="location.href='/pacientes'">Cancelar</button>
-    </div>
-    </form>
     </main>
+
+    <script>
+        const targets = document.querySelectorAll('[data-target]')
+        const content = document.querySelectorAll('[data-content]')
+
+        targets.forEach(target => {
+        target.addEventListener('click', (e) => {
+        content.forEach(c => {
+            c.classList.remove('active')
+        })
+        const t = document.querySelector(target.dataset.target)
+        t.classList.add('active')
+
+        var line = document.querySelector('.line');
+        line.style.width = e.target.offsetWidth + "px";
+        line.style.left = e.target.offsetLeft + "px";
+        })
+        })
+    </script>
+
 </body>

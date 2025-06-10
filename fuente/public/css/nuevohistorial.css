@@ -14,6 +14,16 @@ body {
     justify-content: space-between;
 }
 
+.menu {
+	display: flex;
+    position: relative;
+}
+
+.menu p {
+	margin-right: 2rem;
+	cursor: pointer;
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -159,4 +169,28 @@ tr:not(:last-child) {
 .logo img {
     width: auto;
     height: 200px;
+}
+
+
+
+.content {
+	margin-top: 2rem;
+}
+
+[data-content] {
+	display: none;
+    animation: moving .5s ease; 
+}
+
+.active[data-content] {
+	display: block;
+}
+
+.content {
+    animation: moving .5s ease;   
+}
+
+@keyframes moving {
+    from{transform: translateX(50px);opacity: 0;}
+    to{transform: translateX(0px);opacity: 1;}
 }
