@@ -85,3 +85,63 @@ tr:not(:last-child) {
 .logo a:hover, .logo a:focus {
     text-decoration: none;
 }
+
+
+/* --- Mejora visual para la tabla de pacientes --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #d1d1d1;
+    padding: 10px 8px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+th {
+    background-color: #3b6e6e;
+    color: #fff;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e0f7fa;
+}
+
+
+.pacientes-container {
+    background: #fff;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    box-sizing: border-box;
+}
+
+.tabla-section {
+    width: 100%;
+    overflow-x: auto;
+    background: transparent;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+}
+
+.tabla-section table {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+    background: #fff;
+    table-layout: auto;
+}
