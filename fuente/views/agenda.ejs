@@ -9,7 +9,8 @@
 </head>
 
 <body>
-    <main>
+	<div class="main-content">
+		 <main>
 
     <div class="menu">
 		<p data-target="#general">General</p>
@@ -120,7 +121,7 @@
             </div>
             <div>
                 <label for="buscar">Buscar Fecha</label>
-                <input type="text" id="buscar" placeholder="AAAA/MM/DD">
+                <input type="date" id="buscar">
             </div>
         </div>
 
@@ -170,7 +171,7 @@
             </div>
             <div>
                 <label for="buscar">Buscar Fecha</label>
-                <input type="text" id="buscar" placeholder="AAAA/MM/DD">
+                <input type="date" id="buscar">
             </div>
         	</div>
 
@@ -245,6 +246,8 @@
             });
         });
     </script>
+	</div>
+   
 <%- include('footer.ejs') %>
 </body>
 </html>
