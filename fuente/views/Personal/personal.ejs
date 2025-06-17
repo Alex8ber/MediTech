@@ -83,32 +83,27 @@
         // Inicializar los listeners de los radios al cargar la página
         asignarListenersRadios();
 
-
-document.getElementById('buscar').addEventListener('input', function() {
-    const filtro = this.value;
-    fetch(`/buscar-personal?q=${encodeURIComponent(filtro)}`)
-        .then(res => res.json())
-        .then(data => {
-            const tbody = document.getElementById('tabla-personal');
-            tbody.innerHTML = '';
-            data.forEach(persona => {
-                const fila = document.createElement('tr');
-                fila.innerHTML = `
-                    <td><input type="radio" name="personal_id" value="${persona.id}"></td>
-                    <td>${persona.Nombre}</td>
-                    <td>${persona.Apellido}</td>
-                    <td>${persona.Cedula}</td>
-                    <td>${persona.Edad}</td>
-                    <td>${persona.Genero}</td>
-                    <td>${persona.Ocupacion}</td>
-                    <td>${persona.Especialidad}</td>
-                    <td>${persona.Email}</td>
-                    `;  
-                tbody.appendChild(fila);
-            });
-            asignarListenersRadios();
+    function actualizarTabla(personal) {
+                
+        const tbody = document.getElementById('tabla-personal');
+        tbody.innerHTML = '';
+        data.forEach(persona => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td><input type="radio" name="personal_id" value="${persona.id}"></td>
+                <td>${persona.Nombre}</td>
+                <td>${persona.Apellido}</td>
+                <td>${persona.Cedula}</td>
+                <td>${persona.Edad}</td>
+                <td>${persona.Genero}</td>
+                <td>${persona.Ocupacion}</td>
+                <td>${persona.Especialidad}</td>
+                <td>${persona.Email}</td>
+            `;  
+            tbody.appendChild(fila);
         });
-});
+        asignarListenersRadios();
+};
 
 
 document.getElementById('eliminar-personal').addEventListener('click', function(){
