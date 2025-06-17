@@ -144,11 +144,17 @@ const personal = {
     },
     eliminar_personal(id){
         return new Promise((resolve, reject) => {
-            conexion.query('DELETE FROM Personal WHERE Id = ?', [id], (error, resultados) => {
+            conexion.query('DELETE FROM Telefono_Personal WHERE Id = ?', [id], (error, resultados) => {
                 if(error) {
                     reject(error);
                 } else {
-                    resolve(resultados);
+                    conexion.query( `DELETE FROM Personal WHERE Id = ?`, [id], (error, resultados) => {
+                        if(error) {
+                            reject(error);
+                        } else {
+                            resolve(resultados);
+                        }
+                    })
                 }
             });
         });
