@@ -152,7 +152,13 @@ const personal = {
                         if(error) {
                             reject(error);
                         } else {
-                            resolve(resultados);
+                            conexion.query( `DELETE FROM Usuario WHERE Id = ?`, [id], (error, resultados) => {
+                                if(error) {
+                                    reject(error);
+                                } else {
+                                    resolve(resultados);
+                                }
+                            })
                         }
                     })
                 }

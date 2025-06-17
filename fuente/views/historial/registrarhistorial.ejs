@@ -28,11 +28,11 @@
                     <input type="hidden" name="paciente_id" value="<%= paciente ? paciente.id : '' %>">
                     <div class="registro">
                         <div>
-                            <label for="nombre">Nombre</label>
+                            <label for="nombre">Nombres</label>
                             <input type="text" name="nombre" id="nombre" value="<%= paciente ? paciente.Nombres: '' %>">
                         </div>
                         <div>
-                            <label for="apellido">Apellido</label>
+                            <label for="apellido">Apellidos</label>
                             <input type="text" name="apellido" id="apellido" value="<%= paciente ? paciente.Apellidos: '' %>">
                         </div>
                         <div>
@@ -48,15 +48,49 @@
                             <input type="number" name="edad" id="edad" value="<%= paciente ? paciente.Edad: '' %>">
                         </div>
                         <div>
-                            <label for="patologia">Patologia</label>
-                            <input type="text" name="patologia" id="patologia" value="<%= paciente ? paciente.Patologia: '' %>">
-                        </div>
-                        <div>
                             <label for="genero">Genero</label>
                             <select id="genero" name="genero" form="generoform">
                                 <option value="masculino" <%= paciente && paciente.Genero === 'masculino' ? 'selected' : '' %>>Masculino</option>
                                 <option value="femenino" <%= paciente && paciente.Genero === 'femenino' ? 'selected' : '' %>>Femenino</option>
                             </select>
+                        </div>
+                        <div>
+                            <label for="patologia">Patologia</label>
+                            <input type="text" name="patologia" id="patologia" value="<%= paciente ? paciente.Patologia: '' %>">
+                        </div>
+                        <div>
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" value="<%= paciente ? paciente.Email: '' %>">
+                        </div>
+                        <div>
+                            <label for="ocupacion">Ocupación</label>
+                            <input type="text" name="ocupacion" id="ocupacion" value="<%= paciente ? paciente.Ocupacion: '' %>">
+                        </div>
+                        <div>
+                            <label for="estado_civil">Estado Civil</label>
+                            <select id="estado_civil_id" name="estado_civil_id" required>
+                                <option value="" disabled>Seleccione estado civil</option>
+                                <% civil.forEach(function(c) { %>
+                                    <option value="<%= c.Id %>" <%= c.Estado === paciente['Estado Civil'] ? 'selected' : '' %>><%= c.Estado %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="tipo_de_sangre_id">Tipo de Sangre</label>
+                            <select id="tipo_de_sangre_id" name="tipo_de_sangre_id" required>
+                                <option value="">Seleccione el tipo de sangre</option>
+                                <% tiposDeSangre.forEach(function(tipo) { %>
+                                    <option value="<%= tipo.Id %>" <%= tipo.Tipo === paciente['Tipo de Sangre'] ? 'selected' : '' %>><%= tipo.Tipo %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="alergias">Alergias</label>
+                            <input type="text" name="alergias" id="alergias" value="<%= paciente ? paciente.Alergias: '' %>">
+                        </div>
+                        <div>
+                            <label for="direccion">Dirección</label>
+                            <input type="text" name="direccion" id="direccion" value="<%= paciente ? paciente.Direccion: '' %>">
                         </div>
                         <div class="tabla-section">
                             <div class="tabla-titulo"></div>
@@ -88,6 +122,14 @@
                     <input type="hidden" name="paciente_id" value="<%= paciente ? paciente.id : '' %>">
                     <div class="registro">
                         <div>
+                            <label for="">Peso</label>
+                            <input type="" name="" id="" value="">
+                        </div>
+                        <div>
+                            <label for="">Altura</label>
+                            <input type="" name="" id="" value="">
+                        </div>
+                        <div>
                             <label for="">Presión Arterial</label>
                             <input type="text" name="" id="" value="">
                         </div>
@@ -97,14 +139,6 @@
                         </div>
                         <div>
                             <label for="">Frecuencia Respiratoria</label>
-                            <input type="" name="" id="" value="">
-                        </div>
-                        <div>
-                            <label for="">Peso</label>
-                            <input type="" name="" id="" value="">
-                        </div>
-                        <div>
-                            <label for="">Talla</label>
                             <input type="" name="" id="" value="">
                         </div>
                         <div>
