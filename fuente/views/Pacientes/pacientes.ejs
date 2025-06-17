@@ -61,13 +61,9 @@
                         <th>Edad</th>
                         <th>Genero</th>
                         <th>Patologia</th>
-                        <th>Teléfono</th>
-                        <th>Email</th>
-                        <th>Ocupación</th>
-                        <th>Estado Civil</th>
+                        <th>Teléfono</th>                       
                         <th>Condición</th>
                         <th>Tipo de Sangre</th>
-                        <th>Dirección</th>
                     </tr>
                 </thead>
                 <tbody id="tabla-pacientes">
@@ -81,12 +77,8 @@
                             <td><%= paciente.Genero %></td>
                             <td><%= paciente.Patologia %></td>
                             <td><%= paciente.Telefono %></td>
-                            <td><%= paciente.Email %></td>
-                            <td><%= paciente.Ocupacion %></td>
-                            <td><%= paciente["Estado Civil"] %></td>
                             <td><%= paciente.Condicion %></td>
                             <td><%= paciente["Tipo de Sangre"] %></td>
-                            <td><%= paciente.Direccion %></td>
                         </tr>
                     <% }) %>
                 </tbody>
@@ -130,12 +122,8 @@
             <td>${paciente.Genero}</td>
             <td>${paciente.Patologia}</td>
             <td>${paciente.Telefono}</td>
-            <td>${paciente.Email}</td>
-            <td>${paciente.Ocupacion}</td>
-            <td>${paciente["Estado Civil"]}</td>
             <td>${paciente.Condicion}</td>
             <td>${paciente["Tipo de Sangre"]}</td>
-            <td>${paciente.Direccion}</td>
         `;
         tbody.appendChild(fila);
     });
