@@ -12,24 +12,6 @@ body {
     font-weight: bold;
 }
 
-nav {
-    display: flex;
-    gap: 30px;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 18px;
-    border-radius: 20px;
-    font-weight: 500;
-    transition: background 0.2s;
-}
-
-nav a.active, nav a:hover {
-    background: #5e9b9e;
-}
-
 .perfil .avatar {
     width: 45px;
     height: 45px;
@@ -65,7 +47,6 @@ main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 7px;
 }
 
 .busqueda label {
@@ -149,8 +130,8 @@ tr:not(:last-child) {
 .eliminar-doctor {
     margin: 20px 0 0 20px;
     padding: 10px 22px;
-    background: #b98a8a;
-    color: #111111;
+    background: #ff4d4d;
+    color: #fff;
     border: none;
     border-radius: 8px;
     font-size: 1em;
@@ -189,8 +170,8 @@ tr:not(:last-child) {
 .eliminar-personal{
     margin: 20px 0 0 20px;
     padding: 10px 22px;
-    background: #b98a8a;
-    color: #111111;
+    background: #ff4d4d;
+    color: #fff;
     border: none;
     border-radius: 8px;
     font-size: 1em;

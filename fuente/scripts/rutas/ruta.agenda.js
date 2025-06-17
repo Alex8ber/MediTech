@@ -8,7 +8,7 @@ router.get('/agenda', function (req, res) {
     res.render('agenda.ejs');
 });
 
-router.get('/citas', async function (req, res) {
+router.get('/citas:id', async function (req, res) {
     try {
         const patologias = await agenda.obtenerPatologias();
         const estados = await agenda.obtenerEstado();
@@ -22,7 +22,7 @@ router.get('/citas', async function (req, res) {
     }
 });
 
-router.post('/citas', async function (req, res) {
+router.post('/citas:id', async function (req, res) {
     try {
         if (!req.body.pacienteId || !req.body.personalId || !req.body.observaciones || !req.body.estadoId || !req.body.fecha) {
             res.status(400).send({ error: 'Todos los campos son obligatorios' });

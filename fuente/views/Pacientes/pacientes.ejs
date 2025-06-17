@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacientes</title>
-    <link rel="stylesheet" href="/css/pacientes.css">
+    <link rel="stylesheet" href="/css/estilos1.css">
 
 </head>
 <body>
@@ -87,6 +87,7 @@
             <button style="margin-left:20px;" id="editar-paciente" class="editar-paciente" disabled> Editar Paciente </button>
             <button style="margin-left:20px;" id="eliminar-paciente" class="eliminar-paciente" disabled>Eliminar Paciente</button>
             <button style="margin-left:20px;" id="nuevo-historial" class="nuevo-historial"  disabled>Historial</button>
+            <button style="margin-left:20px;" id="nueva-cita" class="nueva-cita"  disabled>Cita nueva</button>
         </div>
     </main>
     <script>
@@ -102,6 +103,7 @@
                     document.getElementById('editar-paciente').disabled = false;
                     document.getElementById('nuevo-historial').disabled = false;
                     document.getElementById('eliminar-paciente').disabled = false;
+                    document.getElementById('nueva-cita').disabled = false;
                 });
             });
         }
@@ -144,6 +146,12 @@ document.getElementById('editar-paciente').addEventListener('click', function(){
 document.getElementById('eliminar-paciente').addEventListener('click', function(){
     if(pacienteSeleccionado){
         window.location.href = `/eliminarpaciente/${pacienteSeleccionado}`;
+    }
+});
+
+document.getElementById('nueva-cita').addEventListener('click', function(){
+    if(pacienteSeleccionado){
+        window.location.href = `/citas/${pacienteSeleccionado}`;
     }
 });
 

@@ -13,27 +13,15 @@
     <div class="container">
         <h1>Agendar Cita Médica</h1>
         <form action="#" method="POST"> <div class="form-group">
+            
             <div class="form-group">
-                <label for="paciente">Paciente registrado:</label>
-                <select id="paciente" name="pacienteId" required>
-                    <option value="">Seleccione un paciente</option>
-                    <% pacientes.forEach(function(p) { %>
-                        <option value="<%= p.Id %>">
-                            <%= p.Nombre %> <%= p.Apellido %> - <%= p.Edad %> Años - C.I: <%= p.Cedula %>
-                            <% if(p.FechaNacimiento){ %> - Nac: <%= p.FechaNacimiento.toISOString ? p.FechaNacimiento.toISOString().slice(0,10) : p.FechaNacimiento %> <% } %>
-                        </option>
-                    <% }) %>
-                </select>
+                <label for="paciente">Paciente registrado: <%= paciente ? paciente.Nombres + ' ' + paciente.Apellidos: '' %></label>
+                
             </div>
 
             <div class="form-group">
-                <label for="especialidad">Especialidad Médica:</label>
-                <select id="especialidad" name="especialidad" required>
-                    <option value="">Seleccione una especialidad</option>
-                    <% especialidades.forEach(function(es) { %>
-                        <option value="<%= es.Id %>"><%= es.Descripcion %></option>
-                    <% }) %>
-                </select>
+                <label for="especialidad">Especialidad Médica: <%= especialidad ? especialidad.Descripcion : '' %></label>
+                
             </div>
 
             <div class="form-group">
