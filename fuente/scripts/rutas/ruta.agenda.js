@@ -8,26 +8,29 @@ router.get('/agenda', function (req, res) {
     res.render('agenda.ejs');
 });
 
-router.get('/citas:id', async function (req, res) {
+router.get('/citas/:id', async function (req, res) {
     try {
-        const patologias = await agenda.obtenerPatologias();
         const estados = await agenda.obtenerEstado();
-        const especialidades = await personal.obtener_especialidades();
         const pacientes = await paciente.ver_paciente();
         const medicos = await personal.ver_personal();
-        res.render('citas.ejs', { patologias, estados, especialidades, pacientes, medicos });
+        const pacienteSeleccionado = pacientes.find(p => p.id == req.params.id);
+        if (!pacienteSeleccionado) {
+            return res.status(404).send('Paciente no encontrado');
+        }
+        res.render('citas.ejs', { paciente: pacienteSeleccionado, estados, pacientes, medicos, error: null });
     } catch (error) { 
         console.log(error);
-        res.status(500).send('Error cargando datos' );
+        res.status(500).send('Error cargando datos');
     }
 });
 
-router.post('/citas:id', async function (req, res) {
+router.post('/citas/:id', async function (req, res) {
+    const { pacienteId, personalId, observaciones, estadoId, fecha } = req.body;
     try {
+        console.log(req.body);
         if (!req.body.pacienteId || !req.body.personalId || !req.body.observaciones || !req.body.estadoId || !req.body.fecha) {
             res.status(400).send({ error: 'Todos los campos son obligatorios' });
         }else{
-            const { pacienteId, personalId, observaciones, estadoId, fecha } = req.body;
             await agenda.insertarCita({ pacienteId, personalId, observaciones, estadoId, fecha });
             res.redirect('/agenda');
         }
@@ -36,5 +39,6 @@ router.post('/citas:id', async function (req, res) {
         res.status(500).send({ error: 'Error al insertar la cita: ' + error.message });
     }
 });
+
 
 module.exports = router

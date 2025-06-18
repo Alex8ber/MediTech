@@ -12,56 +12,36 @@
 
     <div class="container">
         <h1>Agendar Cita Médica</h1>
-        <form action="#" method="POST"> <div class="form-group">
-            
+        <form action="/citas/<%= paciente ? paciente.id : '' %>" method="POST"> <div class="form-group">
+            <input type="hidden" id="pacienteId" name="pacienteId" value="<%= paciente ? paciente.id : '' %>">
+
             <div class="form-group">
-                <label for="paciente">Paciente registrado: <%= paciente ? paciente.Nombres + ' ' + paciente.Apellidos: '' %></label>
+                <label for="">Paciente: <%= paciente ? paciente.Nombre + ' ' + paciente.Apellido : '' %></label>
                 
             </div>
 
             <div class="form-group">
-                <label for="especialidad">Especialidad Médica: <%= especialidad ? especialidad.Descripcion : '' %></label>
-                
-            </div>
-
-            <div class="form-group">
-                <label for="medico">Médico de Preferencia (opcional):</label>
-                <select name="medico" id="medico" required>
-                    <option value="">Seleccione doctor</option>
+                <label for="personalId">Médico de Preferencia:</label>
+                <select name="personalId" id="personalId" required>
+                    <option value="" disabled selected>Seleccione doctor</option>
                     <% medicos.forEach(function(m) { %>
-                        <option value="<%= m.Id %>"><%= m.Nombre %> - <%= m.Apellido %></option>
+                        <option value="<%= m.id %>"><%= m.Nombre %> - <%= m.Apellido %></option>
                     <% }) %>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="fecha_cita">Fecha Deseada para la Cita:</label>
-                <input type="date" id="fecha_cita" name="fecha_cita" required min="2025-05-29"> </div>
+                <label for="fecha">Fecha Deseada para la Cita:</label>
+                <input type="date" id="fecha" name="fecha" required min="2025-05-29"> </div>
 
             <div class="form-group">
-                <label for="hora_cita">Hora Aproximada Deseada:</label>
-                <input type="time" id="hora_cita" name="hora_cita">
-                <small>Nota: La hora exacta será confirmada posteriormente.</small>
+                <label for="observaciones">Motivo de la Consulta:</label>
+                <textarea id="observaciones" name="observaciones" rows="4" placeholder="Describa brevemente el motivo de su cita" required></textarea>
             </div>
 
             <div class="form-group">
-                <label for="motivo_cita">Motivo de la Consulta:</label>
-                <textarea id="motivo_cita" name="motivo_cita" rows="4" placeholder="Describa brevemente el motivo de su cita" required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="patologia">Patología:</label>
-                <select id="patologia" name="patologia" required>
-                    <option value="">Seleccione una patología</option>
-                    <% patologias.forEach(function(p) { %>
-                        <option value="<%= p.Id %>"><%= p.Nombre %></option>
-                    <% }) %>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="estado">Estado Actual:</label>
-                <select id="estado" name="estadoId" required>
+                <label for="estadoId">Estado Actual:</label>
+                <select id="estadoId" name="estadoId" required>
                     <option value="">Seleccione un estado</option>
                     <% estados.forEach(function(e) { %>
                         <option value="<%= e.Id %>"><%= e.Descripcion %></option>

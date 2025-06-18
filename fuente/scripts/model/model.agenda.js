@@ -28,6 +28,28 @@ const agenda = {
                 else resolve(res);
             });
         });
+    },
+
+    obtenerCitasPorPaciente(pacienteId) {
+    return new Promise((resolve, reject) => {
+        conexion.query(
+            `SELECT 
+                Citas.Fecha, 
+                Estado.Descripcion AS Estado, 
+                CONCAT(personal.Nombres, ' ', personal.Apellidos) AS \`Medico asignado\`, 
+                Citas.Observaciones 
+            FROM Citas 
+            JOIN estado ON Citas.Estado_ID = estado.Id 
+            JOIN personal ON Citas.Personal_ID = personal.Id 
+            WHERE Paciente_ID = ? 
+            ORDER BY Fecha DESC`,
+            [pacienteId],
+            (error, resultados) => {
+                if (error) reject(error);
+                else resolve(resultados);
+                }
+            );
+        });
     }
 };
 

@@ -98,17 +98,34 @@
                                 <thead>
                                     <tr>
                                         <th>Fecha</th>
-                                        <th>Notas de progreso</th>
+                                        <th>Estado</th>
+                                        <th>Médico asignado</th>
+                                        <th>Observaciones</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tabla-pacientes">
-                                    <tr>
-                                        <td>2025-06-19</td>
-                                        <td>hoy el paciente casi se mata haciendo estas vistas</td>
-
-                                    </tr>
+                                <tbody>
+                                    <% if (citas && citas.length > 0) { %>
+                                        <% citas.forEach(function(cita) { %>
+                                            <tr>
+                                                <td>
+                                                    <% if (cita.Fecha instanceof Date) { %>
+                                                        <%= cita.Fecha.toISOString().slice(0,10) %>
+                                                    <% } else { %>
+                                                        <%= cita.Fecha ? cita.Fecha.toString().slice(0,10) : '' %>
+                                                    <% } %>
+                                                </td>
+                                                <td><%= cita.Estado %></td>
+                                                <td><%= cita['Medico asignado'] %></td>
+                                                <td><%= cita.Observaciones %></td>
+                                            </tr>
+                                        <% }) %>
+                                    <% } else { %>
+                                        <tr>
+                                            <td colspan="4">No hay citas registradas</td>
+                                        </tr>
+                                    <% } %>
                                 </tbody>
-                            </table>    
+                            </table>   
                         </div>
                         <button type="submit"class="nuevo">Nuevo Historial Medico</button>
                         <button type="button" class="cancelar" onclick="location.href='/pacientes'">Regresar</button>
