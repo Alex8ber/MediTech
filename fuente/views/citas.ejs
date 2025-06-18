@@ -21,12 +21,21 @@
             </div>
 
             <div class="form-group">
+                <label for="especialidadId">Especialidad:</label>
+                <select name="especialidadId" id="especialidadId" required>
+                    <option value="" disabled selected>Seleccione especialidad</option>
+                    <% especialidades.forEach(function(e) { 
+                        if (e.Descripcion !== 'No Aplicable' && e.Descripcion !== 'No Aplica') { %>
+                        <option value="<%= e.Id %>"><%= e.Descripcion %></option>
+                    <% } 
+                    }) %>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="personalId">Médico de Preferencia:</label>
-                <select name="personalId" id="personalId" required>
+                <select name="personalId" id="personalId" required disabled>
                     <option value="" disabled selected>Seleccione doctor</option>
-                    <% medicos.forEach(function(m) { %>
-                        <option value="<%= m.id %>"><%= m.Nombre %> - <%= m.Apellido %></option>
-                    <% }) %>
                 </select>
             </div>
 
@@ -45,7 +54,24 @@
         </form>
     </div>
     <script>
-        
+document.getElementById('especialidadId').addEventListener('change', function() {
+    const especialidadId = this.value;
+    const personalSelect = document.getElementById('personalId');
+    personalSelect.innerHTML = '<option value="" disabled selected>Cargando...</option>';
+    personalSelect.disabled = true;
+    fetch(`/doctores-por-especialidad/${especialidadId}`)
+        .then(res => res.json())
+        .then(doctores => {
+            personalSelect.innerHTML = '<option value="" disabled selected>Seleccione doctor</option>';
+            doctores.forEach(d => {
+                personalSelect.innerHTML += `<option value="${d.Id}">${d.Nombres} ${d.Apellidos}</option>`;
+            });
+            personalSelect.disabled = false;
+        })
+        .catch(() => {
+            personalSelect.innerHTML = '<option value="" disabled selected>Error al cargar</option>';
+        });
+});
     </script>
 </body>
 </html>

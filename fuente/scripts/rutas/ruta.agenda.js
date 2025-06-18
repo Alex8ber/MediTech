@@ -13,11 +13,12 @@ router.get('/citas/:id', async function (req, res) {
         const estados = await agenda.obtenerEstado();
         const pacientes = await paciente.ver_paciente();
         const medicos = await personal.ver_personal();
+        const especialidades = await agenda.obtenerEspecialidades();
         const pacienteSeleccionado = pacientes.find(p => p.id == req.params.id);
         if (!pacienteSeleccionado) {
             return res.status(404).send('Paciente no encontrado');
         }
-        res.render('citas.ejs', { paciente: pacienteSeleccionado, estados, pacientes, medicos, error: null });
+        res.render('citas.ejs', { paciente: pacienteSeleccionado, estados, pacientes, medicos, especialidades, error: null });
     } catch (error) { 
         console.log(error);
         res.status(500).send('Error cargando datos');
@@ -40,5 +41,13 @@ router.post('/citas/:id', async function (req, res) {
     }
 });
 
+router.get('/doctores-por-especialidad/:especialidadId', async function (req, res) {
+    try {
+        const doctores = await personal.ver_doctores_por_especialidad(req.params.especialidadId);
+        res.json(doctores);
+    } catch (error) {
+        res.status(500).json({ error: 'Error obteniendo doctores' });
+    }
+});
 
 module.exports = router

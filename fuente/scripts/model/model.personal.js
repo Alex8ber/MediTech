@@ -84,7 +84,7 @@ const personal = {
         return new Promise((resolve, reject) => {
             // Si no se selecciona especialidad, asignar "No Aplica" (ID 4)
             if (!especialidad_id || especialidad_id === '' || especialidad_id === null) {
-                especialidad_id = 4; // Cambia este valor si el ID es diferente en tu base de datos
+                especialidad_id = 4; 
             }
             conexion.query(
                 `INSERT INTO Personal (Nombres, Apellidos, Cedula, Edad, Genero_ID, Tipo_usuario_ID, Especialidad_ID) VALUES (?, ?, ?, ?, ?, ?, ?)`,
@@ -147,7 +147,6 @@ const personal = {
                 [nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id, id],
                 (error, resultados) => {
                     if (error) return reject(error);
-                    // Actualizar email en Usuario si es necesario
                     if (email) {
                         conexion.query(
                             `UPDATE Usuario SET Email=? WHERE Id=(SELECT Usuario_ID FROM Personal WHERE Id=?)`,
@@ -185,6 +184,23 @@ const personal = {
                     })
                 }
             });
+        });
+    },
+    ver_doctores_por_especialidad(especialidadId) {
+        return new Promise((resolve, reject) => {
+            conexion.query(
+                `SELECT Personal.Id, Personal.Nombres, Personal.Apellidos 
+                 FROM Personal 
+                 JOIN Especialidad ON Personal.Especialidad_ID = Especialidad.Id
+                 WHERE Personal.Tipo_usuario_ID = 2 
+                   AND Personal.Especialidad_ID = ? 
+                   AND Especialidad.Descripcion <> 'No Aplicable'`,
+                [especialidadId],
+                (err, res) => {
+                    if (err) reject(err);
+                    else resolve(res);
+                }
+            );
         });
     }
 };

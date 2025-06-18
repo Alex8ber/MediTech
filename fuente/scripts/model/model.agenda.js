@@ -50,6 +50,15 @@ const agenda = {
                 }
             );
         });
+    },
+
+    obtenerEspecialidades() {
+        return new Promise((resolve, reject) => {
+            conexion.query(`SELECT Id, Descripcion FROM Especialidad`, (err, res) => {
+                if (err) reject(err);
+                else resolve(res);
+            });
+        });
     }
 };
 
