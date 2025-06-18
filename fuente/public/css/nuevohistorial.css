@@ -4,16 +4,6 @@ body {
     background: aliceblue;
 }
 
-.header {
-    background: #45787a;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    padding: 0 40px;
-    height: 80px;
-    justify-content: space-between;
-}
-
 .menu {
 	display: flex;
     position: relative;
@@ -193,4 +183,18 @@ tr:not(:last-child) {
 @keyframes moving {
     from{transform: translateX(50px);opacity: 0;}
     to{transform: translateX(0px);opacity: 1;}
+}
+
+.aceptar{
+    
+    padding: 10px 22px;
+    align-items: center;
+    background: #45787a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+
 }
