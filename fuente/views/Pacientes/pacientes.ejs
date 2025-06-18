@@ -20,30 +20,24 @@
                 
                 
                 <label for="">Buscar por genero</label>
-                <select name="" id="">
+                <select id="filtro-genero">
                     <option value="">Seleccione el genero</option>
-                    <option value="">Maculino</option>
-                    <option value="">Femenino</option>
+                    <% generos.forEach(g => { %>
+                        <option value="<%= g.Tipo %>"><%= g.Tipo %></option>
+                    <% }) %>
                 </select>
 
             </div>
             <div>
                 <label for="buscar_patologia">Buscar patología</label>
-                <select name="" id="">
-                    <option value="">Seleccione tipo de patología</option>
-                </select>
-
+                <input type="text" id="buscar_patologia" placeholder="Patología del paciente">
+           
                 <label for="">Tipo de Sangre</label>
-                <select name="" id="">
+                <select id="filtro-sangre">
                     <option value="">Seleccione el tipo de sangre</option>
-                    <option value="">A+</option>
-                    <option value="">A-</option>
-                    <option value="">B+</option>
-                    <option value="">B-</option>
-                    <option value="">O+</option>
-                    <option value="">O-</option>
-                    <option value="">AB+</option>
-                    <option value="">AB-</option>
+                    <% tiposDeSangre.forEach(s => { %>
+                        <option value="<%= s.Tipo %>"><%= s.Tipo %></option>
+                    <% }) %>
                 </select>
                 
             </div>
@@ -155,6 +149,20 @@ document.getElementById('nueva-cita').addEventListener('click', function(){
     }
 });
 
+    function buscarPacientes() {
+        const nombre = document.querySelector('input[placeholder="Nombre del paciente"]').value;
+        const patologia = document.getElementById('buscar_patologia').value;
+        const genero = document.getElementById('filtro-genero').value;
+        const sangre = document.getElementById('filtro-sangre').value;
+        fetch(`/buscar-pacientes?q=${encodeURIComponent(nombre)}&patologia=${encodeURIComponent(patologia)}&genero=${encodeURIComponent(genero)}&sangre=${encodeURIComponent(sangre)}`)
+            .then(res => res.json())
+            .then(data => actualizarTabla(data));
+    }
+
+    document.querySelector('input[placeholder="Nombre del paciente"]').addEventListener('input', buscarPacientes);
+    document.getElementById('buscar_patologia').addEventListener('input', buscarPacientes);
+    document.getElementById('filtro-genero').addEventListener('change', buscarPacientes);
+    document.getElementById('filtro-sangre').addEventListener('change', buscarPacientes);
 </script>
     </div>
     

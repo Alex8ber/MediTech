@@ -31,22 +31,14 @@
             </div>
 
             <div class="form-group">
-                <label for="fecha">Fecha Deseada para la Cita:</label>
-                <input type="date" id="fecha" name="fecha" required min="2025-05-29"> </div>
+                <label for="fecha">Fecha y hora Deseada para la Cita:</label>
+                <input type="datetime-local" id="fecha" name="fecha" required min="2025-05-29"> </div>
 
             <div class="form-group">
                 <label for="observaciones">Motivo de la Consulta:</label>
                 <textarea id="observaciones" name="observaciones" rows="4" placeholder="Describa brevemente el motivo de su cita" required></textarea>
             </div>
 
-            <div class="form-group">
-                <label for="estadoId">Estado Actual:</label>
-                <select id="estadoId" name="estadoId" required>
-                    <option value="">Seleccione un estado</option>
-                    <% estados.forEach(function(e) { %>
-                        <option value="<%= e.Id %>"><%= e.Descripcion %></option>
-                    <% }) %>
-                </select>
             </div>
             <input type="submit" value="Solicitar Cita">
 

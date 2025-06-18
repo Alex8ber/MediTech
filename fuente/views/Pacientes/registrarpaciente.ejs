@@ -46,12 +46,7 @@
         </div>
         <div>
             <label for="patologia_id">Patología</label>
-            <select id="patologia_id" name="patologia_id" required>
-                <option value="" disabled selected>Seleccione patologia</option>
-                <% patologias.forEach(function(patologia) { %>
-                    <option value="<%= patologia.Id %>"><%= patologia.Nombre %></option>
-                <% }) %>
-            </select>
+            <input type="text" name="patologia_id" id="patologia_id" placeholder="Ingrese patología" required>
         </div>
         <div>
             <label for="telefono">Teléfono</label>

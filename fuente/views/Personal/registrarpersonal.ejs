@@ -57,11 +57,11 @@
             </div>
             <div class="form-group">
                 <label for="especialidad_id">Especialidad</label>
-                <select id="especialidad_id" name="especialidad_id" required>
+                <select id="especialidad_id" name="especialidad_id">
                     <option value="" disabled selected>Seleccione una especialidad</option>
                     <% especialidades.forEach(function(especialidad) { %>
-                    <option value="<%= especialidad.Id %>"><%= especialidad.Descripcion %></option>
-                <% }) %>
+                        <option value="<%= especialidad.Id %>" <%= especialidad.Descripcion === 'No Aplicable' ? 'selected' : '' %>><%= especialidad.Descripcion %></option>
+                    <% }) %>
                 </select>
             </div>
             <div class="form-group">

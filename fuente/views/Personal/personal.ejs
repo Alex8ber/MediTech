@@ -18,13 +18,13 @@
             <div>
                 <label for="buscar">Buscar Personal</label>
                 <input type="text" id="buscar" placeholder="Buscar personal">
-                
-                <label for="">Tipo de Especialidad</label>
-                <select name="" id="">
+
+                <label for="especialidad">Tipo de Especialidad</label>
+                <select id="especialidad">
                     <option value="">Seleccione la Especialidad</option>
-                    <option value="">Médico general</option>
-                    <option value="">Pediatra</option>
-                    <option value="">Cardiologo</option>
+                    <option value="Médico general">Médico general</option>
+                    <option value="Pediatra">Pediatra</option>
+                    <option value="Cardiologo">Cardiologo</option>
                 </select>
 
                
@@ -86,8 +86,7 @@
         // Inicializar los listeners de los radios al cargar la página
         asignarListenersRadios();
 
-    function actualizarTabla(personal) {
-                
+    function actualizarTabla(data) {
         const tbody = document.getElementById('tabla-personal');
         tbody.innerHTML = '';
         data.forEach(persona => {
@@ -106,8 +105,18 @@
             tbody.appendChild(fila);
         });
         asignarListenersRadios();
-};
+    }
 
+    function buscarPersonal() {
+        const nombre = document.getElementById('buscar').value;
+        const especialidad = document.getElementById('especialidad').value;
+        fetch(`/buscar-personal?nombre=${encodeURIComponent(nombre)}&especialidad=${encodeURIComponent(especialidad)}`)
+            .then(res => res.json())
+            .then(data => actualizarTabla(data));
+    }
+
+    document.getElementById('buscar').addEventListener('input', buscarPersonal);
+    document.getElementById('especialidad').addEventListener('change', buscarPersonal);
 
 document.getElementById('eliminar-personal').addEventListener('click', function(){
     if(personalSeleccionado){
