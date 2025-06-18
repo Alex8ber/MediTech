@@ -22,9 +22,9 @@
                 <label for="especialidad">Tipo de Especialidad</label>
                 <select id="especialidad">
                     <option value="">Seleccione la Especialidad</option>
-                    <option value="Médico general">Médico general</option>
-                    <option value="Pediatra">Pediatra</option>
-                    <option value="Cardiologo">Cardiologo</option>
+                    <% especialidades.forEach(function(especialidad) { %>
+                        <option value="<%= especialidad.Descripcion %>"><%= especialidad.Descripcion %></option>
+                    <% }) %>
                 </select>
 
                

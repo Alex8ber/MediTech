@@ -3,13 +3,14 @@ const router = express.Router();
 const personal = require('../model/model.personal');
 const modelo = require('../model/model.register');
 
-router.get('/personal', function(req, res) {
-    personal.ver_personal().then(personal => {
-        res.render('Personal/personal.ejs', { personal: personal});
-    })
-    .catch(err => {
+router.get('/personal', async function(req, res) {
+    try {
+        const personalList = await personal.ver_personal();
+        const especialidades = await personal.obtener_especialidades();
+        res.render('Personal/personal.ejs', { personal: personalList, especialidades });
+    } catch (err) {
         return res.status(500).send('Error al obtener el personal : ' + err.message);
-    })
+    }
 })
 
 router.get('/buscar-personal', function(req, res) {
