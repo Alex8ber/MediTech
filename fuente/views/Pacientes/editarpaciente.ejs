@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Paciente</title>
     <link rel="stylesheet" href="../css/nuevopaciente.css">
-
+    <script src="../js/validaciones.js"></script> <!-- Agregado -->
 </head>
 
 <body>
@@ -30,11 +30,11 @@
         </div>
         <div>
             <label for="cedula">Cédula</label>
-            <input type="number" name="cedula" id="cedula" value="<%= paciente ? paciente.Cedula: '' %>" required>
+            <input type="text" name="cedula" id="cedula" value="<%= paciente ? paciente.Cedula: '' %>" onkeypress="return isCedulaPattern(event, this)" placeholder="V-12345678" required autocomplete="off" />
         </div>
         <div>
             <label for="edad">Edad</label>
-            <input type="number" name="edad" id="edad" value="<%= paciente ? paciente.Edad: '' %>" required>
+            <input type="number" name="edad" id="edad" value="<%= paciente ? paciente.Edad: '' %>" onkeypress="return isNumberKey(event)" required>
         </div>
         <div>
             <label for="genero_id" >Género</label>
@@ -47,16 +47,11 @@
         </div>
         <div>
             <label for="patologia_id">Patología</label>
-            <select id="patologia_id" name="patologia_id" required>
-                 <option value="" disabled>Seleccione patologia</option>
-                <% patologias.forEach(function(patologia) { %>
-                    <option value="<%= patologia.Id %>" <%= patologia.Nombre === paciente.Patologia ? 'selected' : '' %>><%= patologia.Nombre %></option>
-                <% }) %>
-            </select>
+            <input type="text" name="patologia_id" id="patologia_id" value="<%= paciente ? paciente.Patologia: '' %>" required>
         </div>
         <div>
             <label for="telefono">Teléfono</label>
-            <input type="number" name="telefono" id="telefono" value="<%= paciente ? paciente.Telefono: '' %>" required>
+            <input type="tel" id="telefono" name="telefono" value="<%= paciente ? paciente.Telefono: '' %>" placeholder="+58 ###-#######" onkeypress="return isNumberKeyTLF(event)" required>
         </div>
         <div>
             <label for="email">Email</label>

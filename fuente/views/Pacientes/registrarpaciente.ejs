@@ -6,94 +6,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuevo Paciente</title>
     <link rel="stylesheet" href="../css/nuevopaciente.css">
-
+    <script src="../js/validaciones.js"></script>
 </head>
 
 <body>
     <main>
         <h3>Pacientes > Nuevo Paciente</h3>
-
         <div class="titulo">Registrar Paciente</div>
-
-        <h2> Datos Personales</h2>
-        
+        <h2> Datos Personales</h2>   
         <form action="/registrarpaciente" method="POST">
-    <div class="registro">
-        <div>
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" placeholder="Ingrese nombre" required>
-        </div>
-        <div>
-            <label for="apellido">Apellido</label>
-            <input type="text" name="apellido" id="apellido" placeholder="Ingrese apellido" required>
-        </div>
-        <div>
-            <label for="cedula">Cédula</label>
-            <input type="number" name="cedula" id="cedula" placeholder="V-12345678" required>
-        </div>
-        <div>
-            <label for="edad">Edad</label>
-            <input type="number" name="edad" id="edad" placeholder="ingrese la edad" required>
-        </div>
-        <div>
-            <label for="genero_id">Género</label>
-            <select id="genero_id" name="genero_id" required>
-                <option value="" disabled selected>Seleccione género</option>
-                <option value="1">Masculino</option>
-                <option value="2">Femenino</option>
-                <option value="3">Otro</option>
-            </select>
-        </div>
-        <div>
-            <label for="patologia_id">Patología</label>
-            <input type="text" name="patologia_id" id="patologia_id" placeholder="Ingrese patología" required>
-        </div>
-        <div>
-            <label for="telefono">Teléfono</label>
-            <input type="number" name="telefono" id="telefono" placeholder="+58 ###-#######" required>
-        </div>
-        <div>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="Ingrese email" required>
-        </div>
-        <div>
-            <label for="ocupacion">Ocupación</label>
-            <input type="text" name="ocupacion" id="ocupacion" placeholder="Ingrese ocupación" required>
-        </div>
-        <div>
-            <label for="estado_civil_id">Estado Civil</label>
-            <select id="estado_civil_id" name="estado_civil_id" required>
-                <% civil.forEach(function(c) { %>
-                    <option value="<%= c.Id %>"><%= c.Estado %></option>
-                <% }) %>>
-            </select>
-        </div>
-         <div>
-            <label for="condicion_id">Condición</label>
-            <select id="condicion_id" name="condicion_id" required>
-                <option value="" disabled selected>Seleccione condición</option>
-                <option value="1">Estable</option>
-                <option value="2">Crítico</option>
-                <option value="3">Recuperación</option>
-            </select>
-        </div>
-        <div>
-            <label for="tipo_de_sangre_id">Tipo de Sangre</label>
-            <select id="tipo_de_sangre_id" name="tipo_de_sangre_id" required>
-                    <option value="">Seleccione el tipo de sangre</option>
-                <% tiposDeSangre.forEach(function(tipo) { %>
-                    <option value="<%= tipo.Id %>"><%= tipo.Tipo %></option>
-                <% }) %>
-                </select>
-        </div>
-        <div>
-            <label for="direccion">Dirección</label>
-            <textarea name="direccion" id="direccion" rows="3" placeholder="Ingrese dirección"></textarea>
-        </div>
-            <button type="submit" class="nuevo">Registrar Paciente</button>
-            <button type="button" class="cancelar" onclick="window.location.href='/pacientes'">Cancelar</button>
-        </div>
-    </form>
-
+            <div class="registro"> 
+                <div>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" placeholder="Ingrese nombre" required>
+                </div>
+                <div>
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="apellido" id="apellido" placeholder="Ingrese apellido" required>
+                </div>
+                <div>
+                    <label for="cedula">Cédula</label>
+                    <input type="text" name="cedula" id="cedula" placeholder="V-12345678" required onkeypress="return isCedulaPattern(event, this)" autocomplete="off" />
+                </div>
+                <div>
+                    <label for="edad">Edad</label>
+                    <input type="number" name="edad" id="edad" placeholder="ingrese la edad" onkeypress="return isNumberKey(event)" required>
+                    
+                </div>
+                <div>
+                    <label for="genero_id">Género</label>
+                    <select id="genero_id" name="genero_id" required>
+                        <option value="" disabled selected>Seleccione género</option>
+                        <option value="1">Masculino</option>
+                        <option value="2">Femenino</option>
+                        <option value="3">Otro</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="patologia_id">Patología</label>
+                    <input type="text" name="patologia_id" id="patologia_id" placeholder="Ingrese patología" required>
+                </div>
+                <div>
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="+58 ###-#######" onkeypress="return isNumberKeyTLF(event)" required >
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Ingrese email" autocomplete="on" required>
+                </div>
+                <div>
+                    <label for="ocupacion">Ocupación</label>
+                    <input type="text" name="ocupacion" id="ocupacion" placeholder="Ingrese ocupación" required>
+                </div>
+                <div>
+                    <label for="estado_civil_id">Estado Civil</label>
+                    <select id="estado_civil_id" name="estado_civil_id" required>
+                        <% civil.forEach(function(c) { %>
+                            <option value="<%= c.Id %>"><%= c.Estado %></option>
+                        <% }) %>>
+                    </select>
+                </div>
+                <div>
+                    <label for="condicion_id">Condición</label>
+                    <select id="condicion_id" name="condicion_id" required>
+                        <option value="" disabled selected>Seleccione condición</option>
+                        <option value="1">Estable</option>
+                        <option value="2">Crítico</option>
+                        <option value="3">Recuperación</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="tipo_de_sangre_id">Tipo de Sangre</label>
+                    <select id="tipo_de_sangre_id" name="tipo_de_sangre_id" required>
+                            <option value="">Seleccione el tipo de sangre</option>
+                        <% tiposDeSangre.forEach(function(tipo) { %>
+                            <option value="<%= tipo.Id %>"><%= tipo.Tipo %></option>
+                        <% }) %>
+                        </select>
+                </div>
+                <div>
+                    <label for="direccion">Dirección</label>
+                    <textarea name="direccion" id="direccion" rows="3" placeholder="Ingrese dirección"></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="nuevo">Registrar Paciente</button>
+                    <button type="button" class="cancelar" onclick="window.location.href='/pacientes'">Cancelar</button>
+                </div> 
+            </div>
+        </form>
     </main>
 </body>
