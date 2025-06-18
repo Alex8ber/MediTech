@@ -139,24 +139,26 @@
                     <input type="hidden" name="paciente_id" value="<%= paciente ? paciente.id : '' %>">
                     <div class="registro">
                         <div>
-                            <label for="">Peso</label>
-                            <input type="number" id="peso" placeholder="Peso en kg">
+                            <label for="peso">Peso</label>
+                            <input id="peso" name="peso" placeholder="Peso en Kg" type="number" onkeypress="return isNumberKey(event)" />
                         </div>
                         <div>
-                            <label for="">Altura</label>
-                            <input type="number" id="altura" placeholder="Altura en metros">
+                            <label for="altura">Altura</label>
+                            <input id="altura" name="altura" placeholder="Altura en metros" type="number" onkeypress="return isNumberKey(event)" />
                         </div>
                         <div>
                             <label for="">Presión Arterial</label>
-                            <input type="text" name="" id="" value="">
+                            <input id="presion" name="presion" placeholder="Indique presión arterial" type="number" onkeypress="return isNumberKey(event)" />
+                            
                         </div>
+                        
                         <div>
                             <label for="">Frecuencia Cardíaca</label>
-                            <input type="" name="" id="" value="">
+                            <input id="frecuencia" name="frecuencia" placeholder="indique frecuencia cardiaca" type="number" onkeypress="return isNumberKey(event)" />
                         </div>
                         <div>
                             <label for="">Frecuencia Respiratoria</label>
-                            <input type="" name="" id="" value="">
+                            <input id="respiratoria" name="respiratoria" placeholder="Indique frecuencia respiratoria" type="number" onkeypress="return isNumberKey(event)" />
                         </div>
                         <div>
                             <label for="">IMC (indice masa corporal)</label>
@@ -333,6 +335,15 @@
             </div>
         </div>
     </main>
+
+    <script> 
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (charCode > 31 && (charCode != 46 &&(charCode < 48 || charCode > 57)))
+            return false;
+        return true;
+    }
+    </script>
 
     <script>
         const targets = document.querySelectorAll('[data-target]')
