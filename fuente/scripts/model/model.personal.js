@@ -82,6 +82,10 @@ const personal = {
 
     agregar_personal (nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id) {
         return new Promise((resolve, reject) => {
+            // Si no se selecciona especialidad, asignar "No Aplica" (ID 4)
+            if (!especialidad_id || especialidad_id === '' || especialidad_id === null) {
+                especialidad_id = 4; // Cambia este valor si el ID es diferente en tu base de datos
+            }
             conexion.query(
                 `INSERT INTO Personal (Nombres, Apellidos, Cedula, Edad, Genero_ID, Tipo_usuario_ID, Especialidad_ID) VALUES (?, ?, ?, ?, ?, ?, ?)`,
                 [nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id],
