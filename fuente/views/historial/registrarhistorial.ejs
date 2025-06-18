@@ -140,11 +140,11 @@
                     <div class="registro">
                         <div>
                             <label for="">Peso</label>
-                            <input type="" name="" id="" value="">
+                            <input type="number" id="peso" placeholder="Peso en kg">
                         </div>
                         <div>
                             <label for="">Altura</label>
-                            <input type="" name="" id="" value="">
+                            <input type="number" id="altura" placeholder="Altura en metros">
                         </div>
                         <div>
                             <label for="">Presión Arterial</label>
@@ -160,7 +160,7 @@
                         </div>
                         <div>
                             <label for="">IMC (indice masa corporal)</label>
-                            <input type="" name="" id="" value="">
+                            <input type="text" id="imc" placeholder="IMC" readonly>
                         </div>
                         <div>
                             <label for="">Condiciones Generales</label>
@@ -351,6 +351,20 @@
         line.style.left = e.target.offsetLeft + "px";
         })
         })
+
+        function calcularIMC() {
+            const peso = parseFloat(document.getElementById('peso').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            if (peso > 0 && altura > 0) {
+                const imc = peso / (altura * altura);
+                document.getElementById('imc').value = imc.toFixed(2);
+            } else {
+                document.getElementById('imc').value = "";
+            }
+        }
+
+        document.getElementById('peso').addEventListener('input', calcularIMC);
+        document.getElementById('altura').addEventListener('input', calcularIMC);
     </script>
 
 </body>
