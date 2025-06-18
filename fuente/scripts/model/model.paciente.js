@@ -35,8 +35,9 @@ const paciente = {
         });
     },
 
-    buscar_paciente(filtro, patologia) {
+    buscar_paciente(filtro, patologia, genero, sangre) {
         return new Promise((resolve, reject) => {
+            filtro = filtro ? filtro.trim() : '';
             let query = `
                 SELECT 
                     Pacientes.Id AS id,
@@ -48,17 +49,46 @@ const paciente = {
                     Patologia.Nombre AS Patologia, 
                     Pacientes.Direccion, 
                     Pacientes.Email, 
-                    (SELECT Numero FROM Telefono_Paciente WHERE Paciente_ID = Pacientes.Id LIMIT 1) AS Telefono
+                    (SELECT Numero FROM Telefono_Paciente WHERE Paciente_ID = Pacientes.Id LIMIT 1) AS Telefono,
+                    Condicion.Descripcion AS Condicion,
+                    Tipo_de_Sangre.Tipo AS "Tipo de Sangre"
                 FROM Pacientes
                 LEFT JOIN Patologia ON Pacientes.Patologia_ID = Patologia.Id
                 LEFT JOIN Genero ON Pacientes.Genero_ID = Genero.Id
-                WHERE (Pacientes.Nombres LIKE ? OR Pacientes.Apellidos LIKE ? OR Pacientes.Cedula LIKE ?)
+                LEFT JOIN Condicion ON Pacientes.Condicion_ID = Condicion.Id
+                LEFT JOIN Tipo_de_Sangre ON Pacientes.Tipo_de_sangre_ID = Tipo_de_Sangre.Id
+                WHERE 1=1
             `;
-            const values = [`%${filtro}%`, `%${filtro}%`, `%${filtro}%`];
-
+            const values = [];
+            if (filtro) {
+                query += ` AND (
+                    Pacientes.Nombres LIKE ?
+                    OR Pacientes.Apellidos LIKE ?
+                    OR Pacientes.Cedula LIKE ?
+                    OR Pacientes.Email LIKE ?
+                    OR CONCAT(Pacientes.Nombres, ' ', Pacientes.Apellidos) LIKE ?
+                    OR CONCAT(Pacientes.Apellidos, ' ', Pacientes.Nombres) LIKE ?
+                )`;
+                values.push(
+                    `%${filtro}%`,
+                    `%${filtro}%`,
+                    `%${filtro}%`,
+                    `%${filtro}%`,
+                    `%${filtro}%`,
+                    `%${filtro}%`
+                );
+            }
             if (patologia) {
                 query += ' AND Patologia.Nombre LIKE ?';
                 values.push(`%${patologia}%`);
+            }
+            if (genero) {
+                query += ' AND Genero.Tipo = ?';
+                values.push(genero);
+            }
+            if (sangre) {
+                query += ' AND Tipo_de_Sangre.Tipo = ?';
+                values.push(sangre);
             }
 
             conexion.query(query, values, (error, resultados) => {
@@ -193,6 +223,15 @@ const paciente = {
     obtener_Civil(){
         return new Promise((resolve, reject) => {
             conexion.query(`SELECT Id, Estado FROM Estado_civil`, (err, res) => {
+                if (err) reject(err);
+                else resolve(res);
+            });
+        });
+    },
+
+    obtener_Generos() {
+        return new Promise((resolve, reject) => {
+            conexion.query(`SELECT Id, Tipo FROM Genero`, (err, res) => {
                 if (err) reject(err);
                 else resolve(res);
             });

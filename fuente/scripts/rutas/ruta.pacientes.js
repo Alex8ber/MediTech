@@ -5,20 +5,30 @@ const paciente = require('../model/model.paciente');
 const agenda = require('../model/model.agenda');
 const doctores = require('../model/model.doctores');
 
-router.get('/pacientes', (req, res) => {
-    paciente.ver_paciente().then(pacientes => {
-        res.render('Pacientes/pacientes.ejs', { pacientes: pacientes });
-    })
-    .catch(error => {
+router.get('/pacientes', async (req, res) => {
+    try {
+        const [pacientesList, generos, tiposDeSangre] = await Promise.all([
+            paciente.ver_paciente(),
+            paciente.obtener_Generos(),
+            paciente.obtener_Sangre()
+        ]);
+        res.render('Pacientes/pacientes.ejs', { 
+            pacientes: pacientesList, 
+            generos, 
+            tiposDeSangre 
+        });
+    } catch (error) {
         console.error('Error al obtener los pacientes:', error);
         res.status(500).send('Error al obtener los pacientes');
-    });
+    }
 });
 
 router.get('/buscar-pacientes', (req, res) => {
     const filtro = req.query.q || '';
     const patologia = req.query.patologia || '';
-    paciente.buscar_paciente(filtro, patologia).then(pacientes => {
+    const genero = req.query.genero || '';
+    const sangre = req.query.sangre || '';
+    paciente.buscar_paciente(filtro, patologia, genero, sangre).then(pacientes => {
         res.json(pacientes);
     })
     .catch(error => {

@@ -28,9 +28,12 @@ const personal = {
         });
     },
 
-    buscar_personal(filtro) {
+    buscar_personal(nombreFiltro, especialidadFiltro) {
         return new Promise((resolve, reject) => {
-            const query = 
+            nombreFiltro = nombreFiltro ? nombreFiltro.trim() : '';
+            especialidadFiltro = especialidadFiltro ? especialidadFiltro.trim() : '';
+
+            let query = 
                 `SELECT 
                     Personal.Id AS id,
                     Personal.Nombres AS Nombre, 
@@ -46,13 +49,28 @@ const personal = {
                 LEFT JOIN Tipo_Usuario ON Personal.Tipo_usuario_ID = Tipo_Usuario.Id
                 LEFT JOIN Especialidad ON Personal.Especialidad_ID = Especialidad.Id
                 LEFT JOIN Usuario ON Personal.Usuario_ID = Usuario.Id
-                WHERE(
-                    Personal.Nombres LIKE ? OR 
-                    Personal.Apellidos LIKE ? OR 
-                    Especialidad.Descripcion LIKE ? OR 
-                    Usuario.Email LIKE ?
+                WHERE 1=1`;
+            const values = [];
+            if (nombreFiltro) {
+                query += ` AND (
+                    Personal.Nombres LIKE ? 
+                    OR Personal.Apellidos LIKE ? 
+                    OR Usuario.Email LIKE ?
+                    OR CONCAT(Personal.Nombres, ' ', Personal.Apellidos) LIKE ?
+                    OR CONCAT(Personal.Apellidos, ' ', Personal.Nombres) LIKE ?
                 )`;
-            const values = [`%${filtro}%`, `%${filtro}%`, `%${filtro}%`, `%${filtro}%`];
+                values.push(
+                    `%${nombreFiltro}%`, 
+                    `%${nombreFiltro}%`, 
+                    `%${nombreFiltro}%`,
+                    `%${nombreFiltro}%`,
+                    `%${nombreFiltro}%`
+                );
+            }
+            if (especialidadFiltro) {
+                query += ` AND Especialidad.Descripcion LIKE ?`;
+                values.push(`%${especialidadFiltro}%`);
+            }
             conexion.query(query, values, (error, results) => {
                 if (error) {
                     return reject(error);

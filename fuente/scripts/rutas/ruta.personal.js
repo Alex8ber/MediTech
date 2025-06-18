@@ -13,8 +13,9 @@ router.get('/personal', function(req, res) {
 })
 
 router.get('/buscar-personal', function(req, res) {
-    const filtro = req.query.q || '';
-    personal.buscar_personal(filtro).then(personal => {
+    const nombre = req.query.nombre || '';
+    const especialidad = req.query.especialidad || '';
+    personal.buscar_personal(nombre, especialidad).then(personal => {
         res.json(personal);
     })
     .catch(err => {
