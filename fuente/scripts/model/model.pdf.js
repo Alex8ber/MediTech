@@ -27,7 +27,7 @@ async function buildPDF (dataCallback, endCallback) {
     
     doc.addPage();
 
-    doc.fontSize(18).text('Reporte de Pacientes Registrados', { align: 'center' });
+    doc.fontSize(18).text('Pacientes Registrados', { align: 'center' });
     doc.moveDown();
 
     const table = {

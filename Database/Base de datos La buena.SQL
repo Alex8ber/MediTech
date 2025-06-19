@@ -19,12 +19,6 @@ CREATE TABLE Estado_civil (
     Estado VARCHAR(50) NOT NULL
 );
 
--- Tabla Patologia
-CREATE TABLE Patologia (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    Nombre VARCHAR(100) NOT NULL
-);
-
 -- Tabla Especialidad
 CREATE TABLE Especialidad (
     Id INT AUTO_INCREMENT PRIMARY KEY,
@@ -135,7 +129,7 @@ CREATE TABLE Pacientes (
     Direccion VARCHAR(150),
     Ocupacion VARCHAR(150),
     Estado_Civil_ID INT,
-    Patologia_ID INT,
+    Patologia VARCHAR(100),
     Condicion_ID INT,
     Tipo_de_sangre_ID INT,
     FOREIGN KEY (Genero_ID) REFERENCES Genero(Id),

@@ -53,15 +53,15 @@ router.get('/registrarpaciente', async(req, res) => {
 
 router.post('/registrarpaciente', (req, res) => {
     const {
-        nombre, apellido, cedula, edad, genero_id, patologia_id, telefono, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion
+        nombre, apellido, cedula, edad, genero_id, patologia, telefono, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion
     } = req.body;
     if (
-        !nombre || !apellido || !cedula || !edad || !genero_id || !patologia_id || !telefono || !email || !ocupacion || !estado_civil_id || !condicion_id || !tipo_de_sangre_id || !direccion
+        !nombre || !apellido || !cedula || !edad || !genero_id || !patologia || !telefono || !email || !ocupacion || !estado_civil_id || !condicion_id || !tipo_de_sangre_id || !direccion
     ) {
         return res.status(500).send('Todos los campos son obligatorios');
     }
     paciente.agregar_paciente(
-        nombre, apellido, cedula, edad, genero_id, patologia_id, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion, telefono).then(() => {
+        nombre, apellido, cedula, edad, genero_id, patologia, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion, telefono).then(() => {
         res.redirect('/pacientes');
     })
     .catch(err => {
@@ -100,11 +100,11 @@ router.get('/editarpaciente/:id', async(req, res) => {
 });
 
 router.post('/editarpaciente/:id', (req, res) => {
-    const {paciente_id, nombre, apellido, cedula, edad, genero_id, patologia_id, email, telefono, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion} = req.body;
-    if ( !nombre || !apellido || !cedula || !edad || !genero_id || !patologia_id || !email || !telefono || !ocupacion || !estado_civil_id || !condicion_id || !tipo_de_sangre_id || !direccion) {
+    const {paciente_id, nombre, apellido, cedula, edad, genero_id, patologia, email, telefono, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion} = req.body;
+    if ( !nombre || !apellido || !cedula || !edad || !genero_id || !patologia || !email || !telefono || !ocupacion || !estado_civil_id || !condicion_id || !tipo_de_sangre_id || !direccion) {
         return res.status(500).send('Todos los campos son obligatorios');
     }
-    paciente.actualizar_paciente(paciente_id, nombre, apellido, cedula, edad, genero_id, patologia_id, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion, telefono).then(() => {
+    paciente.actualizar_paciente(paciente_id, nombre, apellido, cedula, edad, genero_id, patologia, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion, telefono).then(() => {
         res.redirect('/pacientes');
     })
     .catch(err => {
