@@ -182,6 +182,19 @@ CREATE TABLE Factura (
     FOREIGN KEY (Servicio_ID) REFERENCES Servicios(Id)
 );
 
+CREATE TABLE Examen_Fisico (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Paciente_ID INT NOT NULL,
+    Peso DECIMAL(5,2),
+    Altura DECIMAL(4,2),
+    Presion_Arterial VARCHAR(20),
+    Frecuencia_Cardiaca INT,
+    Frecuencia_Respiratoria INT,
+    IMC DECIMAL(4,2),
+    Alergias VARCHAR(100), 
+    FOREIGN KEY (Paciente_ID) REFERENCES Pacientes(Id),
+);
+
 -- Tabla Historia_Medica
 CREATE TABLE Historia_Medica (
     Id INT AUTO_INCREMENT PRIMARY KEY,
