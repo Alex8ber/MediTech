@@ -39,9 +39,9 @@ INSERT INTO Usuario (Nombre, Email, Contrasena, Tipo_usuario_ID) VALUES
 
 -- Insertar personal
 INSERT INTO Personal (Nombres, Apellidos, Cedula, Edad, Genero_ID, Usuario_ID, Tipo_usuario_ID, Especialidad_ID) VALUES
-('Juan', 'Pérez', '12345678', 40, 1, 1, 1, NULL),
+('Juan', 'Pérez', '12345678', 40, 1, 1, 1, 4),
 ('Ana', 'Gómez', '87654321', 30, 2, 3, 2, 1),
-('Luis', 'Martínez', '11223344', 28, 1, 3, 3, NULL);
+('Luis', 'Martínez', '11223344', 28, 1, 3, 3, 4);
 
 -- Insertar teléfonos del personal
 INSERT INTO Telefono_Personal (Personal_ID, Numero) VALUES
