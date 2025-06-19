@@ -73,6 +73,20 @@ const historial = {
         });
     },
 
+    actualizar_examen_fisico(id, peso, altura, presion_arterial, frecuencia_cardiaca, frecuencia_respiratoria, imc, alergias) {
+    return new Promise((resolve, reject) => {
+        const sql = `
+            UPDATE Examen_Fisico
+            SET Peso = ?, Altura = ?, Presion_Arterial = ?, Frecuencia_Cardiaca = ?, Frecuencia_Respiratoria = ?, IMC = ?, Alergias = ?
+            WHERE Paciente_ID = ?
+        `;
+        conexion.query(sql, [peso, altura, presion_arterial, frecuencia_cardiaca, frecuencia_respiratoria, imc, alergias, id], (error, resultados) => {
+            if (error) reject(error);
+            else resolve(resultados);
+            });
+        });
+    }
+
 
 };
 

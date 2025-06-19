@@ -30,51 +30,51 @@
                 <h2> Datos Generales</h2>
     
                 <form action="/registrarhistorial" method="POST">
-                    <input type="hidden" name="paciente_id" value="<%= paciente ? paciente.id : '' %>">
+                    <input type="hidden" name="paciente_id" value="<%= paciente ? paciente.id : '' %>" disabled>
                     <div class="registro">
                         <div>
                             <label for="nombre">Nombres</label>
-                            <input type="text" name="nombre" id="nombre" value="<%= paciente ? paciente.Nombres: '' %>">
+                            <input type="text" name="nombre" id="nombre" value="<%= paciente ? paciente.Nombres: '' %>" disabled>
                         </div>
                         <div>
                             <label for="apellido">Apellidos</label>
-                            <input type="text" name="apellido" id="apellido" value="<%= paciente ? paciente.Apellidos: '' %>">
+                            <input type="text" name="apellido" id="apellido" value="<%= paciente ? paciente.Apellidos: '' %>" disabled>
                         </div>
                         <div>
                             <label for="cedula">Cedula</label>
-                            <input type="text" name="cedula" id="cedula" value="<%= paciente ? paciente.Cedula: '' %>" onkeypress="return isCedulaPattern(event, this)" placeholder="V-12345678" required autocomplete="off">
+                            <input type="text" name="cedula" id="cedula" value="<%= paciente ? paciente.Cedula: '' %>" onkeypress="return isCedulaPattern(event, this)" placeholder="V-12345678" required autocomplete="off" disabled>
                         </div>
                         <div>
                             <label for="telefono">Telefono</label>
-                            <input type="tel" name="telefono" id="telefono" value="<%= paciente ? paciente.Telefono: '' %>" onkeypress="return isNumberKeyTLF(event)" placeholder="+58 ###-#######" required>
+                            <input type="tel" name="telefono" id="telefono" value="<%= paciente ? paciente.Telefono: '' %>" onkeypress="return isNumberKeyTLF(event)" placeholder="+58 ###-#######" required disabled>
                         </div>
                         
                         <div>
                             <label for="edad">Edad</label>
-                            <input type="number" name="edad" id="edad" value="<%= paciente ? paciente.Edad: '' %>" onkeypress="return isNumberKey(event)" required>
+                            <input type="number" name="edad" id="edad" value="<%= paciente ? paciente.Edad: '' %>" onkeypress="return isNumberKey(event)" required disabled>
                         </div>
                         <div>
                             <label for="genero">Genero</label>
-                            <select id="genero" name="genero" form="generoform">
+                            <select id="genero" name="genero" form="generoform" disabled>
                                 <option value="masculino" <%= paciente && paciente.Genero === 'masculino' ? 'selected' : '' %>>Masculino</option>
                                 <option value="femenino" <%= paciente && paciente.Genero === 'femenino' ? 'selected' : '' %>>Femenino</option>
                             </select>
                         </div>
                         <div>
                             <label for="patologia">Patologia</label>
-                            <input type="text" name="patologia" id="patologia" value="<%= paciente ? paciente.Patologia: '' %>">
+                            <input type="text" name="patologia" id="patologia" value="<%= paciente ? paciente.Patologia: '' %>" disabled>
                         </div>
                         <div>
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" value="<%= paciente ? paciente.Email: '' %>">
+                            <input type="email" name="email" id="email" value="<%= paciente ? paciente.Email: '' %>" disabled>
                         </div>
                         <div>
                             <label for="ocupacion">Ocupación</label>
-                            <input type="text" name="ocupacion" id="ocupacion" value="<%= paciente ? paciente.Ocupacion: '' %>">
+                            <input type="text" name="ocupacion" id="ocupacion" value="<%= paciente ? paciente.Ocupacion: '' %>" disabled>
                         </div>
                         <div>
                             <label for="estado_civil">Estado Civil</label>
-                            <select id="estado_civil_id" name="estado_civil_id" required>
+                            <select id="estado_civil_id" name="estado_civil_id" required disabled>
                                 <option value="" disabled>Seleccione estado civil</option>
                                 <% civil.forEach(function(c) { %>
                                     <option value="<%= c.Id %>" <%= c.Estado === paciente['Estado Civil'] ? 'selected' : '' %>><%= c.Estado %></option>
@@ -83,7 +83,7 @@
                         </div>
                         <div>
                             <label for="tipo_de_sangre_id">Tipo de Sangre</label>
-                            <select id="tipo_de_sangre_id" name="tipo_de_sangre_id" required>
+                            <select id="tipo_de_sangre_id" name="tipo_de_sangre_id" required disabled>
                                 <option value="">Seleccione el tipo de sangre</option>
                                 <% tiposDeSangre.forEach(function(tipo) { %>
                                     <option value="<%= tipo.Id %>" <%= tipo.Tipo === paciente['Tipo de Sangre'] ? 'selected' : '' %>><%= tipo.Tipo %></option>
@@ -92,7 +92,7 @@
                         </div>
                         <div>
                             <label for="direccion">Dirección</label>
-                            <input type="text" name="direccion" id="direccion" value="<%= paciente ? paciente.Direccion: '' %>">
+                            <input type="text" name="direccion" id="direccion" value="<%= paciente ? paciente.Direccion: '' %>" disabled>
                         </div>
                         <div class="tabla-section">
                             <div class="tabla-titulo"></div>
@@ -129,7 +129,6 @@
                                 </tbody>
                             </table>   
                         </div>
-                        <button type="submit"class="nuevo">Nuevo Historial Medico</button>
                         <button type="button" class="cancelar" onclick="location.href='/pacientes'">Regresar</button>
                     </div>
                 </form>
@@ -137,40 +136,41 @@
 
             <div data-content id="examen_fisico">
                 <h2>Examen Físico</h2>
-                <form action="/registrarExamenFisico" method="POST">
+                <form action="/registrarExamenFisico/<%= paciente ? paciente.id : '' %>" method="POST">
                     <input type="hidden" name="paciente_id" value="<%= paciente ? paciente.id : '' %>">
                     <div class="registro">
                         <div>
                             <label for="peso">Peso</label>
-                            <input id="peso" name="peso" placeholder="Peso en Kg" type="number" value="<%= examenfisico[0] ? examenfisico[0].Peso: '' %>" onkeypress="return isNumberKey(event)" />
+                            <input id="peso" name="peso" placeholder="Peso en Kg" type="number" value="<%= examenfisico[0] ? examenfisico[0].Peso: '' %>" onkeypress="return isNumberKey(event)" disabled/>
                         </div>
                         <div>
                             <label for="altura">Altura</label>
-                            <input id="altura" name="altura" placeholder="Altura en metros" type="number" value="<%= examenfisico[0] ? examenfisico[0].Altura: '' %>" onkeypress="return isNumberKey(event)" />
+                            <input id="altura" name="altura" placeholder="Altura en metros" type="number" value="<%= examenfisico[0] ? examenfisico[0].Altura: '' %>" onkeypress="return isNumberKey(event)" disabled/>
                         </div>
                         <div>
                             <label for="">Presión Arterial</label>
-                            <input id="presion" name="presion" placeholder="Indique presión arterial" type="text" value="<%= examenfisico[0] ? examenfisico[0].Presion: '' %>" onkeypress="return isNumberKey(event)" />
+                            <input id="presion" name="presion" placeholder="Indique presión arterial" type="text" value="<%= examenfisico[0] ? examenfisico[0].Presion: '' %>" onkeypress="return isNumberKey(event)" disabled/>
                             
                         </div>
                         
                         <div>
                             <label for="">Frecuencia Cardíaca</label>
-                            <input id="frecuencia" name="frecuencia" placeholder="indique frecuencia cardiaca" type="number" value="<%= examenfisico[0] ? examenfisico[0].Frecuencia: '' %>" onkeypress="return isNumberKey(event)" />
+                            <input id="frecuencia" name="frecuencia" placeholder="indique frecuencia cardiaca" type="number" value="<%= examenfisico[0] ? examenfisico[0].Frecuencia: '' %>" onkeypress="return isNumberKey(event)" disabled/>
                         </div>
                         <div>
                             <label for="">Frecuencia Respiratoria</label>
-                            <input id="respiratoria" name="respiratoria" placeholder="Indique frecuencia respiratoria" type="number" value="<%= examenfisico[0] ? examenfisico[0].Respiratoria: '' %>" onkeypress="return isNumberKey(event)" />
+                            <input id="respiratoria" name="respiratoria" placeholder="Indique frecuencia respiratoria" type="number" value="<%= examenfisico[0] ? examenfisico[0].Respiratoria: '' %>" onkeypress="return isNumberKey(event)" disabled/>
                         </div>
                         <div>
                             <label for="">IMC (indice masa corporal)</label>
-                            <input type="text" id="imc" placeholder="IMC" value="<%= examenfisico[0] ? examenfisico[0].IMC: '' %>" readonly>
+                            <input type="text" id="imc" placeholder="IMC" value="<%= examenfisico[0] ? examenfisico[0].IMC: '' %>" readonly disabled>
                         </div>
                         <div>
                             <label for="alergias">Alergias</label>
-                            <input type="text" name="alergias" id="alergias" value="<%= examenfisico[0] ? examenfisico[0].Alergias: '' %>">
+                            <input type="text" name="alergias" id="alergias" value="<%= examenfisico[0] ? examenfisico[0].Alergias: '' %>" disabled>
                         </div>
-                        <button type="submit"class="nuevo">Nuevo Historial Medico</button>
+                        <button type="button" id="editar-examen" class="editar">Editar</button>
+                        <button type="submit" id="guardar-examen" class="guardar" style="display:none;">Aceptar y Guardar</button>
                         <button type="button" class="cancelar" onclick="location.href='/pacientes'">Regresar</button>
                     </div>
                 </form>
@@ -180,6 +180,11 @@
     <script>
         const targets = document.querySelectorAll('[data-target]')
         const content = document.querySelectorAll('[data-content]')
+
+        const inputsExamen = document.querySelectorAll('#examen_fisico input, #examen_fisico select, #examen_fisico textarea');
+        const btnEditar = document.getElementById('editar-examen');
+        const btnGuardar = document.getElementById('guardar-examen');
+
 
         targets.forEach(target => {
         target.addEventListener('click', (e) => {
@@ -208,6 +213,21 @@
 
         document.getElementById('peso').addEventListener('input', calcularIMC);
         document.getElementById('altura').addEventListener('input', calcularIMC);
+
+        btnEditar.addEventListener('click', function() {
+        inputsExamen.forEach(input => input.disabled = false);
+        btnEditar.style.display = 'none';
+        btnGuardar.style.display = 'inline-block';
+    });
+
+    // Cuando se envía el formulario, los campos se vuelven a deshabilitar (opcional)
+    btnGuardar.addEventListener('click', function() {
+        setTimeout(() => {
+            inputsExamen.forEach(input => input.disabled = true);
+            btnEditar.style.display = 'inline-block';
+            btnGuardar.style.display = 'none';
+        }, 500); // Espera a que el submit termine
+    });
     </script>
     <script>
         function descargarHistorial() {

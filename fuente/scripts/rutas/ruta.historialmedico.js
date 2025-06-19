@@ -20,4 +20,23 @@ router.get('/registrarhistorial/:id', async (req, res) => {
     }
 });
 
+router.post('/registrarExamenFisico/:id', async (req, res) => {
+    try {
+        const { peso, altura, presion_arterial, frecuencia_cardiaca, frecuencia_respiratoria, imc, alergias } = req.body;
+        await historial.actualizar_examen_fisico(
+            req.params.id,
+            peso,
+            altura,
+            presion_arterial,
+            frecuencia_cardiaca,
+            frecuencia_respiratoria,
+            imc,
+            alergias
+        );
+        res.redirect(`/registrarhistorial/${req.params.id}`);
+    } catch (error) {
+        console.error('Error al actualizar examen físico:', error);
+        res.status(500).send('Error al actualizar examen físico');
+    }
+});
 module.exports = router;
