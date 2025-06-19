@@ -1,5 +1,5 @@
 const express = require('express');
-const { buildPDFPaciente, buildPDFPersonal } = require('../model/model.pdf');
+const { buildPDFPaciente, buildPDFPersonal, buildPDFDoctores } = require('../model/model.pdf');
 
 const router = express.Router();
 
@@ -16,7 +16,7 @@ router.get('/pdfpacientes', (req, res) => {
 
 });
 
-router.get('/pdfpersonal', (req, res) => {
+router.get('/pdfgeneral', (req, res) => {
     const stream = res.writeHead(200, {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="reporte-personal.pdf"'
@@ -27,6 +27,18 @@ router.get('/pdfpersonal', (req, res) => {
         () => stream.end()
     );
 
+});
+
+router.get('/pdfdoctores', (req, res) => {
+    const stream = res.writeHead(200, {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename="reporte-doctores.pdf"'
+    });
+
+    buildPDFDoctores(
+        (data) => stream.write(data),
+        () => stream.end()
+    );
 });
 
 module.exports = router;

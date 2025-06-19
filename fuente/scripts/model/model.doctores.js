@@ -7,12 +7,16 @@ const doctores = {
                     Personal.Nombres AS Nombre, 
                     Personal.Apellidos AS Apellido, 
                     Personal.Cedula, 
-                    Personal.Edad, 
+                    Personal.Edad,
+                    Genero.Tipo AS Genero,
+                    Tipo_Usuario.Descripcion AS Ocupacion,
                     Especialidad.Descripcion AS Especialidad, 
                     Usuario.Email AS Email
                 FROM Personal
-                LEFT JOIN Especialidad ON Personal.Especialidad_ID = Especialidad.Id
+                LEFT JOIN Genero ON Personal.Genero_ID = Genero.Id
                 LEFT JOIN Usuario ON Personal.Usuario_ID = Usuario.Id
+                LEFT JOIN Tipo_Usuario ON Usuario.Tipo_usuario_ID = Tipo_Usuario.Id
+                LEFT JOIN Especialidad ON Personal.Especialidad_ID = Especialidad.Id
                 WHERE Usuario.Tipo_usuario_ID = 2`,
                 (error, results) => {
                     if (error) {
