@@ -9,9 +9,6 @@ INSERT INTO Genero (Tipo) VALUES ('Masculino'), ('Femenino'), ('Otro');
 -- Insertar datos en Estado_civil
 INSERT INTO Estado_civil (Estado) VALUES ('Soltero'), ('Casado'), ('Divorciado'), ('Viudo');
 
--- Insertar datos en Patologia
-INSERT INTO Patologia (Nombre) VALUES ('Diabetes'), ('Hipertensión'), ('Asma');
-
 -- Insertar datos en Condicion
 INSERT INTO Condicion (Descripcion) VALUES ('Estable'), ('Crítico'), ('Recuperación');
 
@@ -53,9 +50,9 @@ INSERT INTO Telefono_Personal (Personal_ID, Numero) VALUES
 (3, '04143456789');
 
 -- Insertar pacientes
-INSERT INTO Pacientes (Nombres, Apellidos, Cedula, Edad, Genero_ID, Email, Direccion, Ocupacion, Estado_Civil_ID, Patologia_ID, Condicion_ID, Tipo_de_sangre_ID) VALUES
-('Carlos', 'Ramírez', '20123456', 25, 1, 'carlos@mail.com', 'Av. Principal 123', 'Estudiante', 1, 1, 1, 1),
-('María', 'López', '20234567', 32, 2, 'maria@mail.com', 'Calle Secundaria 456', 'Abogada', 2, 2, 2, 2);
+INSERT INTO Pacientes (Nombres, Apellidos, Cedula, Edad, Genero_ID, Email, Direccion, Ocupacion, Estado_Civil_ID, Patologia, Condicion_ID, Tipo_de_sangre_ID) VALUES
+('Carlos', 'Ramírez', '20123456', 25, 1, 'carlos@mail.com', 'Av. Principal 123', 'Estudiante', 1, Asma, 1, 1),
+('María', 'López', '20234567', 32, 2, 'maria@mail.com', 'Calle Secundaria 456', 'Abogada', 2, Hipertensión, 2, 2);
 
 -- Insertar teléfonos de pacientes
 INSERT INTO Telefono_Paciente (Paciente_ID, Numero) VALUES

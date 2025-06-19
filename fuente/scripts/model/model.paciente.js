@@ -46,14 +46,13 @@ const paciente = {
                     Pacientes.Cedula, 
                     Pacientes.Edad, 
                     Genero.Tipo AS Genero, 
-                    Patologia.Nombre AS Patologia, 
+                    Pacientes.Patologia, 
                     Pacientes.Direccion, 
                     Pacientes.Email, 
                     (SELECT Numero FROM Telefono_Paciente WHERE Paciente_ID = Pacientes.Id LIMIT 1) AS Telefono,
                     Condicion.Descripcion AS Condicion,
                     Tipo_de_Sangre.Tipo AS "Tipo de Sangre"
                 FROM Pacientes
-                LEFT JOIN Patologia ON Pacientes.Patologia_ID = Patologia.Id
                 LEFT JOIN Genero ON Pacientes.Genero_ID = Genero.Id
                 LEFT JOIN Condicion ON Pacientes.Condicion_ID = Condicion.Id
                 LEFT JOIN Tipo_de_Sangre ON Pacientes.Tipo_de_sangre_ID = Tipo_de_Sangre.Id
@@ -105,7 +104,7 @@ const paciente = {
     return new Promise((resolve, reject) => {
         conexion.query(
             `INSERT INTO Pacientes 
-                (Nombres, Apellidos, Cedula, Edad, Genero_ID, Patologia_ID, Email, Ocupacion, Estado_Civil_ID, Condicion_ID, Tipo_de_sangre_ID, Direccion)
+                (Nombres, Apellidos, Cedula, Edad, Genero_ID, Patologia, Email, Ocupacion, Estado_Civil_ID, Condicion_ID, Tipo_de_sangre_ID, Direccion)
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [nombre, apellido, cedula, edad, genero_id, patologia_id, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion],
             (error, resultados) => {
@@ -161,7 +160,7 @@ const paciente = {
                     Pacientes.Edad, 
                     Pacientes.Genero_ID,
                     Genero.Tipo AS Genero, 
-                    Patologia.Nombre AS Patologia,
+                    Paciente.Patologia,
                     (SELECT Numero FROM Telefono_Paciente WHERE Paciente_ID = Pacientes.Id LIMIT 1) AS Telefono, 
                     Pacientes.Email, 
                     Pacientes.Ocupacion,
@@ -170,7 +169,6 @@ const paciente = {
                     Tipo_de_Sangre.Tipo AS "Tipo de Sangre",
                     Pacientes.Direccion
                 FROM Pacientes
-                LEFT JOIN Patologia ON Pacientes.Patologia_ID = Patologia.Id
                 LEFT JOIN Genero ON Pacientes.Genero_ID = Genero.Id
                 LEFT JOIN Estado_civil ON Pacientes.Estado_Civil_ID = Estado_civil.Id
                 LEFT JOIN Condicion ON Pacientes.Condicion_ID = Condicion.Id
@@ -187,10 +185,10 @@ const paciente = {
         })
     },
 
-    actualizar_paciente(paciente_id, nombre, apellido, cedula, edad, genero_id, patologia_id, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion, telefono){
+    actualizar_paciente(paciente_id, nombre, apellido, cedula, edad, genero_id, patologia, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion, telefono){
         return new Promise((resolve, reject) => {
             conexion.query(
-                `UPDATE Pacientes SET Nombres = ?, Apellidos = ?, Cedula = ?, Edad = ?, Genero_ID = ?, Patologia_ID = ?, Email = ?, Ocupacion = ?, Estado_Civil_ID = ?, Condicion_ID = ?, Tipo_de_sangre_ID = ?, Direccion = ? WHERE Pacientes.Id = ?`, [nombre, apellido, cedula, edad, genero_id, patologia_id, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion, paciente_id],
+                `UPDATE Pacientes SET Nombres = ?, Apellidos = ?, Cedula = ?, Edad = ?, Genero_ID = ?, Patologia = ?, Email = ?, Ocupacion = ?, Estado_Civil_ID = ?, Condicion_ID = ?, Tipo_de_sangre_ID = ?, Direccion = ? WHERE Pacientes.Id = ?`, [nombre, apellido, cedula, edad, genero_id, patologia, email, ocupacion, estado_civil_id, condicion_id, tipo_de_sangre_id, direccion, paciente_id],
                 (error, resultados) => {
                     if (error){
                         reject(error);
