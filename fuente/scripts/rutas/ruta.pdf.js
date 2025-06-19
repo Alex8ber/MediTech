@@ -64,7 +64,7 @@ router.get('/pdfhistorial/:id', (req, res) => {
     buildPDFHistorial(id, (data) => stream.write(data), () => stream.end());
 });
 
-router.get('/pdfconsultas', (req, res) => {
+router.get('/pdfcitas', (req, res) => {
     const stream = res.writeHead(200, {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="reporte-citas.pdf"'
