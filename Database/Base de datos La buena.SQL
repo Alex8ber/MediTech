@@ -190,13 +190,12 @@ CREATE TABLE Historia_Medica (
     Fecha DATETIME NOT NULL,
     Sintomas_ID INT,
     Diagnostico_ID INT,
-    Patologia_ID INT,
+    Patologia INT,
     Tratamiento_ID INT,
     FOREIGN KEY (Paciente_ID) REFERENCES Pacientes(Id),
     FOREIGN KEY (Personal_ID) REFERENCES Personal(Id),
     FOREIGN KEY (Sintomas_ID) REFERENCES Sintomas(Id),
     FOREIGN KEY (Diagnostico_ID) REFERENCES Diagnostico(Id),
-    FOREIGN KEY (Patologia_ID) REFERENCES Patologia(Id),
     FOREIGN KEY (Tratamiento_ID) REFERENCES Tratamiento(Id)
 );
 
