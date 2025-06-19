@@ -4,8 +4,17 @@ const agenda = require('../model/model.agenda');
 const paciente = require('../model/model.paciente');
 const personal = require('../model/model.personal');
 
-router.get('/agenda', function (req, res) {
-    res.render('agenda.ejs');
+router.get('/agenda', async function (req, res) {
+    try {
+        const citas = await agenda.obtenerProximasCitas();
+        const todasLasCitas = await agenda.obtenerTodasLasCitas();
+        const citasHoy = await agenda.obtenerCitasHoy();
+        const citasSemana = await agenda.obtenerCitasSemana();
+        const citasMes = await agenda.obtenerCitasMes();
+        res.render('agenda.ejs', { citas, todasLasCitas, citasHoy, citasSemana, citasMes });
+    } catch (error) {
+        res.status(500).send('Error cargando la agenda');
+    }
 });
 
 router.get('/citas/:id', async function (req, res) {
@@ -18,7 +27,7 @@ router.get('/citas/:id', async function (req, res) {
         if (!pacienteSeleccionado) {
             return res.status(404).send('Paciente no encontrado');
         }
-        res.render('citas.ejs', { paciente: pacienteSeleccionado, estados, pacientes, medicos, especialidades, error: null });
+        res.render('citas.ejs', { paciente: pacienteSeleccionado, pacientes, medicos, especialidades, error: null });
     } catch (error) { 
         console.log(error);
         res.status(500).send('Error cargando datos');
@@ -26,13 +35,13 @@ router.get('/citas/:id', async function (req, res) {
 });
 
 router.post('/citas/:id', async function (req, res) {
-    const { pacienteId, personalId, observaciones, estadoId, fecha } = req.body;
+    const { pacienteId, personalId, observaciones, fecha } = req.body;
     try {
         console.log(req.body);
-        if (!req.body.pacienteId || !req.body.personalId || !req.body.observaciones || !req.body.estadoId || !req.body.fecha) {
+        if (!req.body.pacienteId || !req.body.personalId || !req.body.observaciones || !req.body.fecha) {
             res.status(400).send({ error: 'Todos los campos son obligatorios' });
         }else{
-            await agenda.insertarCita({ pacienteId, personalId, observaciones, estadoId, fecha });
+            await agenda.insertarCita({ pacienteId, personalId, observaciones, fecha });
             res.redirect('/agenda');
         }
 

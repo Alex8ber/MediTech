@@ -21,7 +21,6 @@
 	</div>
     
 	<div class="content">
-
 		<div data-content id="general" class="active">
 			<h1>Agenda General</h1>
 			<div class="card-container">
@@ -44,34 +43,33 @@
 			</div>
 
 			<div class="tabla-section">
-				<div class="tabla-titulo">Proximas Citas</div>
+				<div class="tabla-titulo">Historial de Citas</div>
 				<table>
-					<thead>
-						<tr>
-							<th>Hora</th>
-							<th>Paciente</th>
-							<th>Revision</th>
-						</tr>
-					</thead>
-
-					<tbody id="tabla-agenda">
-						<tr>
-						<td>09:30 AM</td>
-						<td>Ramses Rivero</td>
-						<td>Sesion de terapia</td>
-						</tr>
-						<tr>
-						<td>10:30 AM</td>
-						<td>Dante O'connor</td>
-						<td>Control de progreso</td>
-						</tr>
-						<tr>
-						<td>12:45 PM</td>
-						<td>Mai Conetti</td>
-						<td>Sesion de revision</td>
-						</tr>
-					</tbody>
-				</table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Paciente</th>
+                        <th>Revisión</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (todasLasCitas && todasLasCitas.length > 0) { %>
+                        <% todasLasCitas.forEach(function(cita) { %>
+                            <tr>
+                                <td><%= cita.Fecha.toISOString ? cita.Fecha.toISOString().slice(0,10) : cita.Fecha.slice(0,10) %></td>
+                                <td><%= cita.Hora %></td>
+                                <td><%= cita.Nombres %> <%= cita.Apellidos %></td>
+                                <td><%= cita.Observaciones %></td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="4">No hay citas registradas.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
 			</div>
 
 		</div>
@@ -79,6 +77,18 @@
 		<div data-content id="hoy">
 			<h1>Agenda de Hoy</h1>
 
+			<!-- Filtros de búsqueda agregados -->
+    <div class="busqueda">
+        <div>
+            <label for="buscar-hoy-revision">Buscar Revisión</label>
+            <input type="text" id="buscar-hoy-revision" placeholder="Buscar revisión">
+        </div>
+        <div>
+            <label for="buscar-hoy-fecha">Buscar Fecha y Hora</label>
+            <input type="datetime-local" id="buscar-hoy-fecha">
+        </div>
+    </div>
+
 			<div class="tabla-section">
 				<div class="tabla-titulo">Citas de Hoy</div>
 				<table>
@@ -86,44 +96,42 @@
 						<tr>
 							<th>Hora</th>
 							<th>Paciente</th>
-							<th>Revision</th>
+							<th>Revisión</th>
 						</tr>
 					</thead>
 
-					<tbody id="tabla-agenda">
-						<tr>
-						<td>09:30 AM</td>
-						<td>Ramses Rivero</td>
-						<td>Sesion de terapia</td>
-						</tr>
-						<tr>
-						<td>10:30 AM</td>
-						<td>Dante O'connor</td>
-						<td>Control de progreso</td>
-						</tr>
-						<tr>
-						<td>12:45 PM</td>
-						<td>Mai Conetti</td>
-						<td>Sesion de revision</td>
-						</tr>
-					</tbody>
+					<tbody id="tabla-hoy">
+						
+    <% if (citasHoy && citasHoy.length > 0) { %>
+        <% citasHoy.forEach(function(cita) { %>
+            <tr>
+                <td><%= cita.Hora %></td>
+                <td><%= cita.Nombres %> <%= cita.Apellidos %></td>
+                <td><%= cita.Observaciones %></td>
+            </tr>
+        <% }) %>
+    <% } else { %>
+        <tr>
+            <td colspan="3">No hay citas para hoy.</td>
+        </tr>
+    <% } %>
+</tbody>
 				</table>
 			</div>
 		</div>
 
 		<div data-content id="semana">
 			<h1>Agenda de la Semana</h1>
-
-			<div class="busqueda">
-            <div>
-                <label for="buscar">Buscar Revision</label>
-                <input type="text" id="buscar" placeholder="Buscar revision">
-            </div>
-            <div>
-                <label for="buscar">Buscar Fecha</label>
-                <input type="date" id="buscar">
-            </div>
+    <div class="busqueda">
+        <div>
+            <label for="buscar-semana-revision">Buscar Revisión</label>
+            <input type="text" id="buscar-semana-revision" placeholder="Buscar revisión">
         </div>
+        <div>
+            <label for="buscar-semana-fecha">Buscar Fecha y Hora</label>
+            <input type="datetime-local" id="buscar-semana-fecha">
+        </div>
+    </div>
 
 			<div class="tabla-section">
 				<div class="tabla-titulo">Citas de Hoy</div>
@@ -132,31 +140,27 @@
 						<tr>
 							<th>Hora</th>
 							<th>Paciente</th>
-							<th>Revision</th>
+							<th>Revisión</th>
 							<th>Fecha</th>
 						</tr>
 					</thead>
 
-					<tbody id="tabla-agenda">
-						<tr>
-						<td>09:30 AM</td>
-						<td>Ramses Rivero</td>
-						<td>Sesion de terapia</td>
-						<td>2025-06-02</td>
-						</tr>
-						<tr>
-						<td>10:30 AM</td>
-						<td>Dante O'connor</td>
-						<td>Control de progreso</td>
-						<td>2025-06-05</td>
-						</tr>
-						<tr>
-						<td>12:45 PM</td>
-						<td>Mai Conetti</td>
-						<td>Sesion de revision</td>
-						<td>2025-06-06</td>
-						</tr>
-					</tbody>
+					<tbody id="tabla-semana">
+    <% if (citasSemana && citasSemana.length > 0) { %>
+        <% citasSemana.forEach(function(cita) { %>
+            <tr>
+                <td><%= cita.Hora %></td>
+                <td><%= cita.Nombres %> <%= cita.Apellidos %></td>
+                <td><%= cita.Observaciones %></td>
+                <td><%= cita.Fecha.toISOString ? cita.Fecha.toISOString().slice(0,10) : cita.Fecha.slice(0,10) %></td>
+            </tr>
+        <% }) %>
+    <% } else { %>
+        <tr>
+            <td colspan="4">No hay citas para esta semana.</td>
+        </tr>
+    <% } %>
+</tbody>
 				</table>
 			</div>
 		</div>
@@ -166,12 +170,12 @@
 
 			<div class="busqueda">
             <div>
-                <label for="buscar">Buscar Revision</label>
-                <input type="text" id="buscar" placeholder="Buscar revision">
+                <label for="buscar-mes-revision">Buscar Revisión</label>
+                <input type="text" id="buscar-mes-revision" placeholder="Buscar revisión">
             </div>
             <div>
-                <label for="buscar">Buscar Fecha</label>
-                <input type="date" id="buscar">
+                <label for="buscar-mes-fecha">Buscar Fecha y Hora</label>
+                <input type="datetime-local" id="buscar-mes-fecha">
             </div>
         	</div>
 
@@ -182,36 +186,31 @@
 						<tr>
 							<th>Hora</th>
 							<th>Paciente</th>
-							<th>Revision</th>
+							<th>Revisión</th>
 							<th>Fecha</th>
 						</tr>
 					</thead>
 
-					<tbody id="tabla-agenda">
-						<tr>
-						<td>09:30 AM</td>
-						<td>Ramses Rivero</td>
-						<td>Sesion de terapia</td>
-						<td>2025-06-02</td>
-						</tr>
-						<tr>
-						<td>10:30 AM</td>
-						<td>Dante O'connor</td>
-						<td>Control de progreso</td>
-						<td>2025-06-05</td>
-						</tr>
-						<tr>
-						<td>12:45 PM</td>
-						<td>Mai Conetti</td>
-						<td>Sesion de revision</td>
-						<td>2025-06-06</td>
-						</tr>
-					</tbody>
+					<tbody id="tabla-mes">
+    <% if (citasMes && citasMes.length > 0) { %>
+        <% citasMes.forEach(function(cita) { %>
+            <tr>
+                <td><%= cita.Hora %></td>
+                <td><%= cita.Nombres %> <%= cita.Apellidos %></td>
+                <td><%= cita.Observaciones %></td>
+                <td><%= cita.Fecha.toISOString ? cita.Fecha.toISOString().slice(0,10) : cita.Fecha.slice(0,10) %></td>
+            </tr>
+        <% }) %>
+    <% } else { %>
+        <tr>
+            <td colspan="4">No hay citas para este mes.</td>
+        </tr>
+    <% } %>
+</tbody>
 				</table>
-
 			</div>
 		</div>
-
+    </div>
 	</div>
 
     </main>
@@ -246,8 +245,114 @@
             });
         });
     </script>
-	</div>
-   
+
+    <script>
+    // Filtro para la tabla de "Hoy"
+    const buscarHoyRevision = document.getElementById('buscar-hoy-revision');
+    const buscarHoyFecha = document.getElementById('buscar-hoy-fecha');
+    const filasHoy = document.querySelectorAll('#tabla-hoy tr');
+
+    function filtrarTablaHoy() {
+        const filtroRevision = buscarHoyRevision.value.toLowerCase();
+        const filtroFechaHora = buscarHoyFecha.value; // formato: "YYYY-MM-DDTHH:MM"
+        let filtroHora = '';
+        if (filtroFechaHora) {
+            const partes = filtroFechaHora.split('T');
+            filtroHora = partes[1] ? partes[1].slice(0,5) : ''; // Solo HH:MM
+        }
+
+        filasHoy.forEach(fila => {
+            const textoFila = fila.textContent.toLowerCase();
+            const horaFila = fila.querySelector('td:nth-child(1)') ? fila.querySelector('td:nth-child(1)').textContent.trim().slice(0,5) : '';
+            const coincideRevision = textoFila.includes(filtroRevision);
+            let coincideHora = true;
+            if (filtroHora) {
+                coincideHora = horaFila === filtroHora;
+            }
+            if (coincideRevision && coincideHora) {
+                fila.style.display = '';
+            } else {
+                fila.style.display = 'none';
+            }
+        });
+    }
+
+    buscarHoyRevision.addEventListener('input', filtrarTablaHoy);
+    buscarHoyFecha.addEventListener('input', filtrarTablaHoy);
+
+    // Filtro para la tabla de "Semana"
+    const buscarSemanaRevision = document.getElementById('buscar-semana-revision');
+    const buscarSemanaFecha = document.getElementById('buscar-semana-fecha');
+    const filasSemana = document.querySelectorAll('#tabla-semana tr');
+
+    function filtrarTablaSemana() {
+        const filtroRevision = buscarSemanaRevision.value.toLowerCase();
+        const filtroFechaHora = buscarSemanaFecha.value; // formato: "YYYY-MM-DDTHH:MM"
+        let filtroFecha = '';
+        let filtroHora = '';
+        if (filtroFechaHora) {
+            const partes = filtroFechaHora.split('T');
+            filtroFecha = partes[0] || '';
+            filtroHora = partes[1] ? partes[1].slice(0,5) : '';
+        }
+
+        filasSemana.forEach(fila => {
+            const textoFila = fila.textContent.toLowerCase();
+            const horaFila = fila.querySelector('td:nth-child(1)') ? fila.querySelector('td:nth-child(1)').textContent.trim().slice(0,5) : '';
+            const fechaFila = fila.querySelector('td:nth-child(4)') ? fila.querySelector('td:nth-child(4)').textContent : '';
+            const coincideRevision = textoFila.includes(filtroRevision);
+            let coincideFechaHora = true;
+            if (filtroFechaHora) {
+                coincideFechaHora = fechaFila.includes(filtroFecha) && horaFila === filtroHora;
+            }
+            if (coincideRevision && coincideFechaHora) {
+                fila.style.display = '';
+            } else {
+                fila.style.display = 'none';
+            }
+        });
+    }
+
+    buscarSemanaRevision.addEventListener('input', filtrarTablaSemana);
+    buscarSemanaFecha.addEventListener('input', filtrarTablaSemana);
+
+    // Filtro para la tabla de "Mes"
+    const buscarMesRevision = document.getElementById('buscar-mes-revision');
+    const buscarMesFecha = document.getElementById('buscar-mes-fecha');
+    const filasMes = document.querySelectorAll('#tabla-mes tr');
+
+    function filtrarTablaMes() {
+        const filtroRevision = buscarMesRevision.value.toLowerCase();
+        const filtroFechaHora = buscarMesFecha.value; // formato: "YYYY-MM-DDTHH:MM"
+        let filtroFecha = '';
+        let filtroHora = '';
+        if (filtroFechaHora) {
+            const partes = filtroFechaHora.split('T');
+            filtroFecha = partes[0] || '';
+            filtroHora = partes[1] ? partes[1].slice(0,5) : '';
+        }
+
+        filasMes.forEach(fila => {
+            const textoFila = fila.textContent.toLowerCase();
+            const horaFila = fila.querySelector('td:nth-child(1)') ? fila.querySelector('td:nth-child(1)').textContent.trim().slice(0,5) : '';
+            const fechaFila = fila.querySelector('td:nth-child(4)') ? fila.querySelector('td:nth-child(4)').textContent : '';
+            const coincideRevision = textoFila.includes(filtroRevision);
+            let coincideFechaHora = true;
+            if (filtroFechaHora) {
+                coincideFechaHora = fechaFila.includes(filtroFecha) && horaFila === filtroHora;
+            }
+            if (coincideRevision && coincideFechaHora) {
+                fila.style.display = '';
+            } else {
+                fila.style.display = 'none';
+            }
+        });
+    }
+
+    buscarMesRevision.addEventListener('input', filtrarTablaMes);
+    buscarMesFecha.addEventListener('input', filtrarTablaMes);
+</script>
+<!-- ...existing code... -->
 <%- include('footer.ejs') %>
 </body>
 </html>
