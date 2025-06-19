@@ -63,12 +63,15 @@
                     <% }) %>
                 </tbody>
             </table>
-            <button class="nuevo-personal" style="margin-left:20px;" onclick="window.location.href='/registrarpersonal'">
-                Nuevo Personal
-            </button>
-            <button class="eliminar-personal" style="margin-left:20px;" id="eliminar-personal" disabled>Eliminar Personal</button>
-            <button class="editar-personal" style="margin-left:20px;" id="editar-personal" disabled>Editar Personal</button>
+            <div class="botones-personal">
+                <button class="nuevo-personal" style="margin-left:20px;" onclick="window.location.href='/registrarpersonal'">
+                    Nuevo Personal
+                </button>
+                <button class="eliminar-personal" style="margin-left:20px;" id="eliminar-personal" disabled>Eliminar Personal</button>
+                <button class="editar-personal" style="margin-left:20px;" id="editar-personal" disabled>Editar Personal</button>
+            </div>
         </div>
+
     </main>
 <script>
     let personalSeleccionado = null;
