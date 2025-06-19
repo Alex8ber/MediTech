@@ -100,7 +100,7 @@
         function renderDownloadButton(tab) {
             const section = document.getElementById('section-actions');
             section.innerHTML = `
-                <button class="download-btn" onclick="descargarReporte('${tab}')">
+                <button class="download-btn" onclick="window.location.href='/pdf${tab}'">
                     <svg viewBox="0 0 20 20"><path d="M10 2a1 1 0 0 1 1 1v8.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4A1 1 0 1 1 5.707 9.293L8 11.586V3a1 1 0 0 1 1-1zm-7 13a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1z"/></svg>
                     Descargar Reporte
                 </button>
@@ -124,7 +124,7 @@
 
         // Botón de descarga aquí debes conectar con la lógica real de descarga
         function descargarReporte(tab) {
-            // Conectar con la lógica de generación y descarga de reportes desde la base de datos
+
             alert('Aquí se descargará el reporte de: ' + tab);
         }
 

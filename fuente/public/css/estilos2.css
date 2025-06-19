@@ -212,3 +212,11 @@ tr:not(:last-child) {
 .editar-personal:hover {
     background: rgb(218, 243, 247);
 }
+
+/* Centrar los botones de la sección personal */
+.botones-personal {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 24px;
+}
