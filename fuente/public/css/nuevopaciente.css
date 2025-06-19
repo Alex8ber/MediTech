@@ -4,6 +4,7 @@ body {
     background: aliceblue
 }
 
+
 .logo {
     display: flex;
     align-items: center;
@@ -40,9 +41,7 @@ h2 {
   text-align: center;
 }
 
-.registro {
-    gap: 30px;
-}
+
 
 .registro div {
     display: flex;
@@ -109,40 +108,6 @@ h2 {
     transition: background 0.2s;
 }
 
-.acciones_pa{
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-}
-
-.nuevo_pa,
-.cancelar_pa {
-    font-size: 0.85rem;
-    padding: 10px 22px;
-    min-width: 70px;
-    min-height: 28px;
-}
-
-.nuevo_pa {
-    background: #45787a;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.cancelar_pa {
-    background: #acbfc0;
-    color: #524e4e;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-
-
 .nuevo:hover {
     background: #5e9b9e;
 }
@@ -165,6 +130,3 @@ h2 {
 .logo a:hover, .logo a:focus {
     text-decoration: none;
 }
-
-
-
