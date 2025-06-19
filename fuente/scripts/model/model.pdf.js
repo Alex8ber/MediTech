@@ -331,7 +331,7 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
 
     const datosfisicos = Array.isArray(fisico) ? fisico : [];
 
-    // Tabla de examen físico (ejemplo)
+    // Tabla de examen físico
     const examenFisico = datosfisicos.map(d => ({
         Peso: d.Peso,
         Altura: d.Altura,
@@ -340,7 +340,7 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
         Frecuencia_Respiratoria: d.Respiratoria,
         IMC: d.IMC,
         Alergias: d.Alergias
-    }))
+    }));
 
     const datosfisicospaciente = {
         headers: [
@@ -361,6 +361,8 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
     });
 
     doc.moveDown(1);
+
+
 
     doc.end();
 }
