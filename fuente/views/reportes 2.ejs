@@ -1,0 +1,160 @@
+<%- include('header') %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reportes</title>
+    <link rel="stylesheet" href="/css/reportes.css">
+</head>
+<body>
+    <div class="main-content">
+        
+    <div class="filters" id="filters">
+        <label>Desde: <input type="date" id="fecha-inicio"></label>
+        <label>Hasta: <input type="date" id="fecha-fin"></label>
+        <button class="download-btn" onclick="filtrarPorFecha()">
+            <svg viewBox="0 0 20 20"><path d="M10 2a1 1 0 0 1 1 1v8.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4A1 1 0 1 1 5.707 9.293L8 11.586V3a1 1 0 0 1 1-1zm-7 13a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1z"/></svg>
+            Filtrar
+        </button>
+    </div>
+    <div class="summary" id="summary">
+        <!-- Resumen rápido dinámico -->
+    </div>
+    <div class="tabs">
+        <button class="tab active" data-tab="general">General</button>
+        <button class="tab" data-tab="pacientes">Pacientes</button>
+        <button class="tab" data-tab="doctores">Doctores</button>
+        <button class="tab" data-tab="personal">Personal</button>
+        <button class="tab" data-tab="servicios">Servicios</button>
+        <button class="tab" data-tab="consultas">Consultas</button>
+        <button class="tab" data-tab="ingresos">Ingresos</button>
+    </div>
+    <div class="section-actions" id="section-actions">
+        <!-- Botón de descarga se inserta aquí -->
+    </div>
+    <div class="cards-container" id="cards-container">
+        <!-- Tarjetas dinámicas -->
+    </div>
+    <script>
+        // Aquí debes obtener los datos reales desde la base de datos según el filtro de fechas
+        // Por ahora usamos datos de ejemplo todos en 0
+        const data = {
+            general: [
+                { label: "Pacientes", title: "Total registrados", value: "0", tooltip: "Cantidad total de pacientes registrados" },
+                { label: "Doctores", title: "Activos", value: "0", tooltip: "Doctores actualmente activos" },
+                { label: "Personal", title: "Activos", value: "0", tooltip: "Personal actualmente activo" },
+                { label: "Citas", title: "Este mes", value: "0", tooltip: "Citas agendadas en el mes seleccionado" },
+                { label: "Ingresos", title: "Total", value: "$0", tooltip: "Ingresos totales en el periodo" }
+            ],
+            pacientes: [
+                { label: "Pacientes", title: "Total registrados", value: "0", tooltip: "Cantidad total de pacientes registrados" },
+                { label: "Pacientes", title: "Activos", value: "0", tooltip: "Pacientes actualmente activos" },
+                { label: "Pacientes", title: "Nuevos este mes", value: "0", tooltip: "Pacientes registrados en el mes seleccionado" }
+            ],
+            doctores: [
+                { label: "Doctores", title: "Total", value: "0", tooltip: "Cantidad total de doctores" },
+                { label: "Doctores", title: "Activos", value: "0", tooltip: "Doctores actualmente activos" },
+                { label: "Doctores", title: "Especialistas", value: "0", tooltip: "Doctores especialistas" }
+            ],
+            personal: [
+                { label: "Personal", title: "Total", value: "0", tooltip: "Cantidad total de personal obrero" },
+                { label: "Personal", title: "Activos", value: "0", tooltip: "Personal actualmente activo" }
+            ],
+            servicios: [
+                { label: "Servicios", title: "Total realizados", value: "0", tooltip: "Servicios realizados en el periodo" },
+                { label: "Servicios", title: "Activos", value: "0", tooltip: "Servicios activos actualmente" }
+            ],
+            consultas: [
+                { label: "Consultas", title: "Total realizadas", value: "0", tooltip: "Consultas realizadas en el periodo" },
+                { label: "Consultas", title: "Este mes", value: "0", tooltip: "Consultas realizadas este mes" }
+            ],
+            ingresos: [
+                { label: "Ingresos", title: "Total", value: "$0", tooltip: "Ingresos totales en el periodo" },
+                { label: "Ingresos", title: "Este mes", value: "$0", tooltip: "Ingresos de este mes" }
+            ]
+        };
+
+        // Resumen rápido puedes personalizarlo según los datos
+        function renderSummary(tab) {
+            // Aquí puedes calcular el resumen según los datos reales
+            let resumen = "";
+            if (tab === "general") {
+                resumen = `Total de pacientes: 0 | Doctores activos: 0 | Ingresos: $0 | Citas este mes: 0`;
+            } else if (tab === "pacientes") {
+                resumen = `Pacientes activos: 0 | Nuevos este mes: 0`;
+            } else if (tab === "doctores") {
+                resumen = `Doctores activos: 0 | Especialistas: 0`;
+            } else if (tab === "personal") {
+                resumen = `Personal activo: 0`;
+            } else if (tab === "servicios") {
+                resumen = `Servicios realizados: 0 | Activos: 0`;
+            } else if (tab === "consultas") {
+                resumen = `Consultas realizadas: 0 | Este mes: 0`;
+            } else if (tab === "ingresos") {
+                resumen = `Ingresos totales: $0 | Este mes: $0`;
+            }
+            document.getElementById('summary').textContent = resumen;
+        }
+
+        function renderDownloadButton(tab) {
+            const section = document.getElementById('section-actions');
+            section.innerHTML = `
+                <button class="download-btn" onclick="window.location.href='/pdf${tab}'">
+                    <svg viewBox="0 0 20 20"><path d="M10 2a1 1 0 0 1 1 1v8.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4A1 1 0 1 1 5.707 9.293L8 11.586V3a1 1 0 0 1 1-1zm-7 13a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1z"/></svg>
+                    Descargar Reporte
+                </button>
+            `;
+        }
+
+        function renderCards(tab) {
+            const container = document.getElementById('cards-container');
+            container.innerHTML = '';
+            data[tab].forEach(card => {
+                container.innerHTML += `
+                    <div class="card">
+                        <div class="icon-circle"></div>
+                        <div class="label">${card.label}</div>
+                        <div class="title" title="${card.tooltip}">${card.title}</div>
+                        <div class="value">${card.value}</div>
+                    </div>
+                `;
+            });
+        }
+
+        // Botón de descarga aquí debes conectar con la lógica real de descarga
+        function descargarReporte(tab) {
+
+            alert('Aquí se descargará el reporte de: ' + tab);
+        }
+
+        // Filtro de fechas aquí debemos conectar con el backend
+        function filtrarPorFecha() {
+            const inicio = document.getElementById('fecha-inicio').value;
+            const fin = document.getElementById('fecha-fin').value;
+            // Llama a tu backend y actualiza los datos según el rango de fechas seleccionado
+            alert(`Filtrar desde ${inicio} hasta ${fin} (conecta aquí con tu backend)`);
+        }
+
+        // Inicializar con la pestaña general
+        renderDownloadButton('general');
+        renderCards('general');
+        renderSummary('general');
+
+        // Manejar el cambio de pestañas
+        document.querySelectorAll('.tab').forEach(tabBtn => {
+            tabBtn.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                const tab = this.getAttribute('data-tab');
+                renderDownloadButton(tab);
+                renderCards(tab);
+                renderSummary(tab);
+            });
+        });
+    </script>
+     </div>
+    <%- include('footer.ejs') %>
+</body>
+</html>
+   
