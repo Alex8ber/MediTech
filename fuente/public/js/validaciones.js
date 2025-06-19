@@ -70,3 +70,25 @@ function isCedulaPattern(evt, input) {
     }
     return false;
 }
+function isNumberKeyDecimal(evt, input) {
+    // Permitir teclas de control: backspace, tab, delete, flechas, etc.
+    if (teclasPermitidas(evt)) {
+        return true;
+    }
+    // Permitir solo números (0-9), '.', y ','
+    if ((evt.key >= "0" && evt.key <= "9") || evt.key === '.' || evt.key === ',') {
+        return true;
+    }
+    return false;
+}
+function isNumberKeyDecYslash(evt, input) { 
+    // Permitir teclas de control: backspace, tab, delete, flechas, etc.
+    if (teclasPermitidas(evt)) {
+        return true;
+    }
+    // Permitir solo números (0-9), '/', y ','
+    if ((evt.key >= "0" && evt.key <= "9") || evt.key === '/' || evt.key === ',') {
+        return true;
+    }
+    return false;
+}
