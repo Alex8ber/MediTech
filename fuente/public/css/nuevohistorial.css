@@ -270,3 +270,35 @@ tr:not(:last-child) {
 hr {
     margin-bottom: 30px;
 }
+
+.editar {
+    margin: 20px 0 0 20px;
+    padding: 10px 22px;
+    background: #45787a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-weight: 600;
+}
+.editar:hover {
+    background: rgb(218, 243, 247);
+}
+
+.guardar {
+    margin: 20px 0 0 20px;
+    padding: 10px 22px;
+    background: #45787a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-weight: 600;
+}
+.guardar:hover {
+    background: #4bbcb3;
+}
