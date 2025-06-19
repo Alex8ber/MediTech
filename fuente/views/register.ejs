@@ -21,6 +21,17 @@
                     <input type="text" id="user" name="user" required placeholder="Usuario">
                 </div>
                 <div class="form-group">
+                    <label for="tipoUsuario">Tipo de Usuario</label>
+                    <select name="tipoUsuario" id="tipoUsuario" required>
+                        <option value="">Seleccione un tipo de usuario</option>
+                        <% if (typeof tiposUsuario !== 'undefined' && tiposUsuario.length > 0) { %>
+                            <% tiposUsuario.forEach(function(tipo) { %>
+                                <option value="<%= tipo.Id %>"><%= tipo.Descripcion %></option>
+                            <% }); %>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="email">Correo Electrónico</label>
                     <input type="email" id="email" name="email" required placeholder="tu.correo@ejemplo.com">
                 </div>
@@ -37,17 +48,6 @@
 
             <!-- Paso 2: Datos personales -->
             <div id="paso2" style="display:none;">
-                <div class="form-group">
-                    <label for="tipoUsuario">Tipo de Usuario</label>
-                    <select name="tipoUsuario" id="tipoUsuario" required>
-                        <option value="">Seleccione un tipo de usuario</option>
-                        <% if (typeof tiposUsuario !== 'undefined' && tiposUsuario.length > 0) { %>
-                            <% tiposUsuario.forEach(function(tipo) { %>
-                                <option value="<%= tipo.Id %>"><%= tipo.Descripcion %></option>
-                            <% }); %>
-                        <% } %>
-                    </select>
-                </div>
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <input type="text" id="nombre" name="nombre" required placeholder="Ingrese nombre">
@@ -83,6 +83,7 @@
                         <option value="Otro">Otro</option>
                     </select>
                 </div>
+
                 <div class="form-group" id="especialidad-group">
                     <label for="especialidad">Especialidad</label>
                     <select name="especialidad" id="especialidad">
@@ -110,7 +111,8 @@
             var email = document.getElementById('email').value.trim();
             var pass = document.getElementById('pass').value;
             var confirm = document.getElementById('confirm').value;
-            if(!user || !email || !pass || !confirm) {
+            var tipoUsuario = document.getElementById('tipoUsuario').value;
+            if(!user || !email || !pass || !confirm || !tipoUsuario) {
                 alert('Por favor, completa todos los campos.');
                 return;
             }
@@ -140,5 +142,3 @@
             }
         });
     </script>
-</body>
-</html>
