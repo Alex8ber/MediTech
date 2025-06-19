@@ -134,7 +134,6 @@ CREATE TABLE Pacientes (
     Tipo_de_sangre_ID INT,
     FOREIGN KEY (Genero_ID) REFERENCES Genero(Id),
     FOREIGN KEY (Estado_Civil_ID) REFERENCES Estado_civil(Id),
-    FOREIGN KEY (Patologia_ID) REFERENCES Patologia(Id),
     FOREIGN KEY (Condicion_ID) REFERENCES Condicion(Id),
     FOREIGN KEY (Tipo_de_sangre_ID) REFERENCES Tipo_de_Sangre(Id)
 );
