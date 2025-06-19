@@ -86,9 +86,9 @@ INSERT INTO Factura (Paciente_ID, Personal_ID, Fecha, Servicio_ID) VALUES
 (2, 2, '2025-06-04 11:30:00', 2);
 
 -- Insertar historia médica
-INSERT INTO Historia_Medica (Paciente_ID, Personal_ID, Fecha, Sintomas_ID, Diagnostico_ID, Patologia_ID, Tratamiento_ID) VALUES
-(1, 1, '2025-06-03 09:30:00', 1, 1, 1, 1),
-(2, 2, '2025-06-04 11:30:00', 2, 2, 2, 2);
+INSERT INTO Historia_Medica (Paciente_ID, Personal_ID, Fecha, Sintomas_ID, Diagnostico_ID, Patologia, Tratamiento_ID) VALUES
+(1, 1, '2025-06-03 09:30:00', 1, 1, Asma, 1),
+(2, 2, '2025-06-04 11:30:00', 2, 2, Hipertensión, 2);
 
 -- Insertar total
 INSERT INTO Total (Paciente_ID, Monto, MetodoPago_ID, Numero_Referencia) VALUES
