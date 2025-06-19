@@ -49,5 +49,41 @@ module.exports = {
                 }
             );
         });
+    },
+
+    obtenerGeneros() {
+        return new Promise((resolve, reject) => {
+            conexion.query(
+                `SELECT Id, Tipo FROM Genero`,
+                (error, resultados) => {
+                    if (error) reject(error);
+                    else resolve(resultados);
+                }
+            );
+        });
+    },
+
+    obtenerEstadosCiviles() {
+        return new Promise((resolve, reject) => {
+            conexion.query(
+                `SELECT Id, Estado FROM Estado_civil`,
+                (error, resultados) => {
+                    if (error) reject(error);
+                    else resolve(resultados);
+                }
+            );
+        });
+    },
+
+    obtenerEspecialidades() {
+        return new Promise((resolve, reject) => {
+            conexion.query(
+                `SELECT Id, Descripcion FROM Especialidad`,
+                (error, resultados) => {
+                    if (error) reject(error);
+                    else resolve(resultados);
+                }
+            );
+        });
     }
 };

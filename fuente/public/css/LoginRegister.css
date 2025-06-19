@@ -3,9 +3,6 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-
-            
-            
             min-height: 100vh;      /* Asegura que el cuerpo ocupe toda la altura */
             padding: 20px 0; /* Añade padding por si el contenido es muy alto en móviles */
         }
@@ -30,25 +27,31 @@
 
         .login-container {
             background-color: white;
-            padding: 30px 40px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px; /* Ancho máximo del formulario */
             box-sizing: border-box;
-            margin: 40px auto; /* Centra el contenedor en la página */
+            max-width: 370px;
+            margin: 10px auto;
+            padding: 18px 18px 12px 18px;
         }
-
+        @media (max-width: 500px) {
+            .login-container {
+                max-width: 98vw;
+                padding: 8px 2vw;
+            }
+        }
         .login-container h2 {
             color: rgb(86, 170, 142); /* Color principal para el título */
             text-align: center;
-            margin-bottom: 25px;
-            font-size: 2em;
+            margin-top: 0; /* Ajusta el margen superior del título */
+            margin-bottom: 0.5rem;
+            font-size: 1.5em;
         }
 
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
         .form-group label {
@@ -100,14 +103,14 @@
             background-color: rgb(86, 170, 142); /* Color principal */
             color: white;
             border: none;
-            padding: 15px;
+            padding: 10px;
             width: 100%;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: bold;
             transition: background-color 0.3s ease;
-            margin-top: 10px; /* Espacio sobre el botón */
+            margin-top: 0.3rem; /* Espacio sobre el botón */
         }
 
         .register-button:hover {

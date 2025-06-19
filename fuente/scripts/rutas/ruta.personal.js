@@ -65,10 +65,10 @@ router.get('/editarpersonal/:id', async (req, res) => {
 });
 
 router.post('/editarpersonal/:id', async (req, res) => {
-    const { nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id, email } = req.body;
+    const { nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id, email, telefono } = req.body;
     const id = req.params.id;
     try {
-        await personal.actualizar_personal(id, nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id, email);
+        await personal.actualizar_personal(id, nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id, email, telefono);
         res.redirect('/personal');
     } catch (error) {
         res.status(500).send('Error al actualizar personal');
