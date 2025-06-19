@@ -4,16 +4,6 @@ body {
     background: aliceblue
 }
 
-.header {
-    background: #45787a;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    padding: 0 40px;
-    height: 80px;
-    justify-content: space-between;
-}
-
 .logo {
     display: flex;
     align-items: center;
@@ -75,6 +65,7 @@ h2 {
     outline: none;
 }
 
+
 .registro select {
     padding: 12px;
     border: none;
@@ -118,34 +109,10 @@ h2 {
     transition: background 0.2s;
 }
 
-.nuevo_pa {
-    margin: 20px 400px;
-    padding: 10px 22px;
-    align-items: center;
-    background: #45787a;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.cancelar_pa {
-    padding: 10px 22px;
-    align-items: center;
-    background: #acbfc0;
-    color: #524e4e;
-    border: none;
-    border-radius: 8px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.acciones-pa{
+.acciones_pa{
     display: flex;
     gap: 8px;
+    justify-content: center;
 }
 
 .nuevo_pa,
@@ -155,6 +122,26 @@ h2 {
     min-width: 70px;
     min-height: 28px;
 }
+
+.nuevo_pa {
+    background: #45787a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cancelar_pa {
+    background: #acbfc0;
+    color: #524e4e;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+
 
 .nuevo:hover {
     background: #5e9b9e;
