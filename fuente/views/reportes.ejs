@@ -15,6 +15,7 @@
         <button class="tab" data-tab="doctores">Doctores</button>
         <button class="tab" data-tab="personal">Personal</button>
         <button class="tab" data-tab="citas">Citas</button>
+        <div class="line"></div>
     </div>
     <div class="section-actions" id="section-actions">
         </div>
@@ -109,6 +110,15 @@ function renderCards(tab) {
             </div>
         `;
     });
+    // Reiniciar animación
+    setTimeout(() => {
+        container.querySelectorAll('.card').forEach(card => {
+            card.style.animation = 'none';
+            // Forzar reflow
+            void card.offsetWidth;
+            card.style.animation = '';
+        });
+    }, 10);
 }
 
 // Inicializar con la pestaña general
@@ -125,6 +135,26 @@ document.querySelectorAll('.tab').forEach(tabBtn => {
         renderCards(tab);
     });
 });
+
+    // Animación de la barra selectora
+    function moverLinea(tabBtn) {
+        const line = document.querySelector('.tabs .line');
+        line.style.width = tabBtn.offsetWidth + "px";
+        line.style.left = tabBtn.offsetLeft + "px";
+    }
+
+    // Inicializar posición de la barra al cargar
+    window.addEventListener('DOMContentLoaded', () => {
+        const activeTab = document.querySelector('.tab.active');
+        if (activeTab) moverLinea(activeTab);
+    });
+
+    // Actualizar barra al cambiar de pestaña
+    document.querySelectorAll('.tab').forEach(tabBtn => {
+        tabBtn.addEventListener('click', function() {
+            moverLinea(this);
+        });
+    });
 </script>
      </div>
     <%- include('footer.ejs') %>
