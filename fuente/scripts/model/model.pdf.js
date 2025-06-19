@@ -257,7 +257,7 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
     // Título principal
     doc.fontSize(18).font('Helvetica-Bold').text('Historial Médico', { align: 'center' });
     doc.moveDown();
-    doc.image(logoPath, 40, 78, { width: 80, height: 60 });
+    doc.image(logoPath, 80, 78, { width: 80, height: 60 });
     doc.fontSize(10).text('Fecha: ' + new Date().toLocaleDateString(), { align: 'right' });
     doc.moveDown();
 
@@ -361,17 +361,6 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
     });
 
     doc.moveDown(1);
-
-
-    // --- DIAGNÓSTICO ---
-    doc.fontSize(16).font('Helvetica-Bold').text('Diagnóstico');
-    doc.moveDown(0.5);
-
-    doc.fontSize(12).font('Helvetica').text(
-    (datos.diagnostico && datos.diagnostico.Descripcion) 
-    ? datos.diagnostico.Descripcion 
-    : 'Sin diagnóstico registrado'
-);
 
     doc.end();
 }
