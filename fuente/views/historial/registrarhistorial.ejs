@@ -144,49 +144,33 @@
                     <div class="registro">
                         <div>
                             <label for="peso">Peso</label>
-                            <input id="peso" name="peso" placeholder="Peso en Kg" type="number" onkeypress="return isNumberKey(event)" />
+                            <input id="peso" name="peso" placeholder="Peso en Kg" type="number" value="<%= examenfisico[0] ? examenfisico[0].Peso: '' %>" onkeypress="return isNumberKey(event)" />
                         </div>
                         <div>
                             <label for="altura">Altura</label>
-                            <input id="altura" name="altura" placeholder="Altura en metros" type="number" onkeypress="return isNumberKey(event)" />
+                            <input id="altura" name="altura" placeholder="Altura en metros" type="number" value="<%= examenfisico[0] ? examenfisico[0].Altura: '' %>" onkeypress="return isNumberKey(event)" />
                         </div>
                         <div>
                             <label for="">Presión Arterial</label>
-                            <input id="presion" name="presion" placeholder="Indique presión arterial" type="number" onkeypress="return isNumberKey(event)" />
+                            <input id="presion" name="presion" placeholder="Indique presión arterial" type="text" value="<%= examenfisico[0] ? examenfisico[0].Presion: '' %>" onkeypress="return isNumberKey(event)" />
                             
                         </div>
                         
                         <div>
                             <label for="">Frecuencia Cardíaca</label>
-                            <input id="frecuencia" name="frecuencia" placeholder="indique frecuencia cardiaca" type="number" onkeypress="return isNumberKey(event)" />
+                            <input id="frecuencia" name="frecuencia" placeholder="indique frecuencia cardiaca" type="number" value="<%= examenfisico[0] ? examenfisico[0].Frecuencia: '' %>" onkeypress="return isNumberKey(event)" />
                         </div>
                         <div>
                             <label for="">Frecuencia Respiratoria</label>
-                            <input id="respiratoria" name="respiratoria" placeholder="Indique frecuencia respiratoria" type="number" onkeypress="return isNumberKey(event)" />
+                            <input id="respiratoria" name="respiratoria" placeholder="Indique frecuencia respiratoria" type="number" value="<%= examenfisico[0] ? examenfisico[0].Respiratoria: '' %>" onkeypress="return isNumberKey(event)" />
                         </div>
                         <div>
                             <label for="">IMC (indice masa corporal)</label>
-                            <input type="text" id="imc" placeholder="IMC" readonly>
+                            <input type="text" id="imc" placeholder="IMC" value="<%= examenfisico[0] ? examenfisico[0].IMC: '' %>" readonly>
                         </div>
                         <div>
-                            <label for="">Condiciones Generales</label>
-                            <input type="" name="" id="" value="">
-                        </div>
-                        <div>
-                            <label for="">Piel, Cicatrices, Tatuajes</label>
-                            <input type="" name="" id="" value="">
-                        </div>
-                        <div>
-                            <label for="">Ojos</label>
-                            <input type="" name="" id="" value="">
-                        </div>
-                        <div>
-                            <label for="">Oídos</label>
-                            <input type="" name="" id="" value="">
-                        </div>
-                        <div>
-                            <label for="">Nariz</label>
-                            <input type="" name="" id="" value="">
+                            <label for="alergias">Alergias</label>
+                            <input type="text" name="alergias" id="alergias" value="<%= examenfisico[0] ? examenfisico[0].Alergias: '' %>">
                         </div>
                         <button type="submit"class="nuevo">Nuevo Historial Medico</button>
                         <button type="button" class="cancelar" onclick="location.href='/pacientes'">Regresar</button>
