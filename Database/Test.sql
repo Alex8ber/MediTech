@@ -51,8 +51,8 @@ INSERT INTO Telefono_Personal (Personal_ID, Numero) VALUES
 
 -- Insertar pacientes
 INSERT INTO Pacientes (Nombres, Apellidos, Cedula, Edad, Genero_ID, Email, Direccion, Ocupacion, Estado_Civil_ID, Patologia, Condicion_ID, Tipo_de_sangre_ID) VALUES
-('Carlos', 'Ramírez', '20123456', 25, 1, 'carlos@mail.com', 'Av. Principal 123', 'Estudiante', 1, Asma, 1, 1),
-('María', 'López', '20234567', 32, 2, 'maria@mail.com', 'Calle Secundaria 456', 'Abogada', 2, Hipertensión, 2, 2);
+('Carlos', 'Ramírez', '20123456', 25, 1, 'carlos@mail.com', 'Av. Principal 123', 'Estudiante', 1, 'Asma', 1, 1),
+('María', 'López', '20234567', 32, 2, 'maria@mail.com', 'Calle Secundaria 456', 'Abogada', 2, 'Hipertensión', 2, 2);
 
 -- Insertar teléfonos de pacientes
 INSERT INTO Telefono_Paciente (Paciente_ID, Numero) VALUES
@@ -87,8 +87,8 @@ INSERT INTO Factura (Paciente_ID, Personal_ID, Fecha, Servicio_ID) VALUES
 
 -- Insertar historia médica
 INSERT INTO Historia_Medica (Paciente_ID, Personal_ID, Fecha, Sintomas_ID, Diagnostico_ID, Patologia, Tratamiento_ID) VALUES
-(1, 1, '2025-06-03 09:30:00', 1, 1, Asma, 1),
-(2, 2, '2025-06-04 11:30:00', 2, 2, Hipertensión, 2);
+(1, 1, '2025-06-03 09:30:00', 1, 1, 'Asma', 1),
+(2, 2, '2025-06-04 11:30:00', 2, 2, 'Hipertensión', 2);
 
 -- Insertar total
 INSERT INTO Total (Paciente_ID, Monto, MetodoPago_ID, Numero_Referencia) VALUES
