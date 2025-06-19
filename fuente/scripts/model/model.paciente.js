@@ -10,7 +10,7 @@ const paciente = {
                     Pacientes.Cedula, 
                     Pacientes.Edad, 
                     Genero.Tipo AS Genero, 
-                    Patologia.Nombre AS Patologia, 
+                    Pacientes.Patologia, 
                     Pacientes.Direccion, 
                     Pacientes.Email, 
                     Pacientes.Ocupacion,
@@ -19,7 +19,6 @@ const paciente = {
                     Tipo_de_Sangre.Tipo AS "Tipo de Sangre",
                     (SELECT Numero FROM Telefono_Paciente WHERE Paciente_ID = Pacientes.Id LIMIT 1) AS Telefono
                 FROM Pacientes
-                LEFT JOIN Patologia ON Pacientes.Patologia_ID = Patologia.Id
                 LEFT JOIN Genero ON Pacientes.Genero_ID = Genero.Id
                 LEFT JOIN Estado_civil ON Pacientes.Estado_Civil_ID = Estado_civil.Id
                 LEFT JOIN Condicion ON Pacientes.Condicion_ID = Condicion.Id
@@ -160,7 +159,7 @@ const paciente = {
                     Pacientes.Edad, 
                     Pacientes.Genero_ID,
                     Genero.Tipo AS Genero, 
-                    Paciente.Patologia,
+                    Pacientes.Patologia,
                     (SELECT Numero FROM Telefono_Paciente WHERE Paciente_ID = Pacientes.Id LIMIT 1) AS Telefono, 
                     Pacientes.Email, 
                     Pacientes.Ocupacion,

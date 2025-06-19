@@ -39,12 +39,11 @@ router.get('/buscar-pacientes', (req, res) => {
 
 router.get('/registrarpaciente', async(req, res) => {
     try {
-        const [patologias, tiposDeSangre, civil] = await Promise.all([
-            agenda.obtenerPatologias(),
+        const [tiposDeSangre, civil] = await Promise.all([
             paciente.obtener_Sangre(),
             paciente.obtener_Civil()
         ]);
-        res.render('Pacientes/registrarpaciente.ejs', { patologias, tiposDeSangre, civil });
+        res.render('Pacientes/registrarpaciente.ejs', { tiposDeSangre, civil });
     } catch (error) {
         console.error('Error al obtener datos para registrar paciente:', error);
         res.status(500).send('Error al obtener datos para registrar paciente');
