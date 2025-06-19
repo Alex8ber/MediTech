@@ -1,68 +1,147 @@
-    body {
-        font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: auto;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-            color: #555;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="date"],
-        input[type="time"],
-        select,
-        textarea {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-        input[type="submit"] {
-            background-color: rgb(86, 170, 142);
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-            width: 100%;
-        }
-        input[type="submit"]:hover {
-            background-color: rgb(86, 170, 142);
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-    /* Para el enlace "MediTech" */
-.logo a {
-    color: #fff;           /* Letras blancas */
-    text-decoration: none; /* Quita la barra de abajo */
+/* Reset básico */
+body, h1, label, input, select, textarea, button {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    box-sizing: border-box;
 }
 
-/* Si quieres asegurarte que no haya subrayado al pasar el mouse */
+body {
+    
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background: #fff;
+    padding: 36px 40px 32px 40px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    max-width: 430px;
+    width: 100%;
+    margin: 40px auto;
+    animation: fadeIn 0.7s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+h1 {
+    text-align: center;
+    color: #45787a;
+    font-size: 2.1em;
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+    color: #45787a;
+    font-size: 1.05em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    border: 1.5px solid #e0e6e9;
+    border-radius: 7px;
+    background: #f8fafb;
+    font-size: 1em;
+    color: #333;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+input[type="datetime-local"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #56aa8e;
+    outline: none;
+    background: #f1fdf7;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 90px;
+    max-height: 200px;
+}
+
+input[type="submit"] {
+    background: linear-gradient(90deg, #56aa8e 60%, #45787a 100%);
+    color: #fff;
+    padding: 14px 0;
+    border: none;
+    border-radius: 7px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px #0001;
+    transition: background 0.2s, transform 0.1s;
+    width: 100%;
+    letter-spacing: 0.5px;
+}
+
+input[type="submit"]:hover {
+    background: linear-gradient(90deg, #45787a 60%, #56aa8e 100%);
+    transform: translateY(-2px) scale(1.02);
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+select:disabled {
+    background: #f0f0f0;
+    color: #aaa;
+}
+
+::-webkit-input-placeholder { color: #b0b8bb; }
+::-moz-placeholder { color: #b0b8bb; }
+:-ms-input-placeholder { color: #b0b8bb; }
+::placeholder { color: #b0b8bb; }
+
+/* Mensaje de error para selects */
+select:invalid {
+    color: #b0b8bb;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 22px 8px 18px 8px;
+        max-width: 98vw;
+    }
+    h1 {
+        font-size: 1.3em;
+    }
+}
+
+/* Logo Meditech en el header si lo tienes */
+.logo a {
+    color: #45787a;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+}
 .logo a:hover, .logo a:focus {
     text-decoration: none;
 }
