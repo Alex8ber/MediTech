@@ -1,9 +1,10 @@
 const PDFDocument = require('pdfkit-table');
 const { Table } = require('pdfkit-table');
 const pacientes = require('../model/model.paciente');
+const personal = require('../model/model.personal');
 
 
-async function buildPDF (dataCallback, endCallback) {
+async function buildPDFPaciente (dataCallback, endCallback) {
     const listaPacientes = await pacientes.ver_paciente() || [];
     console.log('Pacientes:', listaPacientes);
 
@@ -52,4 +53,54 @@ async function buildPDF (dataCallback, endCallback) {
     doc.end();
 };
 
-module.exports = buildPDF;
+async function buildPDFPersonal(dataCallback, endCallback) {
+    const listaPersonal = await personal.ver_personal() || [];
+    console.log('Personal:', listaPersonal);
+
+    const personalArray = Array.isArray(listaPersonal) ? listaPersonal : [];
+
+    const personalMapeados = personalArray.map(p => ({
+        Nombre: p.Nombres,
+        Apellido: p.Apellidos,
+        Cedula: p.Cedula,
+        Edad: p.Edad,
+        Genero: p.Genero,
+        Ocupacion: p.Ocupacion,
+        Especialidad: p.Especialidad,
+        Email: p.Email
+    }));
+
+    const doc = new PDFDocument({ autoFirstPage: false });
+
+    doc.on('data', dataCallback);
+    doc.on('end', endCallback);
+
+    doc.addPage();
+
+    doc.fontSize(18).text('Personal Registrado', { align: 'center' });
+    doc.moveDown();
+
+    const table = {
+        headers: [
+            { label: "Nombre", property: "Nombre", width: 70 },
+            { label: "Apellido", property: "Apellido", width: 70 },
+            { label: "Cédula", property: "Cedula", width: 70 },
+            { label: "Edad", property: "Edad", width: 40 },
+            { label: "Género", property: "Genero", width: 60 },
+            { label: "Ocupación", property: "Ocupacion", width: 80 },
+            { label: "Especialidad", property: "Especialidad", width: 80 },
+            { label: "Email", property: "Email", width: 80 }
+        ],
+        data: personalMapeados
+    };
+
+    await doc.table(table, {
+        prepareHeader: () => doc.font('Helvetica-Bold').fontSize(10),
+        prepareRow: (row, i) => doc.font('Helvetica').fontSize(9)
+    });
+}
+
+module.exports = {
+    buildPDFPaciente,
+    buildPDFPersonal
+};
