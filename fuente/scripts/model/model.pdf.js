@@ -235,7 +235,7 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
 
     console.log('Historial:', datos);
 
-    const doc = new PDFDocument({ autoFirstPage: false, layout: 'portrait', margin: 40 });
+    const doc = new PDFDocument({ autoFirstPage: false });
     doc.on('data', dataCallback);
     doc.on('end', endCallback);
 
@@ -243,7 +243,7 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
 
     // Título principal
     doc.fontSize(22).font('Helvetica-Bold').text('Historial Médico', { align: 'center' });
-    doc.moveDown(2);
+    doc.moveDown(1);
 
     // --- DATOS GENERALES ---
     doc.fontSize(16).font('Helvetica-Bold').text('Datos generales');
@@ -263,7 +263,7 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
         Ocupacion: d.Ocupacion,
         EstadoCivil: d['Estado Civil'],
         TipoSangre: d['Tipo de Sangre'],
-        Direccion: d.direccion
+        Direccion: d.Direccion 
     }))
 
     const datosgeneralespaciente = {
@@ -271,15 +271,10 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
             { label: "Nombres", property: "Nombres", width: 90 },
             { label: "Apellidos", property: "Apellidos", width: 90 },
             { label: "Cedula", property: "Cedula", width: 65 },
-            { label: "Telefono", property: "Telefono", width: 65 },
+            { label: "Telefono", property: "Telefono", width: 70 },
             { label: "Edad", property: "Edad", width: 40 },
-            { label: "Genero", property: "Genero", width: 50 },
-            { label: "Patologia", property: "Patologia", width: 70 },
-            { label: "Email", property: "Email", width: 140 },
-            { label: "Ocupación", property: "Ocupacion", width: 70 },
-            { label: "Estado Civil", property: "EstadoCivil", width: 70 },
-            { label: "Tipo de Sangre", property: "TipoSangre", width: 70 },
-            { label: "Dirección", property: "Direccion", width: 70 }
+            { label: "Genero", property: "Genero", width: 55 },
+            { label: "Patologia", property: "Patologia", width: 70 }
         ],
         datas: datosGenerales
     }
@@ -290,7 +285,23 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
         prepareRow: (row, i) => doc.font('Helvetica').fontSize(10)
     });
 
-    doc.moveDown(1);
+    const datosExtraPaciente = {
+        headers: [
+            { label: "Email", property: "Email", width: 140 },
+            { label: "Ocupación", property: "Ocupacion", width: 70 },
+            { label: "Estado Civil", property: "EstadoCivil", width: 70 },
+            { label: "Tipo de Sangre", property: "TipoSangre", width: 70 },
+            { label: "Dirección", property: "Direccion", width: 130 }
+        ],
+        datas: datosGenerales
+    }
+
+
+    await doc.table( datosExtraPaciente, {
+        prepareHeader: () => doc.font('Helvetica-Bold').fontSize(11),
+        prepareRow: (row, i) => doc.font('Helvetica').fontSize(10)
+    });
+    doc.moveDown(3);
 
 
 

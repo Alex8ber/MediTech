@@ -29,8 +29,8 @@ const historial = {
                 Pacientes.Patologia, 
                 Pacientes.Email, Pacientes.Ocupacion, 
                 Estado_civil.Estado AS "Estado Civil",
-                Tipo_de_Sangre.Tipo AS "Tipo de sangre", 
-                Pacientes.Direccion
+                Tipo_de_Sangre.Tipo AS "Tipo de Sangre", 
+                Pacientes.Direccion AS Direccion
                 FROM Pacientes 
                 LEFT JOIN Genero ON Pacientes.Genero_ID = Genero.Id  
                 LEFT JOIN Estado_civil ON Pacientes.Estado_Civil_ID = Estado_civil.Id 
