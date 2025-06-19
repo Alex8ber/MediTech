@@ -45,7 +45,35 @@ const historial = {
                 }
             );
         });
-    }
+    },
+
+    ver_examen_fisico(id) {
+        return new Promise((resolve, reject) => {
+            conexion.query(
+                `SELECT
+                Examen_Fisico.Id AS id,
+                Examen_Fisico.Paciente_ID,
+                Examen_Fisico.Peso,
+                Examen_Fisico.Altura,
+                Examen_Fisico.Presion_Arterial AS Presion,
+                Examen_Fisico.Frecuencia_Cardiaca AS Frecuencia,
+                Examen_Fisico.Frecuencia_Respiratoria AS Respiratoria,
+                Examen_Fisico.IMC,
+                Examen_Fisico.Alergias
+            FROM Examen_Fisico
+            WHERE Paciente_ID = ?`, [id],
+                (error, resultados) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(resultados);
+                    }
+                }
+            )
+        });
+    },
+
+
 };
 
 

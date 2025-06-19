@@ -1,5 +1,5 @@
 const express = require('express');
-const { buildPDFPaciente, buildPDFPersonal, buildPDFDoctores, buildPDFPersonalSolo } = require('../model/model.pdf');
+const { buildPDFPaciente, buildPDFPersonal, buildPDFDoctores, buildPDFPersonalSolo, buildPDFHistorial } = require('../model/model.pdf');
 
 const router = express.Router();
 
@@ -52,6 +52,16 @@ router.get('/pdfpersonal', (req, res) => {
         () => stream.end()
     );
 
+});
+
+router.get('/pdfhistorial/:id', (req, res) => {
+    const id = req.params.id;
+    const stream = res.writeHead(200, {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename="historial-medico.pdf"'
+    });
+
+    buildPDFHistorial(id, (data) => stream.write(data), () => stream.end());
 });
 
 module.exports = router;

@@ -12,7 +12,8 @@ router.get('/registrarhistorial/:id', async (req, res) => {
         const civil = await paciente.obtener_Civil();
         const tiposDeSangre = await paciente.obtener_Sangre();
         const citas = await agenda.obtenerCitasPorPaciente(req.params.id);
-        res.render('historial/registrarhistorial.ejs', { paciente: pacienteData, civil, tiposDeSangre, citas });
+        const examenfisico = await historial.ver_examen_fisico(req.params.id);
+        res.render('historial/registrarhistorial.ejs', { paciente: pacienteData, civil, tiposDeSangre, citas, examenfisico });
     } catch (error) {
         console.error('Error al obtener el paciente:', error);
         res.status(500).send('Error al obtener el paciente');
