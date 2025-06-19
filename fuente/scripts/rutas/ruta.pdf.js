@@ -1,5 +1,5 @@
 const express = require('express');
-const { buildPDFPaciente, buildPDFPersonal, buildPDFDoctores, buildPDFPersonalSolo, buildPDFHistorial } = require('../model/model.pdf');
+const { buildPDFPaciente, buildPDFPersonal, buildPDFDoctores, buildPDFPersonalSolo, buildPDFHistorial, buildPDFCitas} = require('../model/model.pdf');
 
 const router = express.Router();
 
@@ -62,6 +62,18 @@ router.get('/pdfhistorial/:id', (req, res) => {
     });
 
     buildPDFHistorial(id, (data) => stream.write(data), () => stream.end());
+});
+
+router.get('/pdfconsultas', (req, res) => {
+    const stream = res.writeHead(200, {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename="reporte-citas.pdf"'
+    });
+
+    buildPDFCitas(
+        (data) => stream.write(data),
+        () => stream.end()
+    );
 });
 
 module.exports = router;

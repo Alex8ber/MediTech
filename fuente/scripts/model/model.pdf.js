@@ -1,11 +1,15 @@
 const PDFDocument = require('pdfkit-table');
+const path = require('path');
+
 const { Table } = require('pdfkit-table');
+const { x } = require('pdfkit');
+const logoPath = path.join(__dirname, '../../public/images/logo con fondo 1.png');
+
 const pacientes = require('../model/model.paciente');
 const personal = require('../model/model.personal');
 const doctores = require('../model/model.doctores');
 const agenda = require('../model/model.agenda');
 const historial = require('../model/model.historial');
-const { x } = require('pdfkit');
 
 
 async function buildPDFPaciente (dataCallback, endCallback) {
@@ -37,6 +41,7 @@ async function buildPDFPaciente (dataCallback, endCallback) {
 
     doc.fontSize(18).text('Pacientes Registrados', { align: 'center' });
     doc.moveDown();
+    doc.image(logoPath, 60, 78, { width: 80, height: 60 });
     doc.fontSize(10).text('Fecha: ' + new Date().toLocaleDateString(), { align: 'right' });
     doc.moveDown();
 
@@ -66,7 +71,7 @@ async function buildPDFPaciente (dataCallback, endCallback) {
     doc.end();
 };
 
-
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 async function buildPDFPersonal(dataCallback, endCallback) {
     const listaPersonal = await personal.ver_personal() || [];
@@ -94,6 +99,7 @@ async function buildPDFPersonal(dataCallback, endCallback) {
 
     doc.fontSize(18).text('Personal Registrado', { align: 'center' });
     doc.moveDown();
+    doc.image(logoPath, 80, 78, { width: 80, height: 60 });
     doc.fontSize(10).text('Fecha: ' + new Date().toLocaleDateString(), { align: 'right' });
     doc.moveDown();
 
@@ -115,11 +121,13 @@ async function buildPDFPersonal(dataCallback, endCallback) {
     await doc.table(table, {
         x : 80,
         prepareHeader: () => doc.font('Helvetica-Bold').fontSize(10),
-        prepareRow: (row, i) => doc.font('Helvetica').fontSize(8)
+        prepareRow: (row, i) => doc.font('Helvetica').fontSize(9)
     });
 
     doc.end();
 }
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 async function buildPDFDoctores(dataCallback, endCallback) {
     const listaDoctores = await doctores.ver_doctores() || [];
@@ -147,6 +155,7 @@ async function buildPDFDoctores(dataCallback, endCallback) {
 
     doc.fontSize(18).text('Doctores Registrado', { align: 'center' });
     doc.moveDown();
+    doc.image(logoPath, 80, 78, { width: 80, height: 60 });
     doc.fontSize(10).text('Fecha: ' + new Date().toLocaleDateString(), { align: 'right' });
     doc.moveDown();
 
@@ -168,11 +177,13 @@ async function buildPDFDoctores(dataCallback, endCallback) {
     await doc.table(table, {
         x : 80,
         prepareHeader: () => doc.font('Helvetica-Bold').fontSize(10),
-        prepareRow: (row, i) => doc.font('Helvetica').fontSize(8)
+        prepareRow: (row, i) => doc.font('Helvetica').fontSize(9)
     });
 
     doc.end();
 }
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 async function buildPDFPersonalSolo(dataCallback, endCallback) {
     const listaPersonal = await personal.ver_solo_personal() || [];
@@ -200,6 +211,7 @@ async function buildPDFPersonalSolo(dataCallback, endCallback) {
 
     doc.fontSize(18).text('Personal Registrado', { align: 'center' });
     doc.moveDown();
+    doc.image(logoPath, 80, 78, { width: 80, height: 60 });
     doc.fontSize(10).text('Fecha: ' + new Date().toLocaleDateString(), { align: 'right' });
     doc.moveDown();
 
@@ -221,12 +233,13 @@ async function buildPDFPersonalSolo(dataCallback, endCallback) {
     await doc.table(table, {
         x : 80,
         prepareHeader: () => doc.font('Helvetica-Bold').fontSize(10),
-        prepareRow: (row, i) => doc.font('Helvetica').fontSize(8)
+        prepareRow: (row, i) => doc.font('Helvetica').fontSize(9)
     });
 
     doc.end();
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 async function buildPDFHistorial(id, dataCallback, endCallback) {
     // Suponiendo que tienes una función que retorna un objeto con todas las secciones
@@ -242,8 +255,11 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
     doc.addPage();
 
     // Título principal
-    doc.fontSize(22).font('Helvetica-Bold').text('Historial Médico', { align: 'center' });
-    doc.moveDown(1);
+    doc.fontSize(18).font('Helvetica-Bold').text('Historial Médico', { align: 'center' });
+    doc.moveDown();
+    doc.image(logoPath, 40, 78, { width: 80, height: 60 });
+    doc.fontSize(10).text('Fecha: ' + new Date().toLocaleDateString(), { align: 'right' });
+    doc.moveDown();
 
     // --- DATOS GENERALES ---
     doc.fontSize(16).font('Helvetica-Bold').text('Datos generales');
@@ -281,8 +297,8 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
 
 
     await doc.table( datosgeneralespaciente, {
-        prepareHeader: () => doc.font('Helvetica-Bold').fontSize(11),
-        prepareRow: (row, i) => doc.font('Helvetica').fontSize(10)
+        prepareHeader: () => doc.font('Helvetica-Bold').fontSize(10),
+        prepareRow: (row, i) => doc.font('Helvetica').fontSize(9)
     });
 
     const datosExtraPaciente = {
@@ -347,10 +363,6 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
     doc.moveDown(1);
 
 
-
-
-
-
     // --- DIAGNÓSTICO ---
     doc.fontSize(16).font('Helvetica-Bold').text('Diagnóstico');
     doc.moveDown(0.5);
@@ -364,10 +376,60 @@ async function buildPDFHistorial(id, dataCallback, endCallback) {
     doc.end();
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+async function buildPDFCitas(dataCallback, endCallback) {
+    const listaCitas = await agenda.obtenerTodasLasCitas() || [];
+    console.log('Citas:', listaCitas);
+
+    const citas = Array.isArray(listaCitas) ? listaCitas : [];
+
+    const citasMapeadas = citas.map(c => ({
+        Fecha: c.Fecha ? (c.Fecha.toISOString ? c.Fecha.toISOString().slice(0,10) : c.Fecha.slice(0,10)) : '',
+        Hora: c.Hora || '',
+        Paciente: (c.Nombres || '') + ' ' + (c.Apellidos || ''),
+        Doctor: c.Doctor || '',
+        Observaciones: c.Observaciones || ''
+    }));
+
+     const doc = new PDFDocument({ autoFirstPage: false });
+    doc.on('data', dataCallback);
+    doc.on('end', endCallback);
+
+    doc.addPage();
+
+    doc.fontSize(18).text('Reporte de Citas', { align: 'center' });
+    doc.moveDown();
+    doc.image(logoPath, 40, 78, { width: 80, height: 60 });
+    doc.fontSize(10).text('Fecha: ' + new Date().toLocaleDateString(), { align: 'right' });
+    doc.moveDown();
+
+    const table = {
+        headers: [
+            { label: "Fecha", property: "Fecha", width: 70 },
+            { label: "Hora", property: "Hora", width: 50 },
+            { label: "Paciente", property: "Paciente", width: 120 },
+            { label: "Doctor", property: "Doctor", width: 100 },
+            { label: "Observaciones", property: "Observaciones", width: 200 }
+        ],
+        datas: citasMapeadas
+    };
+
+    await doc.table(table, {
+        x: 35,
+        prepareHeader: () => doc.font('Helvetica-Bold').fontSize(10),
+        prepareRow: (row, i) => doc.font('Helvetica').fontSize(9)
+    });
+
+    doc.end();
+}
+
+
 module.exports = {
     buildPDFPaciente,
     buildPDFPersonal,
     buildPDFDoctores,
     buildPDFPersonalSolo,
-    buildPDFHistorial
+    buildPDFHistorial,
+    buildPDFCitas
 };

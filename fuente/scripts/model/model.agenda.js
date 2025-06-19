@@ -84,9 +84,11 @@ const agenda = {
                     DATE_FORMAT(Citas.Fecha, '%H:%i') AS Hora,
                     Pacientes.Nombres,
                     Pacientes.Apellidos,
-                    Citas.Observaciones
+                    Citas.Observaciones,
+                    CONCAT(Personal.Nombres, ' ', Personal.Apellidos) AS Doctor
                 FROM Citas
                 JOIN Pacientes ON Citas.Paciente_ID = Pacientes.Id
+                JOIN Personal ON Citas.Personal_ID = Personal.Id
                 ORDER BY Citas.Fecha DESC
             `;
             conexion.query(sql, (err, res) => {
