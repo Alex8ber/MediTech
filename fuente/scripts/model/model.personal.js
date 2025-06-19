@@ -154,7 +154,8 @@ const personal = {
                     Personal.Genero_ID,
                     Personal.Tipo_usuario_ID,
                     Personal.Especialidad_ID,
-                    Usuario.Email
+                    Usuario.Email,
+                    (SELECT Numero FROM Telefono_Personal WHERE Personal_ID = Personal.Id LIMIT 1) AS Telefono
                 FROM Personal
                 LEFT JOIN Usuario ON Personal.Usuario_ID = Usuario.Id
                 WHERE Personal.Id = ?`,
@@ -166,25 +167,55 @@ const personal = {
             );
         });
     },
-    actualizar_personal(id, nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id, email) {
+    actualizar_personal(id, nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id, email, telefono) {
         return new Promise((resolve, reject) => {
             conexion.query(
                 `UPDATE Personal SET Nombres=?, Apellidos=?, Cedula=?, Edad=?, Genero_ID=?, Tipo_usuario_ID=?, Especialidad_ID=? WHERE Id=?`,
                 [nombre, apellido, cedula, edad, genero_id, tipo_usuario_id, especialidad_id, id],
                 (error, resultados) => {
                     if (error) return reject(error);
-                    if (email) {
-                        conexion.query(
-                            `UPDATE Usuario SET Email=? WHERE Id=(SELECT Usuario_ID FROM Personal WHERE Id=?)`,
-                            [email, id],
-                            (err) => {
-                                if (err) return reject(err);
-                                resolve(resultados);
-                            }
-                        );
-                    } else {
-                        resolve(resultados);
-                    }
+                    // Actualizar email si corresponde
+                    const updateEmail = email
+                        ? new Promise((res, rej) => {
+                            conexion.query(
+                                `UPDATE Usuario SET Email=? WHERE Id=(SELECT Usuario_ID FROM Personal WHERE Id=?)`,
+                                [email, id],
+                                (err) => err ? rej(err) : res()
+                            );
+                        })
+                        : Promise.resolve();
+
+                    // Actualizar o insertar teléfono
+                    const updateTelefono = telefono
+                        ? new Promise((res, rej) => {
+                            conexion.query(
+                                `SELECT Id FROM Telefono_Personal WHERE Personal_ID=? LIMIT 1`,
+                                [id],
+                                (err, rows) => {
+                                    if (err) return rej(err);
+                                    if (rows.length > 0) {
+                                        // Actualizar
+                                        conexion.query(
+                                            `UPDATE Telefono_Personal SET Numero=? WHERE Personal_ID=?`,
+                                            [telefono, id],
+                                            (err2) => err2 ? rej(err2) : res()
+                                        );
+                                    } else {
+                                        // Insertar
+                                        conexion.query(
+                                            `INSERT INTO Telefono_Personal (Personal_ID, Numero) VALUES (?, ?)`,
+                                            [id, telefono],
+                                            (err2) => err2 ? rej(err2) : res()
+                                        );
+                                    }
+                                }
+                            );
+                        })
+                        : Promise.resolve();
+
+                    Promise.all([updateEmail, updateTelefono])
+                        .then(() => resolve(resultados))
+                        .catch(reject);
                 }
             );
         });
@@ -228,6 +259,42 @@ const personal = {
                 }
             );
         });
-    }
+    },
+    insertarPersonal(nombre, apellido, cedula, edad, generoId, usuarioId, tipoUsuarioId, especialidadId) {
+        return new Promise((resolve, reject) => {
+            conexion.query(
+                `INSERT INTO Personal (Nombres, Apellidos, Cedula, Edad, Genero_ID, Usuario_ID, Tipo_usuario_ID, Especialidad_ID)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+                [nombre, apellido, cedula, edad, generoId, usuarioId, tipoUsuarioId, especialidadId],
+                (error, resultados) => {
+                    if (error) reject(error);
+                    else resolve(resultados);
+                }
+            );
+        });
+    },
+    obtener_generos() {
+        return new Promise((resolve, reject) => {
+            conexion.query(
+                `SELECT Id, Tipo FROM Genero`,
+                (error, resultados) => {
+                    if (error) reject(error);
+                    else resolve(resultados);
+                }
+            );
+        });
+    },
+    insertarTelefonoPersonal(personalId, telefono) {
+        return new Promise((resolve, reject) => {
+            conexion.query(
+                `INSERT INTO Telefono_Personal (Personal_ID, Numero) VALUES (?, ?)`,
+                [personalId, telefono],
+                (error, resultados) => {
+                    if (error) reject(error);
+                    else resolve(resultados);
+                }
+            );
+        });
+    },
 };
 module.exports = personal;

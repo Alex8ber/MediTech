@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Personal</title>
     <link rel="stylesheet" href="../css/nuevopaciente.css">
+    <script src="/js/validaciones.js"></script>
 </head>
 <body>
     <main>
@@ -16,19 +17,19 @@
             <div class="registro">
                 <div>
                     <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" id="nombre" value="<%= personal ? personal.Nombres : '' %>" required>
+                    <input type="text" name="nombre" id="nombre" placeholder="Ingrese nombre" value="<%= personal ? personal.Nombres : '' %>" required>
                 </div>
                 <div>
                     <label for="apellido">Apellido</label>
-                    <input type="text" name="apellido" id="apellido" value="<%= personal ? personal.Apellidos : '' %>" required>
+                    <input type="text" name="apellido" id="apellido" placeholder="Ingrese apellido" value="<%= personal ? personal.Apellidos : '' %>" required>
                 </div>
                 <div>
                     <label for="cedula">Cédula</label>
-                    <input type="number" name="cedula" id="cedula" value="<%= personal ? personal.Cedula : '' %>" required>
+                    <input type="text" name="cedula" id="cedula" placeholder="V-12345678" value="<%= personal ? personal.Cedula : '' %>" required onkeypress="return isCedulaPattern(event, this)">
                 </div>
                 <div>
                     <label for="edad">Edad</label>
-                    <input type="number" name="edad" id="edad" value="<%= personal ? personal.Edad : '' %>" required>
+                    <input type="number" name="edad" id="edad" placeholder="Ingrese edad" value="<%= personal ? personal.Edad : '' %>" required onkeypress="return isNumberKey(event)">
                 </div>
                 <div>
                     <label for="genero_id">Género</label>
@@ -59,7 +60,11 @@
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" value="<%= personal ? personal.Email : '' %>" required>
+                    <input type="email" name="email" id="email" placeholder="Ingrese email" value="<%= personal ? personal.Email : '' %>" required>
+                </div>
+                <div>
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" name="telefono" id="telefono" placeholder="Ej: +584141234567" value="<%= personal && personal.Telefono ? personal.Telefono : '' %>" required onkeypress="return isNumberKeyTLF(event, this)">
                 </div>
                 <button type="submit" class="nuevo">Actualizar Personal</button>
                 <button type="button" class="cancelar" onclick="window.location.href='/personal'">Cancelar</button>

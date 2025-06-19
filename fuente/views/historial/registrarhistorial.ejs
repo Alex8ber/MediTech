@@ -12,21 +12,21 @@
 
 <body>
     <main>
-        <div class="menu">
-            <p data-target="#general">Datos Generales</p>
-            <p data-target="#examen_fisico">Examen Físico</p>
-            <p data-target="#examen_laboratorio">Examen Laboratorio</p>
-            <p data-target="#diagnostico">Diagnostico</p>
-            <p data-target="#descargar">
-                <button class="download-btn" onclick=(descargarHistorial())>
+        <div class="menu-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0;">
+            <div class="menu" style="gap: 0;">
+                <p data-target="#general">Datos Generales</p>
+                <p data-target="#examen_fisico">Examen Físico</p>
+                <p data-target="#examen_laboratorio">Examen Laboratorio</p>
+                <p data-target="#diagnostico">Diagnóstico</p>
+            </div>
+            <button class="download-btn" onclick="descargarHistorial()" style="margin-left: 24px;">
                 <svg viewBox="0 0 20 20"><path d="M10 2a1 1 0 0 1 1 1v8.586l2.293-2.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4A1 1 0 1 1 5.707 9.293L8 11.586V3a1 1 0 0 1 1-1zm-7 13a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1z"></path></svg>
-                    Descargar Reporte
-                </button>
-            </p>
-		<div class="line"></div>
-	    </div>
-
-        <div class="content">
+                Descargar Reporte
+            </button>
+        </div>
+        <hr style="border: none; border-top: 1.5px solid #e0e0e0; margin: 0 0 30px 0;">     
+        
+            <div class="content">
             <div data-content id="general" class="active">
 
                 <h2> Datos Generales</h2>

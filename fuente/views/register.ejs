@@ -6,6 +6,7 @@
     <title>Crear Cuenta - MediTech</title>
     <link rel="stylesheet" href="/css/LoginRegister.css">
     <link rel="stylesheet" href="/css/doctores.css">
+    <script src="/js/validaciones.js"></script>
 </head>
 <body>
     <div class="login-container">
@@ -58,32 +59,27 @@
                 </div>
                 <div class="form-group">
                     <label for="cedula">Cédula</label>
-                    <input type="text" id="cedula" name="cedula" required placeholder="V-12345678">
+                    <input type="text" id="cedula" name="cedula" required placeholder="V-12345678" onkeypress="return isCedulaPattern(event, this)">
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" id="telefono" name="telefono" required placeholder="Ej: +584141234567" onkeypress="return isNumberKeyTLF(event, this)">
                 </div>
                 <div class="form-group">
                     <label for="edad">Edad</label>
-                    <input type="text" id="edad" name="edad" required placeholder="Ingrese edad">
+                    <input type="text" id="edad" name="edad" required placeholder="Ingrese edad" onkeypress="return isNumberKey(event)">
                 </div>
                 <div class="form-group">
                     <label for="genero">Género</label>
                     <select name="genero" id="genero" required>
                         <option value="">Seleccione género</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
-                        <option value="O">Otro</option>
+                        <% if (typeof generos !== 'undefined' && generos.length > 0) { %>
+                            <% generos.forEach(function(g) { %>
+                                <option value="<%= g.Id %>"><%= g.Tipo %></option>
+                            <% }); %>
+                        <% } %>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="ocupacion">Ocupación</label>
-                    <select name="ocupacion" id="ocupacion" required>
-                        <option value="">Seleccione una ocupación</option>
-                        <option value="Médico">Médico</option>
-                        <option value="Enfermero">Enfermero</option>
-                        <option value="Administrativo">Administrativo</option>
-                        <option value="Otro">Otro</option>
-                    </select>
-                </div>
-
                 <div class="form-group" id="especialidad-group">
                     <label for="especialidad">Especialidad</label>
                     <select name="especialidad" id="especialidad">
@@ -106,7 +102,6 @@
     <script>
         // Mostrar paso 2 y ocultar paso 1
         document.getElementById('siguiente-btn').onclick = function() {
-            // Validación básica antes de avanzar
             var user = document.getElementById('user').value.trim();
             var email = document.getElementById('email').value.trim();
             var pass = document.getElementById('pass').value;
@@ -134,11 +129,28 @@
         };
         // Mostrar especialidad solo si el tipo de usuario es Doctor (ajusta el valor según tu BD)
         document.getElementById('tipoUsuario').addEventListener('change', function() {
-            var especialidadGroup = document.getElementById('especialidad-group');
+            var especialidadSelect = document.getElementById('especialidad');
+            var noAplicableOption = null;
+            for (var i = 0; i < especialidadSelect.options.length; i++) {
+                if (especialidadSelect.options[i].text === 'No Aplicable') {
+                    noAplicableOption = especialidadSelect.options[i];
+                    break;
+                }
+            }
             if(this.value === '2') { // Cambia '2' por el ID real de Doctor si es diferente
-                especialidadGroup.style.display = 'block';
+                if(noAplicableOption) noAplicableOption.style.display = 'none';
+                document.getElementById('especialidad-group').style.display = 'block';
+                especialidadSelect.selectedIndex = 0; // Limpia selección
             } else {
-                especialidadGroup.style.display = 'none';
+                if(noAplicableOption) {
+                    noAplicableOption.style.display = '';
+                    especialidadSelect.value = noAplicableOption.value; // Selecciona "No Aplicable"
+                }
+                document.getElementById('especialidad-group').style.display = 'none';
             }
         });
+        // Ejecutar al cargar por si acaso
+        document.getElementById('tipoUsuario').dispatchEvent(new Event('change'));
     </script>
+</body>
+</html>

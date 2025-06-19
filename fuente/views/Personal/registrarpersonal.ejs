@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuevo Personal Obrero</title>
     <link rel="stylesheet" href="../css/nuevopaciente.css">
-
+    <script src="/js/validaciones.js"></script>
 </head>
 
 <body>
@@ -31,19 +31,19 @@
             </div>
             <div>
                 <label for="cedula">Cedula</label>
-                <input type="number" name="cedula" id="cedula" placeholder="V-12345678" required>
+                <input type="number" name="cedula" id="cedula" placeholder="V-12345678" onkeypress="return isCedulaPattern(event, this)" required>
             </div>
             <div>
                 <label for="edad">Edad</label>
-                <input type="number" name="edad" id="edad" placeholder="Ingrese edad" required>
+                <input type="number" name="edad" id="edad" placeholder="Ingrese edad" onkeypress="return isNumberKey(event)" required>
             </div>
             <div>
                 <label for="genero_id">Género</label>
                 <select id="genero_id" name="genero_id" required>
                     <option value="" disabled selected>Seleccione género</option>
-                    <option value="1">Masculino</option>
-                    <option value="2">Femenino</option>
-                    <option value="3">Otro</option>
+                    <% generos.forEach(function(genero) { %>
+                        <option value="<%= genero.Id %>"><%= genero.Tipo %></option>
+                    <% }) %>
                 </select>
             </div>
             <div>
@@ -66,7 +66,7 @@
             </div>
             <div class="form-group">
                 <label for="email">Correo Electrónico a utilizar</label>
-                <input type="email" id="email" name="email" required placeholder="tu.correo@ejemplo.com" required>
+                <input type="email" id="email" name="email" required placeholder="tu.correo@ejemplo.com" required >
             </div>
             <button type="submit" class="nuevo">Registrar Personal</button>
             <button type="button" class="cancelar" onclick="window.location.href='/personal'">Cancelar</button>
