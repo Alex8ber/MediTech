@@ -84,14 +84,13 @@ router.get('/eliminarpaciente/:id', (req, res) => {
 
 router.get('/editarpaciente/:id', async(req, res) => {
     try {
-        const [patologias, pacientes, tiposDeSangre, civil, pacienteData] = await Promise.all([
-        agenda.obtenerPatologias(),
+        const [pacientes, tiposDeSangre, civil, pacienteData] = await Promise.all([
         paciente.ver_paciente(),
         paciente.obtener_Sangre(),
         paciente.obtener_Civil(),
         paciente.editar_paciente(req.params.id)
     ]);
-    res.render('Pacientes/editarpaciente.ejs', {paciente: pacienteData, patologias, pacientes, tiposDeSangre, civil});
+    res.render('Pacientes/editarpaciente.ejs', {paciente: pacienteData, pacientes, tiposDeSangre, civil});
     } catch (error) {
         console.error('Error al obtener el paciente:', error);
         res.status(500).send('Error al obtener el paciente');

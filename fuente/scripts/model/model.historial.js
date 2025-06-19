@@ -24,14 +24,13 @@ const historial = {
                 (SELECT Numero FROM Telefono_Paciente WHERE Paciente_ID = Pacientes.ID LIMIT 1) AS Telefono, 
                 Pacientes.Edad,  
                 Genero.Tipo AS Genero, 
-                Patologia.Nombre AS Patologia, 
+                Pacientes.Patologia, 
                 Pacientes.Email, Pacientes.Ocupacion, 
                 Estado_civil.Estado AS "Estado Civil",
                 Tipo_de_Sangre.Tipo AS "Tipo de sangre", 
                 Pacientes.Direccion
                 FROM Pacientes 
-                LEFT JOIN Genero ON Pacientes.Genero_ID = Genero.Id 
-                LEFT JOIN Patologia ON Pacientes.Patologia_ID = Patologia.Id 
+                LEFT JOIN Genero ON Pacientes.Genero_ID = Genero.Id  
                 LEFT JOIN Estado_civil ON Pacientes.Estado_Civil_ID = Estado_civil.Id 
                 LEFT JOIN Tipo_de_Sangre ON Pacientes.Tipo_de_sangre_ID = Tipo_de_Sangre.Id 
                 WHERE Pacientes.id = ?`, [id],
