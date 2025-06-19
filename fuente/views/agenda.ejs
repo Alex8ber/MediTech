@@ -27,17 +27,17 @@
 				<div class="card">
 					<div class="card-content">
 						<h3>Citas</h3>
-						<h2>10 programadas</h2>
+						<h2><%= totalCitas %> programadas</h2>
 						<p>Revisa y gestiona tus citas de hoy.</p>
-						<button>Ver agenda</button>
+						<button id="btn-ver-agenda">Ver agenda</button>
 					</div>
 				</div>
 				<div class="card">
 					<div class="card-content">
 						<h3>Pacientes</h3>
-						<h2>2 Nuevos</h2>
-						<p>Nuevos pacientes registrados.</p>
-						<button>Ver pacientes</button>
+						<h2><%= totalPacientes %> registrados</h2>
+						<p>Consulta la lista de pacientes.</p>
+						<button id="btn-ver-pacientes">Ver pacientes</button>
 					</div>
 				</div>
 			</div>
@@ -351,6 +351,16 @@
 
     buscarMesRevision.addEventListener('input', filtrarTablaMes);
     buscarMesFecha.addEventListener('input', filtrarTablaMes);
+</script>
+<script>
+document.getElementById('btn-ver-agenda').addEventListener('click', function() {
+    document.querySelector('[data-target="#hoy"]').click();
+});
+</script>
+<script>
+document.getElementById('btn-ver-pacientes').addEventListener('click', function() {
+    window.location.href = '/pacientes';
+});
 </script>
 <!-- ...existing code... -->
 <%- include('footer.ejs') %>

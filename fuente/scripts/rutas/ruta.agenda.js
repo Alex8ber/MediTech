@@ -11,7 +11,10 @@ router.get('/agenda', async function (req, res) {
         const citasHoy = await agenda.obtenerCitasHoy();
         const citasSemana = await agenda.obtenerCitasSemana();
         const citasMes = await agenda.obtenerCitasMes();
-        res.render('agenda.ejs', { citas, todasLasCitas, citasHoy, citasSemana, citasMes });
+        const totalCitas = todasLasCitas.length; // <-- contador de citas programadas
+        const pacientes = await require('../model/model.paciente').ver_paciente();
+        const totalPacientes = pacientes.length;
+        res.render('agenda.ejs', { citas, todasLasCitas, citasHoy, citasSemana, citasMes, totalCitas, totalPacientes });
     } catch (error) {
         res.status(500).send('Error cargando la agenda');
     }
