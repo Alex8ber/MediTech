@@ -2,6 +2,7 @@ const PDFDocument = require('pdfkit-table');
 const { Table } = require('pdfkit-table');
 const pacientes = require('../model/model.paciente');
 const personal = require('../model/model.personal');
+const { x } = require('pdfkit');
 
 
 async function buildPDFPaciente (dataCallback, endCallback) {
@@ -46,12 +47,15 @@ async function buildPDFPaciente (dataCallback, endCallback) {
     };
 
     await doc.table(table, {
+        x : 40,
         prepareHeader: () => doc.font('Helvetica-Bold').fontSize(10),
         prepareRow: (row, i) => doc.font('Helvetica').fontSize(9)
     });
 
     doc.end();
 };
+
+
 
 async function buildPDFPersonal(dataCallback, endCallback) {
     const listaPersonal = await personal.ver_personal() || [];
@@ -60,14 +64,14 @@ async function buildPDFPersonal(dataCallback, endCallback) {
     const personalArray = Array.isArray(listaPersonal) ? listaPersonal : [];
 
     const personalMapeados = personalArray.map(p => ({
-        Nombre: p.Nombres,
-        Apellido: p.Apellidos,
-        Cedula: p.Cedula,
-        Edad: p.Edad,
-        Genero: p.Genero,
-        Ocupacion: p.Ocupacion,
-        Especialidad: p.Especialidad,
-        Email: p.Email
+        Nombre: p.Nombre || '',
+        Apellido: p.Apellido || '',
+        Cedula: p.Cedula || '',
+        Edad: p.Edad || '',
+        Genero: p.Genero || '',
+        Ocupacion: p.Ocupacion || '',
+        Especialidad: p.Especialidad || '',
+        Email: p.Email || ''
     }));
 
     const doc = new PDFDocument({ autoFirstPage: false });
@@ -82,22 +86,25 @@ async function buildPDFPersonal(dataCallback, endCallback) {
 
     const table = {
         headers: [
-            { label: "Nombre", property: "Nombre", width: 70 },
-            { label: "Apellido", property: "Apellido", width: 70 },
-            { label: "Cédula", property: "Cedula", width: 70 },
-            { label: "Edad", property: "Edad", width: 40 },
-            { label: "Género", property: "Genero", width: 60 },
-            { label: "Ocupación", property: "Ocupacion", width: 80 },
+            { label: "Nombre", property: "Nombre", width: 80 },
+            { label: "Apellido", property: "Apellido", width: 80 },
+            { label: "Cédula", property: "Cedula", width: 50 },
+            { label: "Edad", property: "Edad", width: 35 },
+            { label: "Género", property: "Genero", width: 45 },
+            { label: "Ocupación", property: "Ocupacion", width: 70 },
             { label: "Especialidad", property: "Especialidad", width: 80 },
-            { label: "Email", property: "Email", width: 80 }
+            { label: "Email", property: "Email", width: 120 }
         ],
-        data: personalMapeados
+        datas: personalMapeados
     };
 
     await doc.table(table, {
+        x : 25,
         prepareHeader: () => doc.font('Helvetica-Bold').fontSize(10),
-        prepareRow: (row, i) => doc.font('Helvetica').fontSize(9)
+        prepareRow: (row, i) => doc.font('Helvetica').fontSize(8)
     });
+
+    doc.end();
 }
 
 module.exports = {
