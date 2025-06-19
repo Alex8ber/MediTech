@@ -172,8 +172,62 @@ async function buildPDFDoctores(dataCallback, endCallback) {
     doc.end();
 }
 
+async function buildPDFPersonalSolo(dataCallback, endCallback) {
+    const listaPersonal = await personal.ver_solo_personal() || [];
+    console.log('Personal:', listaPersonal);
+
+    const personalArray = Array.isArray(listaPersonal) ? listaPersonal : [];
+
+    const personalMapeados = personalArray.map(p => ({
+        Nombre: p.Nombre || '',
+        Apellido: p.Apellido || '',
+        Cedula: p.Cedula || '',
+        Edad: p.Edad || '',
+        Genero: p.Genero || '',
+        Ocupacion: p.Ocupacion || '',
+        Especialidad: p.Especialidad || '',
+        Email: p.Email || ''
+    }));
+
+    const doc = new PDFDocument({ autoFirstPage: false, layout : 'landscape' });
+
+    doc.on('data', dataCallback);
+    doc.on('end', endCallback);
+
+    doc.addPage();
+
+    doc.fontSize(18).text('Personal Registrado', { align: 'center' });
+    doc.moveDown();
+    doc.fontSize(10).text('Fecha: ' + new Date().toLocaleDateString(), { align: 'right' });
+    doc.moveDown();
+
+
+    const table = {
+        headers: [
+            { label: "Nombre", property: "Nombre", width: 90 },
+            { label: "Apellido", property: "Apellido", width: 90 },
+            { label: "Cédula", property: "Cedula", width: 65},
+            { label: "Edad", property: "Edad", width: 40 },
+            { label: "Género", property: "Genero", width: 50 },
+            { label: "Ocupación", property: "Ocupacion", width: 70 },
+            { label: "Especialidad", property: "Especialidad", width: 80 },
+            { label: "Email", property: "Email", width: 140 }
+        ],
+        datas: personalMapeados
+    };
+
+    await doc.table(table, {
+        x : 80,
+        prepareHeader: () => doc.font('Helvetica-Bold').fontSize(10),
+        prepareRow: (row, i) => doc.font('Helvetica').fontSize(8)
+    });
+
+    doc.end();
+}
+
 module.exports = {
     buildPDFPaciente,
     buildPDFPersonal,
-    buildPDFDoctores
+    buildPDFDoctores,
+    buildPDFPersonalSolo
 };
