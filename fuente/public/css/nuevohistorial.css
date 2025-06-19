@@ -6,7 +6,9 @@ body {
 
 .menu {
 	display: flex;
-    position: relative;
+    position: sticky;
+
+    align-items: center;
 }
 
 .menu p {

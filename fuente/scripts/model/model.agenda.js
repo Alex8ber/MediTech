@@ -13,14 +13,6 @@ const agenda = {
             );
         });
     },
-    obtenerPatologias() {
-        return new Promise((resolve, reject) => {
-            conexion.query(`SELECT Id, Nombre FROM Patologia`, (err, res) => {
-                if (err) reject(err);
-                else resolve(res);
-            });
-        });
-    },
     obtenerEstado() {
         return new Promise((resolve, reject) => {
             conexion.query(`SELECT Id, Descripcion FROM Estado`, (err, res) => {

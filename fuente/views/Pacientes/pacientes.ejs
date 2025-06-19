@@ -77,11 +77,13 @@
                     <% }) %>
                 </tbody>
             </table>
-            <button style="margin-left:20px;"   id="nuevo-paciente" class="nuevo-paciente" onclick="window.location.href='/registrarpaciente'"> Nuevo Paciente </button>
-            <button style="margin-left:20px;" id="editar-paciente" class="editar-paciente" disabled> Editar Paciente </button>
-            <button style="margin-left:20px;" id="eliminar-paciente" class="eliminar-paciente" disabled>Eliminar Paciente</button>
-            <button style="margin-left:20px;" id="nuevo-historial" class="nuevo-historial"  disabled>Historial</button>
-            <button style="margin-left:20px;" id="nueva-cita" class="nueva-cita"  disabled>Cita nueva</button>
+            <div class="botones-pacientes">
+                <button id="nuevo-paciente" class="nuevo-paciente" onclick="window.location.href='/registrarpaciente'"> Nuevo</button>
+                <button id="editar-paciente" class="editar-paciente" disabled> Editar</button>
+                <button id="eliminar-paciente" class="eliminar-paciente" disabled>Eliminar</button>
+                <button id="nuevo-historial" class="nuevo-historial"  disabled>Historial</button>
+                <button id="nueva-cita" class="nueva-cita"  disabled>Nueva Cita</button>
+            </div>
         </div>
     </main>
     <script>

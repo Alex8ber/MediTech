@@ -3,7 +3,7 @@ const historial = {
     ver_historial() {
         return new Promise((resolve, reject) => {
             conexion.query(
-                `SELECT Pacientes.Nombres, Pacientes.Apellidos, Pacientes.Cedula From Pacientes`,
+                `SELECT Pacientes.Id AS id, Pacientes.Nombres, Pacientes.Apellidos, Pacientes.Cedula From Pacientes`,
                 (error, resultados) => {
                     if (error) {
                         reject(error);
@@ -18,7 +18,9 @@ const historial = {
     obtenerPacientePorId(id) {
         return new Promise((resolve, reject) => {
             conexion.query(
-                `SELECT Pacientes.Nombres, 
+                `SELECT
+                Pacientes.ID AS id, 
+                Pacientes.Nombres, 
                 Pacientes.Apellidos, 
                 Pacientes.Cedula, 
                 (SELECT Numero FROM Telefono_Paciente WHERE Paciente_ID = Pacientes.ID LIMIT 1) AS Telefono, 

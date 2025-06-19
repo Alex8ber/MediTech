@@ -10,78 +10,135 @@
 <body>
     <div class="login-container">
         <h2>Crear Nueva Cuenta</h2>
-        <% if (error !=null) { %>
+        <% if (error != null) { %>
             <p style="color: red;"><%= error %></p>
         <% } %>
-        <form action="/register" method="POST"> 
-
-            <div class="form-group">
-                <label for="usuario">Usuario</label>
-                <input type="text" id="user" name="user" required placeholder="Usuario">
+        <form id="registro-form" action="/register" method="POST">
+            <!-- Paso 1: Datos de cuenta -->
+            <div id="paso1">
+                <div class="form-group">
+                    <label for="user">Usuario</label>
+                    <input type="text" id="user" name="user" required placeholder="Usuario">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" required placeholder="tu.correo@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label for="pass">Contraseña</label>
+                    <input type="password" id="pass" name="pass" required placeholder="Mínimo 8 caracteres">
+                </div>
+                <div class="form-group">
+                    <label for="confirm">Confirmar Contraseña</label>
+                    <input type="password" id="confirm" name="confirm" required placeholder="Repite la contraseña">
+                </div>
+                <button type="button" class="register-button" id="siguiente-btn">Siguiente</button>
             </div>
 
-           <div class="form-group">
-                <label for="tipoUsuario">Tipo de Usuario</label>
-                <select name="tipoUsuario" id="tipoUsuario" required>
-                    <option value="">Seleccione un tipo de usuario</option>
-                    <% if (typeof tiposUsuario !== 'undefined' && tiposUsuario.length > 0) { %>
-                        <% tiposUsuario.forEach(function(tipo) { %>
-                            <option value="<%= tipo.Id %>"><%= tipo.Descripcion %></option>
-                        <% }); %>
-                    <% } %>
-                </select>
+            <!-- Paso 2: Datos personales -->
+            <div id="paso2" style="display:none;">
+                <div class="form-group">
+                    <label for="tipoUsuario">Tipo de Usuario</label>
+                    <select name="tipoUsuario" id="tipoUsuario" required>
+                        <option value="">Seleccione un tipo de usuario</option>
+                        <% if (typeof tiposUsuario !== 'undefined' && tiposUsuario.length > 0) { %>
+                            <% tiposUsuario.forEach(function(tipo) { %>
+                                <option value="<%= tipo.Id %>"><%= tipo.Descripcion %></option>
+                            <% }); %>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Ingrese nombre">
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" name="apellido" required placeholder="Ingrese apellido">
+                </div>
+                <div class="form-group">
+                    <label for="cedula">Cédula</label>
+                    <input type="text" id="cedula" name="cedula" required placeholder="V-12345678">
+                </div>
+                <div class="form-group">
+                    <label for="edad">Edad</label>
+                    <input type="text" id="edad" name="edad" required placeholder="Ingrese edad">
+                </div>
+                <div class="form-group">
+                    <label for="genero">Género</label>
+                    <select name="genero" id="genero" required>
+                        <option value="">Seleccione género</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                        <option value="O">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ocupacion">Ocupación</label>
+                    <select name="ocupacion" id="ocupacion" required>
+                        <option value="">Seleccione una ocupación</option>
+                        <option value="Médico">Médico</option>
+                        <option value="Enfermero">Enfermero</option>
+                        <option value="Administrativo">Administrativo</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group" id="especialidad-group">
+                    <label for="especialidad">Especialidad</label>
+                    <select name="especialidad" id="especialidad">
+                        <option value="">Seleccione una especialidad</option>
+                        <% if (typeof especialidades !== 'undefined' && especialidades.length > 0) { %>
+                            <% especialidades.forEach(function(especialidad) { %>
+                                <option value="<%= especialidad.Id %>"><%= especialidad.Descripcion %></option>
+                            <% }); %>
+                        <% } %>
+                    </select>
+                </div>
+                <button type="button" class="register-button" id="anterior-btn" style="background:#acbfc0;color:#333;margin-right:10px;">Anterior</button>
+                <button type="submit" class="register-button">Crear Cuenta</button>
             </div>
-
-            <div class="form-group" id="especialidad-group" style="display: none;">
-                <label for="especialidad">Especialidad</label>
-                <select name="especialidad" id="especialidad">
-                    <option value="">Seleccione una especialidad</option>
-                    <% if (typeof especialidades !== 'undefined' && especialidades.length > 0) { %>
-                        <% especialidades.forEach(function(especialidad) { %>
-                            <option value="<%= especialidad.Id %>"><%= especialidad.Descripcion %></option>
-                        <% }); %>
-                    <% } %>
-                </select>
-
-            </div>
-
-            <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const tipoUsuario = document.getElementById('tipoUsuario');
-        const especialidadGroup = document.getElementById('especialidad-group');
-        // Cambia '2' por el valor real de Doctor en tu base de datos
-        tipoUsuario.addEventListener('change', function() {
-            if (tipoUsuario.value === '2') {
+        </form>
+        <div class="login-link">
+            <p>¿Ya tienes una cuenta? <a href="/login">Inicia Sesión</a></p>
+        </div>
+    </div>
+    <script>
+        // Mostrar paso 2 y ocultar paso 1
+        document.getElementById('siguiente-btn').onclick = function() {
+            // Validación básica antes de avanzar
+            var user = document.getElementById('user').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var pass = document.getElementById('pass').value;
+            var confirm = document.getElementById('confirm').value;
+            if(!user || !email || !pass || !confirm) {
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+            if(pass.length < 8) {
+                alert('La contraseña debe tener al menos 8 caracteres.');
+                return;
+            }
+            if(pass !== confirm) {
+                alert('Las contraseñas no coinciden.');
+                return;
+            }
+            document.getElementById('paso1').style.display = 'none';
+            document.getElementById('paso2').style.display = 'block';
+        };
+        // Botón para volver al paso 1
+        document.getElementById('anterior-btn').onclick = function() {
+            document.getElementById('paso2').style.display = 'none';
+            document.getElementById('paso1').style.display = 'block';
+        };
+        // Mostrar especialidad solo si el tipo de usuario es Doctor (ajusta el valor según tu BD)
+        document.getElementById('tipoUsuario').addEventListener('change', function() {
+            var especialidadGroup = document.getElementById('especialidad-group');
+            if(this.value === '2') { // Cambia '2' por el ID real de Doctor si es diferente
                 especialidadGroup.style.display = 'block';
             } else {
                 especialidadGroup.style.display = 'none';
             }
         });
-    });
-</script>
-
-            
-            <div class="form-group">
-                <label for="email">Correo Electrónico</label>
-                <input type="email" id="email" name="email" required placeholder="tu.correo@ejemplo.com">
-            </div>
-
-            <div class="form-group">
-                <label for="pass">Contraseña</label>
-                <input type="password" id="pass" name="pass" required placeholder="Mínimo 8 caracteres">
-                </div>
-
-            <div class="form-group">
-                <label for="confirm">Confirmar Contraseña</label>
-                <input type="password" id="confirm" name="confirm" required placeholder="Repite la contraseña">
-            </div>
-
-            <button type="submit" class="register-button">Crear Cuenta</button>
-        </form>
-
-        <div class="login-link">
-            <p>¿Ya tienes una cuenta? <a href="/login">Inicia Sesión</a></p>
-        </div>
-    </div>
+    </script>
 </body>
 </html>

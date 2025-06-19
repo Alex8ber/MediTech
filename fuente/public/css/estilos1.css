@@ -232,3 +232,75 @@ select {
     background: #5e9b9e;
 }
 
+.botones-pacientes {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.busqueda input,
+.busqueda select {
+    padding: 12px 14px;
+    border: 1.5px solid #e0e6e9;
+    border-radius: 7px;
+    background: #f8fafb;
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px #0001;
+}
+
+.busqueda input:focus,
+.busqueda select:focus {
+    border-color: #5e9b9e;
+    outline: none;
+    background: #f1fdf7;
+    box-shadow: 0 2px 8px #5e9b9e22;
+}
+
+.busqueda label {
+    font-weight: 600;
+    color: #45787a;
+    margin-bottom: 6px;
+    font-size: 1.05em;
+}
+
+.botones-pacientes button {
+    min-width: 140px;
+    padding: 12px 0;
+    font-size: 1em;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 2px 8px #0001;
+}
+
+.nuevo-paciente, .nuevo-historial, .nueva-cita {
+    background: linear-gradient(90deg, #45787a 60%, #5e9b9e 100%);
+    color: #fff;
+}
+
+.editar-paciente {
+    background: #acbfc0;
+    color: #524e4e;
+}
+
+.eliminar-paciente {
+    background: #ff4d4d;
+    color: #fff;
+}
+
+.botones-pacientes button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.botones-pacientes button:hover:not(:disabled) {
+    filter: brightness(1.08);
+    transform: translateY(-2px) scale(1.03);
+}
