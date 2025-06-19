@@ -85,6 +85,10 @@ INSERT INTO Factura (Paciente_ID, Personal_ID, Fecha, Servicio_ID) VALUES
 (1, 1, '2025-06-03 09:30:00', 1),
 (2, 2, '2025-06-04 11:30:00', 2);
 
+-- Insertar examen físico
+INSERT INTO Examen_Fisico (Paciente_ID, Peso, Altura, Presion_Arterial, Frecuencia_Cardiaca, Frecuencia_Respiratoria, IMC, Alergias) VALUES
+(1, 70.50, 1.75, '120/80', 72, 16, 23.02, 'Ninguna'),
+(2, 60.00, 1.65, '110/70', 80, 18, 22.04, 'Penicilina');
 -- Insertar historia médica
 INSERT INTO Historia_Medica (Paciente_ID, Personal_ID, Fecha, Sintomas_ID, Diagnostico_ID, Patologia, Tratamiento_ID) VALUES
 (1, 1, '2025-06-03 09:30:00', 1, 1, 'Asma', 1),
