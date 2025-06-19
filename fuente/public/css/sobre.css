@@ -1,8 +1,8 @@
 
 
 :root {
-    --primary-color: #007BFF; /* Azul principal */
-    --secondary-color: #0056b3; /* Azul más oscuro para hover */
+    --primary-color: #0f6441; /* Azul principal */
+    --secondary-color: #0f6965; /* Azul más oscuro para hover */
     --light-gray: #f8f9fa;
     --dark-gray: #343a40;
     --text-color: #495057;
@@ -29,14 +29,7 @@ body {
     padding: 0 20px;
 }
 
-/* --- Header y Navegación --- */
-.header {
-    background: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
+
 
 .nav-container {
     display: flex;
